@@ -1,8 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Heart } from "lucide-react";
-import { APPARITIONS, type ApparitionStatus } from "@/data/apparitions";
+import { Heart, Share2 } from "lucide-react";
+import { useState } from "react";
+import { APPARITIONS, type ApparitionStatus, type Apparition } from "@/data/apparitions";
 import { StatusBadge } from "@/components/StatusBadge";
 import { useFavorites } from "@/hooks/use-favorites";
+import { ShareCardDialog } from "@/components/ShareCardDialog";
 
 export const Route = createFileRoute("/saved")({
   head: () => ({
@@ -26,6 +28,7 @@ function statusHue(status: ApparitionStatus) {
 function SavedPage() {
   const { favorites } = useFavorites();
   const saved = APPARITIONS.filter((a) => favorites.includes(a.slug));
+  const [shareTarget, setShareTarget] = useState<Apparition | null>(null);
 
   return (
     <div className="pb-8">
@@ -71,38 +74,54 @@ function SavedPage() {
           <ul className="space-y-3">
             {saved.map((a) => (
               <li key={a.slug}>
-                <Link
-                  to="/apparition/$slug"
-                  params={{ slug: a.slug }}
-                  className="glass-card flex items-start gap-3 rounded-2xl p-3 active:scale-[0.99] transition-transform"
-                >
-                  <div
-                    className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl"
-                    style={{
-                      background: `radial-gradient(120% 100% at 30% 20%, ${statusHue(a.status)}, oklch(0.22 0.08 265))`,
-                    }}
+                <div className="glass-card relative flex items-start gap-3 rounded-2xl p-3">
+                  <Link
+                    to="/apparition/$slug"
+                    params={{ slug: a.slug }}
+                    className="flex flex-1 items-start gap-3 active:scale-[0.99] transition-transform"
                   >
-                    <div className="absolute inset-0 star-field opacity-50" />
-                    <div className="absolute right-[-8px] top-[-8px] h-10 w-10 rounded-full bg-[oklch(0.87_0.10_90/0.35)] blur-xl" />
-                    <div className="absolute inset-x-0 bottom-0 p-1 text-center font-serif text-xs italic text-white/80">
-                      {a.year}
+                    <div
+                      className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl"
+                      style={{
+                        background: `radial-gradient(120% 100% at 30% 20%, ${statusHue(a.status)}, oklch(0.22 0.08 265))`,
+                      }}
+                    >
+                      <div className="absolute inset-0 star-field opacity-50" />
+                      <div className="absolute right-[-8px] top-[-8px] h-10 w-10 rounded-full bg-[oklch(0.87_0.10_90/0.35)] blur-xl" />
+                      <div className="absolute inset-x-0 bottom-0 p-1 text-center font-serif text-xs italic text-white/80">
+                        {a.year}
+                      </div>
                     </div>
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <StatusBadge status={a.status} />
-                    <h2 className="mt-1.5 font-serif text-lg leading-snug text-foreground">
-                      {a.title}
-                    </h2>
-                    <p className="mt-0.5 truncate text-xs text-muted-foreground">
-                      {a.location} · {a.year}
-                    </p>
-                  </div>
-                </Link>
+                    <div className="min-w-0 flex-1 pr-10">
+                      <StatusBadge status={a.status} />
+                      <h2 className="mt-1.5 font-serif text-lg leading-snug text-foreground">
+                        {a.title}
+                      </h2>
+                      <p className="mt-0.5 truncate text-xs text-muted-foreground">
+                        {a.location} · {a.year}
+                      </p>
+                    </div>
+                  </Link>
+                  <button
+                    onClick={() => setShareTarget(a)}
+                    className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/85 backdrop-blur-xl active:scale-95"
+                    aria-label={`Share ${a.title}`}
+                  >
+                    <Share2 className="h-4 w-4" />
+                  </button>
+                </div>
               </li>
             ))}
           </ul>
         )}
       </main>
+      {shareTarget && (
+        <ShareCardDialog
+          apparition={shareTarget}
+          open={!!shareTarget}
+          onClose={() => setShareTarget(null)}
+        />
+      )}
     </div>
   );
 }

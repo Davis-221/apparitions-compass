@@ -1,9 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, Heart, MapPin, Calendar, Users, Share2, Sparkles } from "lucide-react";
+import { useState } from "react";
 import { getApparition } from "@/data/apparitions";
 import { PRAYERS } from "@/data/prayers";
 import { StatusBadge } from "@/components/StatusBadge";
 import { useFavorites } from "@/hooks/use-favorites";
+import { ShareCardDialog } from "@/components/ShareCardDialog";
 
 export const Route = createFileRoute("/apparition/$slug")({
   loader: ({ params }) => {
@@ -39,18 +41,8 @@ function ApparitionPage() {
   const { isFavorite, toggle } = useFavorites();
   const fav = isFavorite(a.slug);
   const relatedPrayers = PRAYERS.filter((p) => p.apparitionSlug === a.slug);
-
-  const share = async () => {
-    if (typeof navigator !== "undefined" && "share" in navigator) {
-      try {
-        await navigator.share({
-          title: a.title,
-          text: a.summary,
-          url: typeof window !== "undefined" ? window.location.href : undefined,
-        });
-      } catch {}
-    }
-  };
+  const [shareOpen, setShareOpen] = useState(false);
+  const share = () => setShareOpen(true);
 
   return (
     <div className="pb-8">
@@ -167,6 +159,7 @@ function ApparitionPage() {
           </Section>
         )}
       </div>
+      <ShareCardDialog apparition={a} open={shareOpen} onClose={() => setShareOpen(false)} />
     </div>
   );
 }
