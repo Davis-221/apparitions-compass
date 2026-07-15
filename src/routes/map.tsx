@@ -25,10 +25,10 @@ declare global {
 }
 
 const STATUS_COLOR: Record<Apparition["status"], string> = {
-  approved: "#059669",
-  worthy: "#0284c7",
-  investigation: "#d97706",
-  not_approved: "#e11d48",
+  approved: "#34d399",
+  worthy: "#7dd3fc",
+  investigation: "#fbbf24",
+  not_approved: "#fb7185",
 };
 
 function MapPage() {
@@ -52,15 +52,16 @@ function MapPage() {
         disableDefaultUI: true,
         zoomControl: true,
         styles: [
-          { elementType: "geometry", stylers: [{ color: "#e8e2d0" }] },
-          { elementType: "labels.text.fill", stylers: [{ color: "#5a5245" }] },
-          { elementType: "labels.text.stroke", stylers: [{ color: "#f5efe0" }] },
-          { featureType: "water", stylers: [{ color: "#b4c8d8" }] },
-          { featureType: "landscape", stylers: [{ color: "#f0e9d6" }] },
+          { elementType: "geometry", stylers: [{ color: "#1a2749" }] },
+          { elementType: "labels.text.fill", stylers: [{ color: "#8fa5c8" }] },
+          { elementType: "labels.text.stroke", stylers: [{ color: "#0f1b3d" }] },
+          { featureType: "water", stylers: [{ color: "#0a1428" }] },
+          { featureType: "landscape", stylers: [{ color: "#243761" }] },
           { featureType: "road", stylers: [{ visibility: "off" }] },
           { featureType: "poi", stylers: [{ visibility: "off" }] },
           { featureType: "transit", stylers: [{ visibility: "off" }] },
-          { featureType: "administrative", elementType: "geometry", stylers: [{ visibility: "off" }] },
+          { featureType: "administrative", elementType: "geometry", stylers: [{ color: "#3a4f7a" }] },
+          { featureType: "administrative.country", elementType: "labels.text.fill", stylers: [{ color: "#c9b98f" }] },
         ],
       });
 
@@ -114,17 +115,17 @@ function MapPage() {
       )}
 
       <div className="safe-area-top pointer-events-none absolute inset-x-0 top-0 z-10 px-4 pt-4">
-        <div className="pointer-events-auto rounded-2xl border border-border bg-background/95 px-4 py-3 shadow-md backdrop-blur">
-          <p className="text-[11px] uppercase tracking-[0.2em] text-[var(--color-gold)]">
+        <div className="pointer-events-auto glass-card rounded-2xl px-4 py-3">
+          <p className="text-[10px] uppercase tracking-[0.25em] text-[var(--color-gold)]">
             Pilgrim's Map
           </p>
-          <h1 className="mt-0.5 font-serif text-xl font-semibold text-primary">
+          <h1 className="mt-0.5 font-serif text-xl text-foreground">
             Apparitions worldwide
           </h1>
-          <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-[11px]">
+          <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-foreground/80">
             {(Object.keys(STATUS_COLOR) as Apparition["status"][]).map((s) => (
               <span key={s} className="inline-flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-full" style={{ background: STATUS_COLOR[s] }} />
+                <span className="h-2 w-2 rounded-full" style={{ background: STATUS_COLOR[s], boxShadow: `0 0 8px ${STATUS_COLOR[s]}` }} />
                 {STATUS_LABEL[s]}
               </span>
             ))}
@@ -133,12 +134,12 @@ function MapPage() {
       </div>
 
       {selected && (
-        <div className="absolute inset-x-0 bottom-20 z-20 px-4">
-          <div className="rounded-2xl border border-border bg-card p-4 shadow-lg">
+        <div className="absolute inset-x-0 bottom-24 z-20 px-4 animate-[fade-in_0.25s_ease-out]">
+          <div className="glass-card rounded-2xl p-4">
             <div className="flex items-start justify-between gap-3">
               <div>
                 <StatusBadge status={selected.status} />
-                <h2 className="mt-1.5 font-serif text-lg font-semibold text-primary">
+                <h2 className="mt-1.5 font-serif text-xl text-foreground">
                   {selected.title}
                 </h2>
                 <p className="text-xs text-muted-foreground">
@@ -152,13 +153,13 @@ function MapPage() {
                 Close
               </button>
             </div>
-            <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
+            <p className="mt-2 line-clamp-2 text-sm text-foreground/80">
               {selected.summary}
             </p>
             <Link
               to="/apparition/$slug"
               params={{ slug: selected.slug }}
-              className="mt-3 inline-flex rounded-full bg-primary px-4 py-2 text-xs font-medium text-primary-foreground"
+              className="btn-glow mt-3 inline-flex rounded-full bg-gradient-to-r from-[oklch(0.83_0.12_220)] to-[oklch(0.87_0.10_90)] px-4 py-2 text-xs font-medium text-[oklch(0.20_0.08_265)]"
             >
               Read more →
             </Link>
