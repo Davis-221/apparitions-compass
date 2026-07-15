@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, Heart, MapPin, Calendar, Users, Share2 } from "lucide-react";
+import { ArrowLeft, Heart, MapPin, Calendar, Users, Share2, Sparkles } from "lucide-react";
 import { getApparition } from "@/data/apparitions";
 import { PRAYERS } from "@/data/prayers";
 import { StatusBadge } from "@/components/StatusBadge";
@@ -53,57 +53,72 @@ function ApparitionPage() {
   };
 
   return (
-    <div>
-      <div className="relative h-72 w-full overflow-hidden">
+    <div className="pb-8">
+      {/* Cinematic hero */}
+      <div className="relative h-[440px] w-full overflow-hidden">
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(120% 100% at 30% 0%, oklch(0.55 0.13 258) 0%, oklch(0.25 0.08 258) 65%, oklch(0.18 0.05 258) 100%)",
+              "radial-gradient(130% 100% at 25% 5%, oklch(0.60 0.20 260) 0%, oklch(0.28 0.10 265) 55%, oklch(0.16 0.06 265) 100%)",
           }}
         />
-        <div className="absolute inset-0 opacity-50" style={{
-          backgroundImage:
-            "radial-gradient(circle at 70% 30%, oklch(0.85 0.08 82 / 0.55), transparent 55%)",
-        }} />
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/60 to-transparent" />
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 75% 25%, oklch(0.90 0.12 220 / 0.55), transparent 55%), radial-gradient(circle at 30% 80%, oklch(0.87 0.14 90 / 0.35), transparent 55%)",
+          }}
+        />
+        <div className="absolute inset-0 star-field opacity-70 animate-twinkle" />
+        <div className="absolute right-[-60px] top-[-60px] h-72 w-72 rounded-full bg-[oklch(0.87_0.10_90/0.35)] blur-3xl animate-halo" />
+        <div className="absolute bottom-[-40px] left-[-40px] h-64 w-64 rounded-full bg-[oklch(0.72_0.16_215/0.35)] blur-3xl" />
+        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
-        <div className="safe-area-top absolute inset-x-0 top-0 flex items-center justify-between px-3 pt-3">
+        <div className="safe-area-top absolute inset-x-0 top-0 flex items-center justify-between px-4 pt-3">
           <Link
             to="/"
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-black/30 text-white backdrop-blur"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-xl"
           >
             <ArrowLeft className="h-5 w-5" />
           </Link>
           <div className="flex gap-2">
             <button
               onClick={share}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-black/30 text-white backdrop-blur"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-xl"
             >
               <Share2 className="h-4 w-4" />
             </button>
             <button
               onClick={() => toggle(a.slug)}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-black/30 text-white backdrop-blur"
+              className="relative flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-xl"
+              aria-pressed={fav}
             >
-              <Heart className={`h-5 w-5 ${fav ? "fill-rose-400 text-rose-400" : ""}`} />
+              {fav && <span className="absolute inset-0 -z-10 rounded-full bg-[oklch(0.78_0.15_25/0.5)] blur-lg animate-halo" />}
+              <Heart className={`h-5 w-5 transition-all ${fav ? "fill-rose-300 text-rose-300 scale-110" : ""}`} />
             </button>
           </div>
         </div>
 
-        <div className="absolute inset-x-0 bottom-0 px-5 pb-4 text-white">
+        <div className="pointer-events-none absolute right-4 top-24 font-serif text-[120px] italic leading-none text-white/10">
+          {a.year}
+        </div>
+
+        <div className="absolute inset-x-0 bottom-0 px-6 pb-6 text-white">
           <StatusBadge status={a.status} />
-          <h1 className="mt-2 font-serif text-3xl font-semibold leading-tight">
+          <h1 className="mt-3 font-serif text-4xl leading-[1.05] text-glow">
             {a.title}
           </h1>
-          <p className="mt-1 text-sm text-white/80">
+          <p className="mt-2 text-sm text-white/80">
             {a.location} · {a.country}
           </p>
+          <div className="mt-4 gold-hairline w-24" />
         </div>
       </div>
 
-      <div className="px-5 py-5">
-        <div className="grid grid-cols-1 gap-3 rounded-2xl border border-border bg-card p-4 text-sm">
+      <div className="px-5 py-6">
+        {/* Info card - glass */}
+        <div className="glass-card grid grid-cols-1 gap-4 rounded-2xl p-5 text-sm">
           <Row icon={<Calendar className="h-4 w-4" />} label="Dates" value={a.dates} />
           <Row icon={<Users className="h-4 w-4" />} label="Seer(s)" value={a.seers.join(", ")} />
           {a.pilgrimage && (
@@ -111,21 +126,23 @@ function ApparitionPage() {
           )}
         </div>
 
-        <Section title="Church Status">
+        <Section title="Church Status" eyebrow="Ecclesial verdict">
           <p className="text-sm leading-relaxed text-muted-foreground">{a.statusNote}</p>
         </Section>
 
-        <Section title="The Story">
-          <p className="text-sm leading-relaxed">{a.account}</p>
+        <Section title="The Story" eyebrow="Chronicle">
+          <p className="text-[15px] leading-relaxed text-foreground/90">{a.account}</p>
         </Section>
 
-        <Section title="Key Messages">
-          <ul className="space-y-3">
+        <Section title="Key Messages" eyebrow="Words from Heaven">
+          <ul className="space-y-4">
             {a.messages.map((m: string, i: number) => (
               <li
                 key={i}
-                className="border-l-2 border-[var(--color-gold)] pl-3 font-serif text-base italic leading-relaxed text-primary"
+                className="relative rounded-2xl border border-white/10 bg-white/5 p-4 pl-6 font-serif text-lg italic leading-relaxed text-foreground"
               >
+                <span className="absolute left-0 top-4 bottom-4 w-[3px] rounded-full bg-gradient-to-b from-[var(--color-gold)] to-[oklch(0.83_0.12_220)]" />
+                <Sparkles className="absolute right-3 top-3 h-3.5 w-3.5 text-[var(--color-gold)]/70" />
                 {m}
               </li>
             ))}
@@ -133,16 +150,17 @@ function ApparitionPage() {
         </Section>
 
         {relatedPrayers.length > 0 && (
-          <Section title="Prayers">
+          <Section title="Prayers" eyebrow="Pray with her">
             <div className="space-y-2">
               {relatedPrayers.map((p) => (
                 <Link
                   key={p.slug}
                   to="/prayers/$slug"
                   params={{ slug: p.slug }}
-                  className="block rounded-xl border border-border bg-card px-4 py-3 text-sm font-medium text-primary"
+                  className="glass-card flex items-center justify-between rounded-2xl px-4 py-3.5 text-sm font-medium text-foreground"
                 >
-                  {p.title} →
+                  <span className="font-serif text-base">{p.title}</span>
+                  <span className="text-[var(--color-gold)]">→</span>
                 </Link>
               ))}
             </div>
@@ -156,19 +174,29 @@ function ApparitionPage() {
 function Row({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
   return (
     <div className="flex items-start gap-3">
-      <div className="mt-0.5 text-[var(--color-gold)]">{icon}</div>
+      <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[oklch(0.87_0.10_90/0.15)] text-[var(--color-gold)]">
+        {icon}
+      </div>
       <div>
-        <div className="text-[11px] uppercase tracking-wider text-muted-foreground">{label}</div>
-        <div className="text-sm">{value}</div>
+        <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{label}</div>
+        <div className="mt-0.5 text-sm text-foreground">{value}</div>
       </div>
     </div>
   );
 }
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({ title, eyebrow, children }: { title: string; eyebrow?: string; children: React.ReactNode }) {
   return (
-    <section className="mt-6">
-      <h2 className="mb-2 font-serif text-xl font-semibold text-primary">{title}</h2>
+    <section className="mt-8">
+      {eyebrow && (
+        <p className="text-[10px] uppercase tracking-[0.25em] text-[var(--color-gold)]">
+          {eyebrow}
+        </p>
+      )}
+      <div className="mb-3 mt-1 flex items-center gap-3">
+        <h2 className="font-serif text-2xl text-foreground">{title}</h2>
+        <div className="h-px flex-1 bg-gradient-to-r from-[var(--color-gold)]/60 to-transparent" />
+      </div>
       {children}
     </section>
   );
