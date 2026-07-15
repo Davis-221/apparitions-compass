@@ -1,5 +1,37 @@
 import type { Apparition } from "@/data/apparitions";
 import { STATUS_LABEL } from "@/data/apparitions";
+import { apparitionImage } from "@/data/apparition-images";
+
+function loadImage(src: string): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
+}
+
+function drawCover(
+  ctx: CanvasRenderingContext2D,
+  img: HTMLImageElement,
+  dx: number,
+  dy: number,
+  dw: number,
+  dh: number,
+) {
+  const ir = img.width / img.height;
+  const dr = dw / dh;
+  let sx = 0, sy = 0, sw = img.width, sh = img.height;
+  if (ir > dr) {
+    sw = img.height * dr;
+    sx = (img.width - sw) / 2;
+  } else {
+    sh = img.width / dr;
+    sy = 0; // top-align
+  }
+  ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
+}
 
 const W = 1080;
 const H = 1350;
@@ -56,15 +88,24 @@ export async function renderShareCard(a: Apparition, url: string): Promise<Blob>
   ctx.fillStyle = bg;
   ctx.fillRect(0, 0, W, H);
 
+  // Devotional artwork (top-cover full frame under the aurora scrim)
+  const imgSrc = apparitionImage(a.slug);
+  if (imgSrc) {
+    try {
+      const img = await loadImage(imgSrc);
+      drawCover(ctx, img, 0, 0, W, H);
+    } catch {}
+  }
+
   // Halo glows
   const glow1 = ctx.createRadialGradient(W * 0.85, H * 0.15, 0, W * 0.85, H * 0.15, 500);
-  glow1.addColorStop(0, "rgba(140, 200, 255, 0.55)");
+  glow1.addColorStop(0, "rgba(140, 200, 255, 0.35)");
   glow1.addColorStop(1, "rgba(140, 200, 255, 0)");
   ctx.fillStyle = glow1;
   ctx.fillRect(0, 0, W, H);
 
   const glow2 = ctx.createRadialGradient(W * 0.15, H * 0.85, 0, W * 0.15, H * 0.85, 550);
-  glow2.addColorStop(0, "rgba(240, 200, 120, 0.35)");
+  glow2.addColorStop(0, "rgba(240, 200, 120, 0.25)");
   glow2.addColorStop(1, "rgba(240, 200, 120, 0)");
   ctx.fillStyle = glow2;
   ctx.fillRect(0, 0, W, H);
@@ -89,10 +130,11 @@ export async function renderShareCard(a: Apparition, url: string): Promise<Blob>
   ctx.textAlign = "right";
   ctx.fillText(String(a.year), W - 40, 340);
 
-  // Bottom scrim
-  const scrim = ctx.createLinearGradient(0, H * 0.4, 0, H);
-  scrim.addColorStop(0, "rgba(0,0,0,0)");
-  scrim.addColorStop(1, "rgba(0,0,0,0.75)");
+  // Bottom scrim — heavier so title/summary read cleanly over artwork
+  const scrim = ctx.createLinearGradient(0, H * 0.25, 0, H);
+  scrim.addColorStop(0, "rgba(10, 15, 44, 0)");
+  scrim.addColorStop(0.55, "rgba(10, 15, 44, 0.75)");
+  scrim.addColorStop(1, "rgba(10, 15, 44, 0.95)");
   ctx.fillStyle = scrim;
   ctx.fillRect(0, 0, W, H);
 

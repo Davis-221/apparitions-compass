@@ -6,6 +6,7 @@ import { PRAYERS } from "@/data/prayers";
 import { StatusBadge } from "@/components/StatusBadge";
 import { useFavorites } from "@/hooks/use-favorites";
 import { ShareCardDialog } from "@/components/ShareCardDialog";
+import { apparitionImage } from "@/data/apparition-images";
 
 export const Route = createFileRoute("/apparition/$slug")({
   loader: ({ params }) => {
@@ -47,7 +48,7 @@ function ApparitionPage() {
   return (
     <div className="pb-8">
       {/* Cinematic hero */}
-      <div className="relative h-[440px] w-full overflow-hidden">
+      <div className="relative h-[520px] w-full overflow-hidden">
         <div
           className="absolute inset-0"
           style={{
@@ -55,17 +56,27 @@ function ApparitionPage() {
               "radial-gradient(130% 100% at 25% 5%, oklch(0.60 0.20 260) 0%, oklch(0.28 0.10 265) 55%, oklch(0.16 0.06 265) 100%)",
           }}
         />
+        {apparitionImage(a.slug) && (
+          <img
+            src={apparitionImage(a.slug)}
+            alt={a.title}
+            className="absolute inset-0 h-full w-full object-cover object-top"
+            width={768}
+            height={960}
+          />
+        )}
         <div
           className="absolute inset-0"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 75% 25%, oklch(0.90 0.12 220 / 0.55), transparent 55%), radial-gradient(circle at 30% 80%, oklch(0.87 0.14 90 / 0.35), transparent 55%)",
+              "radial-gradient(circle at 75% 25%, oklch(0.90 0.12 220 / 0.30), transparent 55%), radial-gradient(circle at 30% 80%, oklch(0.87 0.14 90 / 0.25), transparent 55%)",
           }}
         />
-        <div className="absolute inset-0 star-field opacity-70 animate-twinkle" />
-        <div className="absolute right-[-60px] top-[-60px] h-72 w-72 rounded-full bg-[oklch(0.87_0.10_90/0.35)] blur-3xl animate-halo" />
-        <div className="absolute bottom-[-40px] left-[-40px] h-64 w-64 rounded-full bg-[oklch(0.72_0.16_215/0.35)] blur-3xl" />
-        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+        <div className="absolute inset-0 star-field opacity-25 mix-blend-screen" />
+        <div className="absolute right-[-60px] top-[-60px] h-72 w-72 rounded-full bg-[oklch(0.87_0.10_90/0.25)] blur-3xl animate-halo" />
+        <div className="absolute bottom-[-40px] left-[-40px] h-64 w-64 rounded-full bg-[oklch(0.72_0.16_215/0.25)] blur-3xl" />
+        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+
 
         <div className="safe-area-top absolute inset-x-0 top-0 flex items-center justify-between px-4 pt-3">
           <Link

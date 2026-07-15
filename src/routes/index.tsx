@@ -8,6 +8,7 @@ import {
   type ApparitionStatus,
 } from "@/data/apparitions";
 import { StatusBadge } from "@/components/StatusBadge";
+import { apparitionImage } from "@/data/apparition-images";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -133,18 +134,28 @@ function BrowsePage() {
                 "radial-gradient(120% 90% at 20% 10%, oklch(0.55 0.20 260) 0%, oklch(0.28 0.10 265) 55%, oklch(0.18 0.06 265) 100%)",
             }}
           />
+          {apparitionImage(current.slug) && (
+            <img
+              src={apparitionImage(current.slug)}
+              alt={current.title}
+              className="absolute inset-0 h-full w-full object-cover object-top opacity-90"
+              width={768}
+              height={960}
+            />
+          )}
           <div
             className="absolute inset-0"
             style={{
               backgroundImage:
-                "radial-gradient(circle at 75% 30%, oklch(0.90 0.10 220 / 0.55), transparent 55%), radial-gradient(circle at 30% 75%, oklch(0.87 0.14 90 / 0.35), transparent 55%)",
+                "radial-gradient(circle at 75% 30%, oklch(0.90 0.10 220 / 0.35), transparent 55%), radial-gradient(circle at 30% 75%, oklch(0.87 0.14 90 / 0.25), transparent 55%)",
             }}
           />
-          <div className="absolute inset-0 star-field opacity-70 animate-twinkle" />
+          <div className="absolute inset-0 star-field opacity-30 mix-blend-screen" />
           {/* Aureole */}
           <div className="absolute right-[-40px] top-[-40px] h-56 w-56 rounded-full bg-[oklch(0.87_0.10_90/0.35)] blur-3xl animate-halo" />
           <div className="absolute bottom-[-30px] left-[-30px] h-48 w-48 rounded-full bg-[oklch(0.72_0.16_215/0.35)] blur-3xl" />
-          <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+
 
           {/* Top row */}
           <div className="relative flex items-start justify-between p-5">
@@ -288,6 +299,7 @@ function statusHue(status: ApparitionStatus) {
 
 function HeroCard({ a, priority }: { a: Apparition; priority?: boolean }) {
   const hue = statusHue(a.status);
+  const img = apparitionImage(a.slug);
   return (
     <Link
       to="/apparition/$slug"
@@ -300,9 +312,20 @@ function HeroCard({ a, priority }: { a: Apparition; priority?: boolean }) {
           background: `radial-gradient(120% 100% at 25% 10%, ${hue} 0%, oklch(0.28 0.08 258) 55%, oklch(0.18 0.05 265) 100%)`,
         }}
       />
-      <div className="absolute inset-0 star-field opacity-40" />
+      {img && (
+        <img
+          src={img}
+          alt={a.title}
+          loading={priority ? "eager" : "lazy"}
+          className="absolute inset-0 h-full w-full object-cover object-top opacity-90"
+          width={768}
+          height={960}
+        />
+      )}
+      <div className="absolute inset-0 star-field opacity-25 mix-blend-screen" />
       <div className="absolute right-[-30px] top-[-30px] h-40 w-40 rounded-full bg-[oklch(0.87_0.10_90/0.25)] blur-3xl" />
-      <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black/75 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black/85 to-transparent" />
+
 
       <div className="relative flex items-start justify-between p-4">
         <span className="rounded-full border border-white/20 bg-white/10 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.2em] text-white/90 backdrop-blur-md">
@@ -329,6 +352,7 @@ function HeroCard({ a, priority }: { a: Apparition; priority?: boolean }) {
 
 function SmallCard({ a }: { a: Apparition }) {
   const hue = statusHue(a.status);
+  const img = apparitionImage(a.slug);
   return (
     <Link
       to="/apparition/$slug"
@@ -341,9 +365,20 @@ function SmallCard({ a }: { a: Apparition }) {
           background: `radial-gradient(120% 100% at 20% 0%, ${hue} 0%, oklch(0.25 0.08 265) 70%)`,
         }}
       />
-      <div className="absolute inset-0 star-field opacity-30" />
+      {img && (
+        <img
+          src={img}
+          alt={a.title}
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover object-top opacity-90"
+          width={768}
+          height={960}
+        />
+      )}
+      <div className="absolute inset-0 star-field opacity-20 mix-blend-screen" />
       <div className="absolute right-[-16px] top-[-16px] h-20 w-20 rounded-full bg-[oklch(0.87_0.10_90/0.25)] blur-2xl" />
-      <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black/80 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black/85 to-transparent" />
+
 
       <div className="pointer-events-none absolute right-3 top-2 font-serif text-3xl italic leading-none text-white/20">
         {a.year}
