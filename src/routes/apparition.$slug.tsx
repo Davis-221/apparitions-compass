@@ -159,6 +159,7 @@ function ApparitionPage() {
           </Section>
         )}
       </div>
+      <ShareCardDialog apparition={a} open={shareOpen} onClose={() => setShareOpen(false)} />
     </div>
   );
 }
