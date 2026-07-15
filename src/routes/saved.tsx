@@ -28,6 +28,7 @@ function statusHue(status: ApparitionStatus) {
 function SavedPage() {
   const { favorites } = useFavorites();
   const saved = APPARITIONS.filter((a) => favorites.includes(a.slug));
+  const [shareTarget, setShareTarget] = useState<Apparition | null>(null);
 
   return (
     <div className="pb-8">
