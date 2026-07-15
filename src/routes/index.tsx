@@ -352,6 +352,7 @@ function HeroCard({ a, priority }: { a: Apparition; priority?: boolean }) {
 
 function SmallCard({ a }: { a: Apparition }) {
   const hue = statusHue(a.status);
+  const img = apparitionImage(a.slug);
   return (
     <Link
       to="/apparition/$slug"
@@ -364,9 +365,20 @@ function SmallCard({ a }: { a: Apparition }) {
           background: `radial-gradient(120% 100% at 20% 0%, ${hue} 0%, oklch(0.25 0.08 265) 70%)`,
         }}
       />
-      <div className="absolute inset-0 star-field opacity-30" />
+      {img && (
+        <img
+          src={img}
+          alt={a.title}
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover object-top opacity-90"
+          width={768}
+          height={960}
+        />
+      )}
+      <div className="absolute inset-0 star-field opacity-20 mix-blend-screen" />
       <div className="absolute right-[-16px] top-[-16px] h-20 w-20 rounded-full bg-[oklch(0.87_0.10_90/0.25)] blur-2xl" />
-      <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black/80 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black/85 to-transparent" />
+
 
       <div className="pointer-events-none absolute right-3 top-2 font-serif text-3xl italic leading-none text-white/20">
         {a.year}
