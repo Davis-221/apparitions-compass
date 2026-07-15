@@ -5,6 +5,7 @@ import { APPARITIONS, type ApparitionStatus, type Apparition } from "@/data/appa
 import { StatusBadge } from "@/components/StatusBadge";
 import { useFavorites } from "@/hooks/use-favorites";
 import { ShareCardDialog } from "@/components/ShareCardDialog";
+import { apparitionImage } from "@/data/apparition-images";
 
 export const Route = createFileRoute("/saved")({
   head: () => ({
