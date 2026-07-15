@@ -1,8 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Heart } from "lucide-react";
-import { APPARITIONS, type ApparitionStatus } from "@/data/apparitions";
+import { Heart, Share2 } from "lucide-react";
+import { useState } from "react";
+import { APPARITIONS, type ApparitionStatus, type Apparition } from "@/data/apparitions";
 import { StatusBadge } from "@/components/StatusBadge";
 import { useFavorites } from "@/hooks/use-favorites";
+import { ShareCardDialog } from "@/components/ShareCardDialog";
 
 export const Route = createFileRoute("/saved")({
   head: () => ({
