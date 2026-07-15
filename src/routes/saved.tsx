@@ -87,12 +87,23 @@ function SavedPage() {
                         background: `radial-gradient(120% 100% at 30% 20%, ${statusHue(a.status)}, oklch(0.22 0.08 265))`,
                       }}
                     >
-                      <div className="absolute inset-0 star-field opacity-50" />
+                      {apparitionImage(a.slug) && (
+                        <img
+                          src={apparitionImage(a.slug)}
+                          alt={a.title}
+                          loading="lazy"
+                          className="absolute inset-0 h-full w-full object-cover object-top"
+                          width={768}
+                          height={960}
+                        />
+                      )}
+                      <div className="absolute inset-0 star-field opacity-20 mix-blend-screen" />
                       <div className="absolute right-[-8px] top-[-8px] h-10 w-10 rounded-full bg-[oklch(0.87_0.10_90/0.35)] blur-xl" />
-                      <div className="absolute inset-x-0 bottom-0 p-1 text-center font-serif text-xs italic text-white/80">
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-1 text-center font-serif text-xs italic text-white">
                         {a.year}
                       </div>
                     </div>
+
                     <div className="min-w-0 flex-1 pr-10">
                       <StatusBadge status={a.status} />
                       <h2 className="mt-1.5 font-serif text-lg leading-snug text-foreground">
