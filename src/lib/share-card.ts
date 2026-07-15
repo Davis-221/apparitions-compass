@@ -1,5 +1,37 @@
 import type { Apparition } from "@/data/apparitions";
 import { STATUS_LABEL } from "@/data/apparitions";
+import { apparitionImage } from "@/data/apparition-images";
+
+function loadImage(src: string): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
+}
+
+function drawCover(
+  ctx: CanvasRenderingContext2D,
+  img: HTMLImageElement,
+  dx: number,
+  dy: number,
+  dw: number,
+  dh: number,
+) {
+  const ir = img.width / img.height;
+  const dr = dw / dh;
+  let sx = 0, sy = 0, sw = img.width, sh = img.height;
+  if (ir > dr) {
+    sw = img.height * dr;
+    sx = (img.width - sw) / 2;
+  } else {
+    sh = img.width / dr;
+    sy = 0; // top-align
+  }
+  ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
+}
 
 const W = 1080;
 const H = 1350;
