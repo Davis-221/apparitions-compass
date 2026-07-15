@@ -1,9 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, Heart, MapPin, Calendar, Users, Share2, Sparkles } from "lucide-react";
+import { useState } from "react";
 import { getApparition } from "@/data/apparitions";
 import { PRAYERS } from "@/data/prayers";
 import { StatusBadge } from "@/components/StatusBadge";
 import { useFavorites } from "@/hooks/use-favorites";
+import { ShareCardDialog } from "@/components/ShareCardDialog";
 
 export const Route = createFileRoute("/apparition/$slug")({
   loader: ({ params }) => {
