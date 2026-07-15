@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
-import { Search } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { Search, Sparkles, ArrowUpRight, MapPin } from "lucide-react";
 import {
   APPARITIONS,
   STATUS_LABEL,
+  type Apparition,
   type ApparitionStatus,
 } from "@/data/apparitions";
 import { StatusBadge } from "@/components/StatusBadge";
@@ -11,11 +12,11 @@ import { StatusBadge } from "@/components/StatusBadge";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Browse Marian Apparitions" },
+      { title: "Marian Apparitions — A Celestial Atlas" },
       {
         name: "description",
         content:
-          "Browse Marian apparitions worldwide — from Guadalupe to Fátima, Lourdes to Medjugorje.",
+          "An interactive atlas of Marian apparitions worldwide — from Guadalupe to Fátima, Lourdes to Medjugorje.",
       },
     ],
   }),
@@ -32,9 +33,29 @@ const FILTERS: { key: Filter; label: string }[] = [
   { key: "not_approved", label: STATUS_LABEL.not_approved },
 ];
 
+// Curated feature rotation from the most iconic approved apparitions
+const FEATURED_SLUGS = ["guadalupe", "fatima", "lourdes", "rue-du-bac", "knock"];
+
+function useRotatingFeatured() {
+  const featured = useMemo(
+    () =>
+      FEATURED_SLUGS.map((s) => APPARITIONS.find((a) => a.slug === s)).filter(
+        Boolean,
+      ) as Apparition[],
+    [],
+  );
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setI((n) => (n + 1) % featured.length), 6000);
+    return () => clearInterval(id);
+  }, [featured.length]);
+  return { current: featured[i], index: i, count: featured.length, setIndex: setI };
+}
+
 function BrowsePage() {
   const [filter, setFilter] = useState<Filter>("all");
   const [query, setQuery] = useState("");
+  const { current, index, count, setIndex } = useRotatingFeatured();
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -50,98 +71,304 @@ function BrowsePage() {
     }).sort((a, b) => a.year - b.year);
   }, [filter, query]);
 
+  const stats = useMemo(() => {
+    const total = APPARITIONS.length;
+    const approved = APPARITIONS.filter((a) => a.status === "approved").length;
+    const countries = new Set(APPARITIONS.map((a) => a.country)).size;
+    return { total, approved, countries };
+  }, []);
+
   return (
-    <div>
-      <header className="safe-area-top sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
-        <div className="px-4 pt-4 pb-3">
-          <p className="text-[11px] uppercase tracking-[0.2em] text-[var(--color-gold)]">
-            Ave Maria
-          </p>
-          <h1 className="mt-1 font-serif text-3xl font-semibold leading-tight text-primary">
-            Marian Apparitions
-          </h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            A pilgrim's guide to Our Lady's visits.
-          </p>
-          <div className="relative mt-3">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+    <div className="pb-8">
+      {/* Sticky glass header */}
+      <header className="safe-area-top sticky top-0 z-40">
+        <div className="relative px-5 pt-5 pb-3">
+          <div className="absolute inset-0 -z-10 bg-[oklch(0.22_0.08_265/0.7)] backdrop-blur-2xl border-b border-white/10" />
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="relative flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-[oklch(0.83_0.12_220)] to-[oklch(0.87_0.10_90)]">
+                <Sparkles className="h-4 w-4 text-[oklch(0.20_0.08_265)]" />
+                <span className="absolute inset-0 -z-10 rounded-full bg-[oklch(0.83_0.14_220/0.5)] blur-lg animate-halo" />
+              </div>
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.25em] text-[var(--color-gold)]">
+                  Ave Maria
+                </p>
+                <p className="font-serif text-base leading-none text-foreground">Marian Atlas</p>
+              </div>
+            </div>
+            <Link
+              to="/map"
+              className="flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-[11px] text-foreground/80"
+            >
+              <MapPin className="h-3 w-3" /> World
+            </Link>
+          </div>
+
+          <div className="relative mt-4">
+            <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search name, place, or seer"
-              className="w-full rounded-full border border-input bg-card pl-9 pr-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-ring"
+              placeholder="Search sacred places, seers, years…"
+              className="w-full rounded-full border border-white/15 bg-white/5 pl-10 pr-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground outline-none focus:ring-2 focus:ring-ring"
             />
-          </div>
-          <div className="mt-3 -mx-4 overflow-x-auto px-4">
-            <div className="flex gap-2 pb-1">
-              {FILTERS.map(({ key, label }) => (
-                <button
-                  key={key}
-                  onClick={() => setFilter(key)}
-                  className={`shrink-0 rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors ${
-                    filter === key
-                      ? "bg-primary text-primary-foreground"
-                      : "border border-border bg-card text-foreground"
-                  }`}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
           </div>
         </div>
       </header>
 
-      <main className="px-4 py-4">
-        <p className="mb-3 text-xs text-muted-foreground">
-          {filtered.length} apparition{filtered.length !== 1 ? "s" : ""}
-        </p>
-        <ul className="space-y-3">
-          {filtered.map((a) => (
-            <li key={a.slug}>
-              <Link
-                to="/apparition/$slug"
-                params={{ slug: a.slug }}
-                className="block overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-transform active:scale-[0.99]"
-              >
-                <div className="relative h-28 w-full overflow-hidden">
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background:
-                        "radial-gradient(120% 100% at 20% 0%, oklch(0.55 0.13 258) 0%, oklch(0.28 0.08 258) 60%, oklch(0.2 0.05 258) 100%)",
+      {/* Hero — rotating featured apparition */}
+      <section className="px-5 pt-4">
+        <Link
+          to="/apparition/$slug"
+          params={{ slug: current.slug }}
+          key={current.slug}
+          className="group relative block h-[380px] overflow-hidden rounded-3xl border border-white/15 animate-[fade-in_0.6s_ease-out]"
+        >
+          {/* Celestial layered background */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(120% 90% at 20% 10%, oklch(0.55 0.20 260) 0%, oklch(0.28 0.10 265) 55%, oklch(0.18 0.06 265) 100%)",
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle at 75% 30%, oklch(0.90 0.10 220 / 0.55), transparent 55%), radial-gradient(circle at 30% 75%, oklch(0.87 0.14 90 / 0.35), transparent 55%)",
+            }}
+          />
+          <div className="absolute inset-0 star-field opacity-70 animate-twinkle" />
+          {/* Aureole */}
+          <div className="absolute right-[-40px] top-[-40px] h-56 w-56 rounded-full bg-[oklch(0.87_0.10_90/0.35)] blur-3xl animate-halo" />
+          <div className="absolute bottom-[-30px] left-[-30px] h-48 w-48 rounded-full bg-[oklch(0.72_0.16_215/0.35)] blur-3xl" />
+          <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+
+          {/* Top row */}
+          <div className="relative flex items-start justify-between p-5">
+            <span className="rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-white/90 backdrop-blur-md">
+              Featured
+            </span>
+            <StatusBadge status={current.status} />
+          </div>
+
+          {/* Year - massive */}
+          <div className="pointer-events-none absolute right-5 top-16 font-serif text-[92px] italic leading-none text-white/10">
+            {current.year}
+          </div>
+
+          {/* Content */}
+          <div className="absolute inset-x-0 bottom-0 p-5">
+            <p className="text-[11px] uppercase tracking-[0.25em] text-[var(--color-gold)]">
+              {current.country} · {current.dates}
+            </p>
+            <h2 className="mt-2 font-serif text-3xl leading-tight text-white text-glow">
+              {current.title}
+            </h2>
+            <p className="mt-2 line-clamp-2 text-sm text-white/75">
+              {current.summary}
+            </p>
+            <div className="mt-4 flex items-center justify-between">
+              <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white group-active:translate-x-0.5 transition-transform">
+                Enter the story <ArrowUpRight className="h-3.5 w-3.5" />
+              </span>
+              <div className="flex gap-1.5">
+                {Array.from({ length: count }).map((_, k) => (
+                  <button
+                    key={k}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIndex(k);
                     }}
+                    aria-label={`Show featured ${k + 1}`}
+                    className={`h-1 rounded-full transition-all ${
+                      k === index ? "w-6 bg-white" : "w-1.5 bg-white/40"
+                    }`}
                   />
-                  <div className="absolute inset-0 opacity-40" style={{
-                    backgroundImage:
-                      "radial-gradient(circle at 75% 40%, oklch(0.85 0.06 82 / 0.5), transparent 55%)",
-                  }} />
-                  <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-black/40 to-transparent" />
-                  <div className="absolute left-4 top-3 font-serif text-4xl italic text-white/90">
-                    {a.year}
-                  </div>
-                  <div className="absolute right-3 top-3">
-                    <StatusBadge status={a.status} />
-                  </div>
-                </div>
-                <div className="px-4 py-3">
-                  <h2 className="font-serif text-lg font-semibold leading-snug text-primary">
-                    {a.title}
-                  </h2>
-                  <p className="mt-0.5 text-xs text-muted-foreground">
-                    {a.location} · {a.country}
-                  </p>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Link>
+
+        {/* Stats strip */}
+        <div className="mt-4 grid grid-cols-3 gap-2">
+          <Stat label="Apparitions" value={stats.total} />
+          <Stat label="Approved" value={stats.approved} />
+          <Stat label="Countries" value={stats.countries} />
+        </div>
+      </section>
+
+      {/* Filter chips */}
+      <section className="mt-6 px-5">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="h-px w-6 bg-[var(--color-gold)]" />
+            <h3 className="font-serif text-lg text-foreground">The Chronicle</h3>
+          </div>
+          <span className="text-xs text-muted-foreground">{filtered.length} total</span>
+        </div>
+
+        <div className="mt-3 -mx-5 overflow-x-auto px-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex gap-2 pb-1">
+            {FILTERS.map(({ key, label }) => {
+              const active = filter === key;
+              return (
+                <button
+                  key={key}
+                  onClick={() => setFilter(key)}
+                  className={`shrink-0 rounded-full border px-3.5 py-1.5 text-xs font-medium transition-all ${
+                    active
+                      ? "border-transparent bg-gradient-to-r from-[oklch(0.83_0.12_220)] to-[oklch(0.87_0.10_90)] text-[oklch(0.20_0.08_265)] shadow-[0_8px_20px_-8px_oklch(0.83_0.14_220/0.6)]"
+                      : "border-white/15 bg-white/5 text-foreground/80 hover:bg-white/10"
+                  }`}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Editorial grid — magazine style: alternating hero + pair */}
+      <main className="mt-4 space-y-5 px-5">
+        {chunkMagazine(filtered).map((group, gi) => (
+          <div key={gi} className="space-y-3">
+            {group.hero && <HeroCard a={group.hero} priority={gi === 0} />}
+            {group.pair.length > 0 && (
+              <div className="grid grid-cols-2 gap-3">
+                {group.pair.map((a) => (
+                  <SmallCard key={a.slug} a={a} />
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
         {filtered.length === 0 && (
-          <p className="mt-10 text-center text-sm text-muted-foreground">
-            No apparitions match your search.
-          </p>
+          <div className="mt-10 rounded-2xl border border-dashed border-white/15 p-8 text-center">
+            <p className="font-serif text-lg text-foreground">Nothing here yet</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Try another status or search term.
+            </p>
+          </div>
         )}
       </main>
     </div>
   );
+}
+
+function Stat({ label, value }: { label: string; value: number }) {
+  return (
+    <div className="glass-card rounded-2xl px-3 py-3 text-center">
+      <div className="font-serif text-2xl leading-none text-foreground text-glow">
+        {value}
+      </div>
+      <div className="mt-1 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+        {label}
+      </div>
+    </div>
+  );
+}
+
+function statusHue(status: ApparitionStatus) {
+  switch (status) {
+    case "approved":
+      return "oklch(0.72 0.16 160)";
+    case "worthy":
+      return "oklch(0.75 0.14 220)";
+    case "investigation":
+      return "oklch(0.80 0.14 75)";
+    case "not_approved":
+      return "oklch(0.68 0.18 25)";
+  }
+}
+
+function HeroCard({ a, priority }: { a: Apparition; priority?: boolean }) {
+  const hue = statusHue(a.status);
+  return (
+    <Link
+      to="/apparition/$slug"
+      params={{ slug: a.slug }}
+      className="group relative block h-56 overflow-hidden rounded-3xl border border-white/15 active:scale-[0.99] transition-transform"
+    >
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `radial-gradient(120% 100% at 25% 10%, ${hue} 0%, oklch(0.28 0.08 258) 55%, oklch(0.18 0.05 265) 100%)`,
+        }}
+      />
+      <div className="absolute inset-0 star-field opacity-40" />
+      <div className="absolute right-[-30px] top-[-30px] h-40 w-40 rounded-full bg-[oklch(0.87_0.10_90/0.25)] blur-3xl" />
+      <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black/75 to-transparent" />
+
+      <div className="relative flex items-start justify-between p-4">
+        <span className="rounded-full border border-white/20 bg-white/10 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.2em] text-white/90 backdrop-blur-md">
+          {priority ? "Latest" : "Chronicle"}
+        </span>
+        <StatusBadge status={a.status} />
+      </div>
+
+      <div className="pointer-events-none absolute right-4 top-10 font-serif text-6xl italic leading-none text-white/15">
+        {a.year}
+      </div>
+
+      <div className="absolute inset-x-0 bottom-0 p-4">
+        <p className="text-[10px] uppercase tracking-[0.22em] text-[var(--color-gold)]">
+          {a.location} · {a.country}
+        </p>
+        <h3 className="mt-1.5 font-serif text-2xl leading-tight text-white">
+          {a.title}
+        </h3>
+      </div>
+    </Link>
+  );
+}
+
+function SmallCard({ a }: { a: Apparition }) {
+  const hue = statusHue(a.status);
+  return (
+    <Link
+      to="/apparition/$slug"
+      params={{ slug: a.slug }}
+      className="group relative block h-44 overflow-hidden rounded-2xl border border-white/12 active:scale-[0.98] transition-transform"
+    >
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `radial-gradient(120% 100% at 20% 0%, ${hue} 0%, oklch(0.25 0.08 265) 70%)`,
+        }}
+      />
+      <div className="absolute inset-0 star-field opacity-30" />
+      <div className="absolute right-[-16px] top-[-16px] h-20 w-20 rounded-full bg-[oklch(0.87_0.10_90/0.25)] blur-2xl" />
+      <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black/80 to-transparent" />
+
+      <div className="pointer-events-none absolute right-3 top-2 font-serif text-3xl italic leading-none text-white/20">
+        {a.year}
+      </div>
+
+      <div className="absolute inset-x-0 bottom-0 p-3">
+        <p className="text-[9px] uppercase tracking-[0.2em] text-[var(--color-gold)]">
+          {a.country}
+        </p>
+        <h4 className="mt-1 line-clamp-2 font-serif text-base leading-tight text-white">
+          {a.title}
+        </h4>
+      </div>
+    </Link>
+  );
+}
+
+function chunkMagazine(items: Apparition[]) {
+  const groups: { hero: Apparition | null; pair: Apparition[] }[] = [];
+  let i = 0;
+  while (i < items.length) {
+    const hero = items[i] ?? null;
+    const pair = items.slice(i + 1, i + 3);
+    groups.push({ hero, pair });
+    i += 3;
+  }
+  return groups;
 }

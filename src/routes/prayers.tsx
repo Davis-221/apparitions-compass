@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { BookOpen, Sparkles } from "lucide-react";
 import { PRAYERS } from "@/data/prayers";
 import { APPARITIONS } from "@/data/apparitions";
 
@@ -17,36 +18,47 @@ export const Route = createFileRoute("/prayers")({
 });
 
 const SECTIONS = [
-  { key: "marian" as const, label: "Marian Prayers" },
-  { key: "rosary" as const, label: "The Rosary" },
-  { key: "apparition" as const, label: "From the Apparitions" },
+  { key: "marian" as const, label: "Marian Prayers", eyebrow: "Timeless devotion" },
+  { key: "rosary" as const, label: "The Rosary", eyebrow: "The chain of roses" },
+  { key: "apparition" as const, label: "From the Apparitions", eyebrow: "Given from Heaven" },
 ];
 
 function PrayersPage() {
   return (
-    <div>
-      <header className="safe-area-top border-b border-border bg-background px-5 pt-5 pb-4">
-        <p className="text-[11px] uppercase tracking-[0.2em] text-[var(--color-gold)]">
-          Ora et labora
-        </p>
-        <h1 className="mt-1 font-serif text-3xl font-semibold text-primary">
+    <div className="pb-8">
+      <header className="safe-area-top relative overflow-hidden px-6 pt-8 pb-8">
+        <div className="absolute inset-0 -z-10 star-field opacity-40" />
+        <div className="absolute right-[-40px] top-[-40px] -z-10 h-48 w-48 rounded-full bg-[oklch(0.87_0.10_90/0.3)] blur-3xl animate-halo" />
+        <div className="flex items-center gap-2">
+          <BookOpen className="h-4 w-4 text-[var(--color-gold)]" />
+          <p className="text-[11px] uppercase tracking-[0.25em] text-[var(--color-gold)]">
+            Ora et labora
+          </p>
+        </div>
+        <h1 className="mt-2 font-serif text-4xl leading-tight text-foreground text-glow">
           Prayers
         </h1>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Traditional Marian prayers and prayers from the apparitions.
+        <p className="mt-2 max-w-sm text-sm text-muted-foreground">
+          Traditional Marian prayers and words given at the apparitions —
+          held close, prayed often.
         </p>
+        <div className="mt-4 gold-hairline w-16" />
       </header>
 
-      <main className="px-4 py-5">
-        {SECTIONS.map(({ key, label }) => {
+      <main className="px-5">
+        {SECTIONS.map(({ key, label, eyebrow }) => {
           const prayers = PRAYERS.filter((p) => p.category === key);
           if (prayers.length === 0) return null;
           return (
-            <section key={key} className="mb-6">
-              <h2 className="mb-2 px-1 font-serif text-lg font-semibold text-primary">
-                {label}
-              </h2>
-              <ul className="space-y-2">
+            <section key={key} className="mb-8">
+              <p className="text-[10px] uppercase tracking-[0.25em] text-[var(--color-gold)]">
+                {eyebrow}
+              </p>
+              <div className="mb-3 mt-1 flex items-center gap-3">
+                <h2 className="font-serif text-2xl text-foreground">{label}</h2>
+                <div className="h-px flex-1 bg-gradient-to-r from-[var(--color-gold)]/60 to-transparent" />
+              </div>
+              <ul className="space-y-2.5">
                 {prayers.map((p) => {
                   const app = p.apparitionSlug
                     ? APPARITIONS.find((a) => a.slug === p.apparitionSlug)
@@ -56,16 +68,21 @@ function PrayersPage() {
                       <Link
                         to="/prayers/$slug"
                         params={{ slug: p.slug }}
-                        className="block rounded-xl border border-border bg-card px-4 py-3 shadow-sm active:scale-[0.99]"
+                        className="glass-card group relative flex items-center justify-between overflow-hidden rounded-2xl px-4 py-4 active:scale-[0.99] transition-transform"
                       >
-                        <div className="font-serif text-base font-semibold text-primary">
-                          {p.title}
-                        </div>
-                        {app && (
-                          <div className="mt-0.5 text-xs text-muted-foreground">
-                            {app.title}
+                        <div className="min-w-0 flex-1">
+                          <div className="font-serif text-lg leading-tight text-foreground">
+                            {p.title}
                           </div>
-                        )}
+                          {app && (
+                            <div className="mt-0.5 text-xs text-muted-foreground">
+                              {app.title}
+                            </div>
+                          )}
+                        </div>
+                        <div className="ml-3 flex h-8 w-8 items-center justify-center rounded-full border border-[var(--color-gold)]/40 text-[var(--color-gold)]">
+                          <Sparkles className="h-3.5 w-3.5" />
+                        </div>
                       </Link>
                     </li>
                   );
