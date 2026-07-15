@@ -77,20 +77,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "apple-mobile-web-app-capable", content: "yes" },
       { name: "apple-mobile-web-app-status-bar-style", content: "default" },
       { name: "apple-mobile-web-app-title", content: "Apparitions" },
-      { title: "Marian Apparitions — A Guide to Our Lady's Visits" },
+      { title: "Marian Apparitions — A Celestial Atlas" },
       {
         name: "description",
         content:
-          "Explore Marian apparitions across the world — approved by the Catholic Church, worthy of belief, and under investigation. Includes prayers, map, and history.",
+          "An interactive atlas of Marian apparitions worldwide — from Guadalupe to Fátima, Lourdes to Medjugorje.",
       },
-      { property: "og:title", content: "Marian Apparitions — A Guide to Our Lady's Visits" },
+      { property: "og:title", content: "Marian Apparitions — A Celestial Atlas" },
       {
         property: "og:description",
         content:
-          "A pilgrim's pocket guide to the appearances of the Blessed Virgin Mary.",
+          "An interactive atlas of Marian apparitions worldwide — from Guadalupe to Fátima, Lourdes to Medjugorje.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Marian Apparitions — A Celestial Atlas" },
+      { name: "twitter:description", content: "An interactive atlas of Marian apparitions worldwide — from Guadalupe to Fátima, Lourdes to Medjugorje." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/53e7d218-b083-45a7-bfc6-c1bee5fa986a" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/53e7d218-b083-45a7-bfc6-c1bee5fa986a" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
