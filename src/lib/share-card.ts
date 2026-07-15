@@ -88,15 +88,24 @@ export async function renderShareCard(a: Apparition, url: string): Promise<Blob>
   ctx.fillStyle = bg;
   ctx.fillRect(0, 0, W, H);
 
+  // Devotional artwork (top-cover full frame under the aurora scrim)
+  const imgSrc = apparitionImage(a.slug);
+  if (imgSrc) {
+    try {
+      const img = await loadImage(imgSrc);
+      drawCover(ctx, img, 0, 0, W, H);
+    } catch {}
+  }
+
   // Halo glows
   const glow1 = ctx.createRadialGradient(W * 0.85, H * 0.15, 0, W * 0.85, H * 0.15, 500);
-  glow1.addColorStop(0, "rgba(140, 200, 255, 0.55)");
+  glow1.addColorStop(0, "rgba(140, 200, 255, 0.35)");
   glow1.addColorStop(1, "rgba(140, 200, 255, 0)");
   ctx.fillStyle = glow1;
   ctx.fillRect(0, 0, W, H);
 
   const glow2 = ctx.createRadialGradient(W * 0.15, H * 0.85, 0, W * 0.15, H * 0.85, 550);
-  glow2.addColorStop(0, "rgba(240, 200, 120, 0.35)");
+  glow2.addColorStop(0, "rgba(240, 200, 120, 0.25)");
   glow2.addColorStop(1, "rgba(240, 200, 120, 0)");
   ctx.fillStyle = glow2;
   ctx.fillRect(0, 0, W, H);
