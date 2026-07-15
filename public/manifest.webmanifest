@@ -1,0 +1,16 @@
+{
+  "name": "Marian Apparitions",
+  "short_name": "Apparitions",
+  "description": "A guide to Marian apparitions across the world",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fdf8f0",
+  "theme_color": "#1e3a5f",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}
