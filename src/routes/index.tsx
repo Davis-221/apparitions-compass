@@ -299,6 +299,7 @@ function statusHue(status: ApparitionStatus) {
 
 function HeroCard({ a, priority }: { a: Apparition; priority?: boolean }) {
   const hue = statusHue(a.status);
+  const img = apparitionImage(a.slug);
   return (
     <Link
       to="/apparition/$slug"
@@ -311,9 +312,20 @@ function HeroCard({ a, priority }: { a: Apparition; priority?: boolean }) {
           background: `radial-gradient(120% 100% at 25% 10%, ${hue} 0%, oklch(0.28 0.08 258) 55%, oklch(0.18 0.05 265) 100%)`,
         }}
       />
-      <div className="absolute inset-0 star-field opacity-40" />
+      {img && (
+        <img
+          src={img}
+          alt={a.title}
+          loading={priority ? "eager" : "lazy"}
+          className="absolute inset-0 h-full w-full object-cover object-top opacity-90"
+          width={768}
+          height={960}
+        />
+      )}
+      <div className="absolute inset-0 star-field opacity-25 mix-blend-screen" />
       <div className="absolute right-[-30px] top-[-30px] h-40 w-40 rounded-full bg-[oklch(0.87_0.10_90/0.25)] blur-3xl" />
-      <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black/75 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black/85 to-transparent" />
+
 
       <div className="relative flex items-start justify-between p-4">
         <span className="rounded-full border border-white/20 bg-white/10 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.2em] text-white/90 backdrop-blur-md">
