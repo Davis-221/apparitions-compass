@@ -130,10 +130,11 @@ export async function renderShareCard(a: Apparition, url: string): Promise<Blob>
   ctx.textAlign = "right";
   ctx.fillText(String(a.year), W - 40, 340);
 
-  // Bottom scrim
-  const scrim = ctx.createLinearGradient(0, H * 0.4, 0, H);
-  scrim.addColorStop(0, "rgba(0,0,0,0)");
-  scrim.addColorStop(1, "rgba(0,0,0,0.75)");
+  // Bottom scrim — heavier so title/summary read cleanly over artwork
+  const scrim = ctx.createLinearGradient(0, H * 0.25, 0, H);
+  scrim.addColorStop(0, "rgba(10, 15, 44, 0)");
+  scrim.addColorStop(0.55, "rgba(10, 15, 44, 0.75)");
+  scrim.addColorStop(1, "rgba(10, 15, 44, 0.95)");
   ctx.fillStyle = scrim;
   ctx.fillRect(0, 0, W, H);
 
