@@ -121,7 +121,7 @@ function ApparitionPage() {
 
         <Section title="Key Messages">
           <ul className="space-y-3">
-            {a.messages.map((m, i) => (
+            {a.messages.map((m: string, i: number) => (
               <li
                 key={i}
                 className="border-l-2 border-[var(--color-gold)] pl-3 font-serif text-base italic leading-relaxed text-primary"

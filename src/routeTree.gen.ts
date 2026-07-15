@@ -9,38 +9,127 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SavedRouteImport } from './routes/saved'
+import { Route as PrayersRouteImport } from './routes/prayers'
+import { Route as MapRouteImport } from './routes/map'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PrayersSlugRouteImport } from './routes/prayers.$slug'
+import { Route as ApparitionSlugRouteImport } from './routes/apparition.$slug'
 
+const SavedRoute = SavedRouteImport.update({
+  id: '/saved',
+  path: '/saved',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrayersRoute = PrayersRouteImport.update({
+  id: '/prayers',
+  path: '/prayers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MapRoute = MapRouteImport.update({
+  id: '/map',
+  path: '/map',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrayersSlugRoute = PrayersSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => PrayersRoute,
+} as any)
+const ApparitionSlugRoute = ApparitionSlugRouteImport.update({
+  id: '/apparition/$slug',
+  path: '/apparition/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/map': typeof MapRoute
+  '/prayers': typeof PrayersRouteWithChildren
+  '/saved': typeof SavedRoute
+  '/apparition/$slug': typeof ApparitionSlugRoute
+  '/prayers/$slug': typeof PrayersSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/map': typeof MapRoute
+  '/prayers': typeof PrayersRouteWithChildren
+  '/saved': typeof SavedRoute
+  '/apparition/$slug': typeof ApparitionSlugRoute
+  '/prayers/$slug': typeof PrayersSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/map': typeof MapRoute
+  '/prayers': typeof PrayersRouteWithChildren
+  '/saved': typeof SavedRoute
+  '/apparition/$slug': typeof ApparitionSlugRoute
+  '/prayers/$slug': typeof PrayersSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/map'
+    | '/prayers'
+    | '/saved'
+    | '/apparition/$slug'
+    | '/prayers/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/map'
+    | '/prayers'
+    | '/saved'
+    | '/apparition/$slug'
+    | '/prayers/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/map'
+    | '/prayers'
+    | '/saved'
+    | '/apparition/$slug'
+    | '/prayers/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  MapRoute: typeof MapRoute
+  PrayersRoute: typeof PrayersRouteWithChildren
+  SavedRoute: typeof SavedRoute
+  ApparitionSlugRoute: typeof ApparitionSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/saved': {
+      id: '/saved'
+      path: '/saved'
+      fullPath: '/saved'
+      preLoaderRoute: typeof SavedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prayers': {
+      id: '/prayers'
+      path: '/prayers'
+      fullPath: '/prayers'
+      preLoaderRoute: typeof PrayersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/map': {
+      id: '/map'
+      path: '/map'
+      fullPath: '/map'
+      preLoaderRoute: typeof MapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +137,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/prayers/$slug': {
+      id: '/prayers/$slug'
+      path: '/$slug'
+      fullPath: '/prayers/$slug'
+      preLoaderRoute: typeof PrayersSlugRouteImport
+      parentRoute: typeof PrayersRoute
+    }
+    '/apparition/$slug': {
+      id: '/apparition/$slug'
+      path: '/apparition/$slug'
+      fullPath: '/apparition/$slug'
+      preLoaderRoute: typeof ApparitionSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface PrayersRouteChildren {
+  PrayersSlugRoute: typeof PrayersSlugRoute
+}
+
+const PrayersRouteChildren: PrayersRouteChildren = {
+  PrayersSlugRoute: PrayersSlugRoute,
+}
+
+const PrayersRouteWithChildren =
+  PrayersRoute._addFileChildren(PrayersRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  MapRoute: MapRoute,
+  PrayersRoute: PrayersRouteWithChildren,
+  SavedRoute: SavedRoute,
+  ApparitionSlugRoute: ApparitionSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
