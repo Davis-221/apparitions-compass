@@ -8,6 +8,7 @@ import {
   type ApparitionStatus,
 } from "@/data/apparitions";
 import { StatusBadge } from "@/components/StatusBadge";
+import { apparitionImage } from "@/data/apparition-images";
 
 export const Route = createFileRoute("/")({
   head: () => ({
