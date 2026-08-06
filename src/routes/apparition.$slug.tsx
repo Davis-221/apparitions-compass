@@ -102,6 +102,7 @@ function ApparitionPage() {
         <div className="safe-area-top absolute inset-x-0 top-0 flex items-center justify-between px-4 pt-3">
           <Link
             to="/"
+            aria-label="Back to all apparitions"
             className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-xl"
           >
             <ArrowLeft className="h-5 w-5" />
@@ -109,15 +110,18 @@ function ApparitionPage() {
           <div className="flex gap-2">
             <button
               onClick={share}
+              aria-label={`Share ${a.title}`}
               className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-xl"
             >
               <Share2 className="h-4 w-4" />
             </button>
             <button
               onClick={() => toggle(a.slug)}
+              aria-label={fav ? `Remove ${a.title} from saved` : `Save ${a.title}`}
               className="relative flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-xl"
               aria-pressed={fav}
             >
+
               {fav && <span className="absolute inset-0 -z-10 rounded-full bg-[oklch(0.78_0.15_25/0.5)] blur-lg animate-halo" />}
               <Heart className={`h-5 w-5 transition-all ${fav ? "fill-rose-300 text-rose-300 scale-110" : ""}`} />
             </button>
