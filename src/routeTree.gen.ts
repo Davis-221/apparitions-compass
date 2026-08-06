@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VaticanApprovedMarianApparitionsRouteImport } from './routes/vatican-approved-marian-apparitions'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SavedRouteImport } from './routes/saved'
 import { Route as PrayersRouteImport } from './routes/prayers'
@@ -17,6 +18,12 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as PrayersSlugRouteImport } from './routes/prayers.$slug'
 import { Route as ApparitionSlugRouteImport } from './routes/apparition.$slug'
 
+const VaticanApprovedMarianApparitionsRoute =
+  VaticanApprovedMarianApparitionsRouteImport.update({
+    id: '/vatican-approved-marian-apparitions',
+    path: '/vatican-approved-marian-apparitions',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -59,6 +66,7 @@ export interface FileRoutesByFullPath {
   '/prayers': typeof PrayersRouteWithChildren
   '/saved': typeof SavedRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/vatican-approved-marian-apparitions': typeof VaticanApprovedMarianApparitionsRoute
   '/apparition/$slug': typeof ApparitionSlugRoute
   '/prayers/$slug': typeof PrayersSlugRoute
 }
@@ -68,6 +76,7 @@ export interface FileRoutesByTo {
   '/prayers': typeof PrayersRouteWithChildren
   '/saved': typeof SavedRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/vatican-approved-marian-apparitions': typeof VaticanApprovedMarianApparitionsRoute
   '/apparition/$slug': typeof ApparitionSlugRoute
   '/prayers/$slug': typeof PrayersSlugRoute
 }
@@ -78,6 +87,7 @@ export interface FileRoutesById {
   '/prayers': typeof PrayersRouteWithChildren
   '/saved': typeof SavedRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/vatican-approved-marian-apparitions': typeof VaticanApprovedMarianApparitionsRoute
   '/apparition/$slug': typeof ApparitionSlugRoute
   '/prayers/$slug': typeof PrayersSlugRoute
 }
@@ -89,6 +99,7 @@ export interface FileRouteTypes {
     | '/prayers'
     | '/saved'
     | '/sitemap.xml'
+    | '/vatican-approved-marian-apparitions'
     | '/apparition/$slug'
     | '/prayers/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +109,7 @@ export interface FileRouteTypes {
     | '/prayers'
     | '/saved'
     | '/sitemap.xml'
+    | '/vatican-approved-marian-apparitions'
     | '/apparition/$slug'
     | '/prayers/$slug'
   id:
@@ -107,6 +119,7 @@ export interface FileRouteTypes {
     | '/prayers'
     | '/saved'
     | '/sitemap.xml'
+    | '/vatican-approved-marian-apparitions'
     | '/apparition/$slug'
     | '/prayers/$slug'
   fileRoutesById: FileRoutesById
@@ -117,11 +130,19 @@ export interface RootRouteChildren {
   PrayersRoute: typeof PrayersRouteWithChildren
   SavedRoute: typeof SavedRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  VaticanApprovedMarianApparitionsRoute: typeof VaticanApprovedMarianApparitionsRoute
   ApparitionSlugRoute: typeof ApparitionSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/vatican-approved-marian-apparitions': {
+      id: '/vatican-approved-marian-apparitions'
+      path: '/vatican-approved-marian-apparitions'
+      fullPath: '/vatican-approved-marian-apparitions'
+      preLoaderRoute: typeof VaticanApprovedMarianApparitionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -191,6 +212,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrayersRoute: PrayersRouteWithChildren,
   SavedRoute: SavedRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  VaticanApprovedMarianApparitionsRoute: VaticanApprovedMarianApparitionsRoute,
   ApparitionSlugRoute: ApparitionSlugRoute,
 }
 export const routeTree = rootRouteImport
