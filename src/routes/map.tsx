@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { APPARITIONS, STATUS_LABEL, type Apparition } from "@/data/apparitions";
 import { StatusBadge } from "@/components/StatusBadge";
 
+const SITE = "https://apparitions-compass.lovable.app";
+
 export const Route = createFileRoute("/map")({
   head: () => ({
     meta: [
@@ -12,10 +14,19 @@ export const Route = createFileRoute("/map")({
         content:
           "An interactive world map of Marian apparition sites, from Guadalupe to Fátima and beyond.",
       },
+      { property: "og:title", content: "World Map of Marian Apparitions" },
+      {
+        property: "og:description",
+        content:
+          "Explore every Marian apparition site on an interactive world map, colour-coded by Church status.",
+      },
+      { property: "og:url", content: `${SITE}/map` },
     ],
+    links: [{ rel: "canonical", href: `${SITE}/map` }],
   }),
   component: MapPage,
 });
+
 
 declare global {
   interface Window {
@@ -161,7 +172,7 @@ function MapPage() {
               params={{ slug: selected.slug }}
               className="btn-glow mt-3 inline-flex rounded-full bg-gradient-to-r from-[oklch(0.83_0.12_220)] to-[oklch(0.87_0.10_90)] px-4 py-2 text-xs font-medium text-[oklch(0.20_0.08_265)]"
             >
-              Read more →
+              Read the story of {selected.title} →
             </Link>
           </div>
         </div>

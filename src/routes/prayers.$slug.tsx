@@ -2,18 +2,42 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import { getPrayer } from "@/data/prayers";
 
+const SITE = "https://apparitions-compass.lovable.app";
+
 export const Route = createFileRoute("/prayers/$slug")({
   loader: ({ params }) => {
     const prayer = getPrayer(params.slug);
     if (!prayer) throw notFound();
     return { prayer };
   },
-  head: ({ loaderData }) => {
-    if (!loaderData) return { meta: [{ title: "Prayer not found" }] };
+  head: ({ params, loaderData }) => {
+    if (!loaderData) return { meta: [{ title: "Prayer not found" }, { name: "robots", content: "noindex" }] };
+    const p = loaderData.prayer;
+    const url = `${SITE}/prayers/${params.slug}`;
+    const description = `${p.title} — pray the full text of this traditional Marian prayer.`;
     return {
       meta: [
-        { title: loaderData.prayer.title },
-        { name: "description", content: loaderData.prayer.text.slice(0, 150) },
+        { title: p.title },
+        { name: "description", content: description },
+        { property: "og:title", content: p.title },
+        { property: "og:description", content: description },
+        { property: "og:type", content: "article" },
+        { property: "og:url", content: url },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CreativeWork",
+            headline: p.title,
+            name: p.title,
+            description,
+            text: p.text,
+            url,
+          }),
+        },
       ],
     };
   },
@@ -25,6 +49,7 @@ export const Route = createFileRoute("/prayers/$slug")({
   ),
 });
 
+
 function PrayerPage() {
   const { prayer } = Route.useLoaderData();
 
@@ -33,8 +58,10 @@ function PrayerPage() {
       <header className="safe-area-top sticky top-0 z-40 flex items-center gap-2 border-b border-white/10 bg-[oklch(0.22_0.08_265/0.7)] px-3 py-3 backdrop-blur-2xl">
         <Link
           to="/prayers"
+          aria-label="Back to prayers"
           className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-foreground"
         >
+
           <ArrowLeft className="h-5 w-5" />
         </Link>
         <h1 className="font-serif text-lg text-foreground">
