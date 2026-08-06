@@ -7,15 +7,30 @@ import { useFavorites } from "@/hooks/use-favorites";
 import { ShareCardDialog } from "@/components/ShareCardDialog";
 import { apparitionImage } from "@/data/apparition-images";
 
+const SITE = "https://apparitions-compass.lovable.app";
+
 export const Route = createFileRoute("/saved")({
   head: () => ({
     meta: [
       { title: "Saved Apparitions" },
-      { name: "description", content: "Your saved Marian apparitions." },
+      {
+        name: "description",
+        content:
+          "Your personal collection of saved Marian apparitions — kept close for prayer, reflection, and sharing as devotional cards.",
+      },
+      { property: "og:title", content: "Saved Marian Apparitions" },
+      {
+        property: "og:description",
+        content:
+          "Keep your favourite Marian apparitions in one place for prayer, reflection, and sharing.",
+      },
+      { property: "og:url", content: `${SITE}/saved` },
     ],
+    links: [{ rel: "canonical", href: `${SITE}/saved` }],
   }),
   component: SavedPage,
 });
+
 
 function statusHue(status: ApparitionStatus) {
   switch (status) {

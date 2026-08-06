@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SavedRouteImport } from './routes/saved'
 import { Route as PrayersRouteImport } from './routes/prayers'
 import { Route as MapRouteImport } from './routes/map'
@@ -16,6 +17,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as PrayersSlugRouteImport } from './routes/prayers.$slug'
 import { Route as ApparitionSlugRouteImport } from './routes/apparition.$slug'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SavedRoute = SavedRouteImport.update({
   id: '/saved',
   path: '/saved',
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/map': typeof MapRoute
   '/prayers': typeof PrayersRouteWithChildren
   '/saved': typeof SavedRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/apparition/$slug': typeof ApparitionSlugRoute
   '/prayers/$slug': typeof PrayersSlugRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/map': typeof MapRoute
   '/prayers': typeof PrayersRouteWithChildren
   '/saved': typeof SavedRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/apparition/$slug': typeof ApparitionSlugRoute
   '/prayers/$slug': typeof PrayersSlugRoute
 }
@@ -69,6 +77,7 @@ export interface FileRoutesById {
   '/map': typeof MapRoute
   '/prayers': typeof PrayersRouteWithChildren
   '/saved': typeof SavedRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/apparition/$slug': typeof ApparitionSlugRoute
   '/prayers/$slug': typeof PrayersSlugRoute
 }
@@ -79,6 +88,7 @@ export interface FileRouteTypes {
     | '/map'
     | '/prayers'
     | '/saved'
+    | '/sitemap.xml'
     | '/apparition/$slug'
     | '/prayers/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -87,6 +97,7 @@ export interface FileRouteTypes {
     | '/map'
     | '/prayers'
     | '/saved'
+    | '/sitemap.xml'
     | '/apparition/$slug'
     | '/prayers/$slug'
   id:
@@ -95,6 +106,7 @@ export interface FileRouteTypes {
     | '/map'
     | '/prayers'
     | '/saved'
+    | '/sitemap.xml'
     | '/apparition/$slug'
     | '/prayers/$slug'
   fileRoutesById: FileRoutesById
@@ -104,11 +116,19 @@ export interface RootRouteChildren {
   MapRoute: typeof MapRoute
   PrayersRoute: typeof PrayersRouteWithChildren
   SavedRoute: typeof SavedRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ApparitionSlugRoute: typeof ApparitionSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/saved': {
       id: '/saved'
       path: '/saved'
@@ -170,6 +190,7 @@ const rootRouteChildren: RootRouteChildren = {
   MapRoute: MapRoute,
   PrayersRoute: PrayersRouteWithChildren,
   SavedRoute: SavedRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   ApparitionSlugRoute: ApparitionSlugRoute,
 }
 export const routeTree = rootRouteImport

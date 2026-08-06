@@ -130,7 +130,12 @@ function BrowsePage() {
                 <p className="text-[10px] uppercase tracking-[0.25em] text-[var(--color-gold)]">
                   Ave Maria
                 </p>
-                <p className="font-serif text-base leading-none text-foreground">Marian Atlas</p>
+                <h1 className="font-serif text-base leading-none text-foreground">
+                  Marian Atlas
+                  <span className="sr-only">
+                    {" "}— Marian apparitions worldwide
+                  </span>
+                </h1>
               </div>
             </div>
             <Link
@@ -146,10 +151,12 @@ function BrowsePage() {
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
+              aria-label="Search apparitions by place, seer, or year"
               placeholder="Search sacred places, seers, years…"
               className="w-full rounded-full border border-white/15 bg-white/5 pl-10 pr-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground outline-none focus:ring-2 focus:ring-ring"
             />
           </div>
+
         </div>
       </header>
 

@@ -3,6 +3,8 @@ import { BookOpen, Sparkles } from "lucide-react";
 import { PRAYERS } from "@/data/prayers";
 import { APPARITIONS } from "@/data/apparitions";
 
+const SITE = "https://apparitions-compass.lovable.app";
+
 export const Route = createFileRoute("/prayers")({
   head: () => ({
     meta: [
@@ -12,10 +14,19 @@ export const Route = createFileRoute("/prayers")({
         content:
           "Classic Marian prayers — Hail Mary, Memorare, Angelus, Salve Regina — and prayers from Marian apparitions.",
       },
+      { property: "og:title", content: "Marian Prayers — Hail Mary, Memorare, Angelus" },
+      {
+        property: "og:description",
+        content:
+          "A library of traditional Marian prayers and the prayers given at the apparitions.",
+      },
+      { property: "og:url", content: `${SITE}/prayers` },
     ],
+    links: [{ rel: "canonical", href: `${SITE}/prayers` }],
   }),
   component: PrayersPage,
 });
+
 
 const SECTIONS = [
   { key: "marian" as const, label: "Marian Prayers", eyebrow: "Timeless devotion" },
