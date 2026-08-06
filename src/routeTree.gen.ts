@@ -15,6 +15,7 @@ import { Route as SavedRouteImport } from './routes/saved'
 import { Route as PrayersRouteImport } from './routes/prayers'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as MapRouteImport } from './routes/map'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PrayersSlugRouteImport } from './routes/prayers.$slug'
 import { Route as ApparitionSlugRouteImport } from './routes/apparition.$slug'
@@ -53,6 +54,11 @@ const MapRoute = MapRouteImport.update({
   path: '/map',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -89,6 +95,7 @@ const Char91DotmcpChar93InvokeToolToolRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/map': typeof MapRoute
   '/mcp': typeof McpRoute
   '/prayers': typeof PrayersRouteWithChildren
@@ -103,6 +110,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/map': typeof MapRoute
   '/mcp': typeof McpRoute
   '/prayers': typeof PrayersRouteWithChildren
@@ -118,6 +126,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/map': typeof MapRoute
   '/mcp': typeof McpRoute
   '/prayers': typeof PrayersRouteWithChildren
@@ -134,6 +143,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/map'
     | '/mcp'
     | '/prayers'
@@ -148,6 +158,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
     | '/map'
     | '/mcp'
     | '/prayers'
@@ -162,6 +173,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/auth'
     | '/map'
     | '/mcp'
     | '/prayers'
@@ -177,6 +189,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
   MapRoute: typeof MapRoute
   McpRoute: typeof McpRoute
   PrayersRoute: typeof PrayersRouteWithChildren
@@ -231,6 +244,13 @@ declare module '@tanstack/react-router' {
       path: '/map'
       fullPath: '/map'
       preLoaderRoute: typeof MapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -291,6 +311,7 @@ const PrayersRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
   MapRoute: MapRoute,
   McpRoute: McpRoute,
   PrayersRoute: PrayersRouteWithChildren,
