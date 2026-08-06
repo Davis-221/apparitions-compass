@@ -8,23 +8,43 @@ import { useFavorites } from "@/hooks/use-favorites";
 import { ShareCardDialog } from "@/components/ShareCardDialog";
 import { apparitionImage } from "@/data/apparition-images";
 
+const SITE = "https://apparitions-compass.lovable.app";
+
 export const Route = createFileRoute("/apparition/$slug")({
   loader: ({ params }) => {
     const apparition = getApparition(params.slug);
     if (!apparition) throw notFound();
     return { apparition };
   },
-  head: ({ loaderData }) => {
+  head: ({ params, loaderData }) => {
     if (!loaderData) {
       return { meta: [{ title: "Apparition not found" }, { name: "robots", content: "noindex" }] };
     }
     const a = loaderData.apparition;
+    const url = `${SITE}/apparition/${params.slug}`;
     return {
       meta: [
         { title: `${a.title} — ${a.year}` },
         { name: "description", content: a.summary },
         { property: "og:title", content: `${a.title} — ${a.location}, ${a.year}` },
         { property: "og:description", content: a.summary },
+        { property: "og:type", content: "article" },
+        { property: "og:url", content: url },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: `${a.title} — ${a.location}, ${a.year}`,
+            description: a.summary,
+            about: a.title,
+            locationCreated: { "@type": "Place", name: `${a.location}, ${a.country}` },
+            url,
+          }),
+        },
       ],
     };
   },
@@ -36,6 +56,7 @@ export const Route = createFileRoute("/apparition/$slug")({
     </div>
   ),
 });
+
 
 function ApparitionPage() {
   const { apparition: a } = Route.useLoaderData();
