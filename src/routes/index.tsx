@@ -10,6 +10,8 @@ import {
 import { StatusBadge } from "@/components/StatusBadge";
 import { apparitionImage } from "@/data/apparition-images";
 
+const SITE = "https://apparitions-compass.lovable.app";
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -19,10 +21,43 @@ export const Route = createFileRoute("/")({
         content:
           "An interactive atlas of Marian apparitions worldwide — from Guadalupe to Fátima, Lourdes to Medjugorje.",
       },
+      { property: "og:title", content: "Marian Apparitions — A Celestial Atlas" },
+      {
+        property: "og:description",
+        content:
+          "Browse Marian apparitions worldwide by Church status, read their stories and messages, and pray with them.",
+      },
+      { property: "og:url", content: `${SITE}/` },
+    ],
+    links: [{ rel: "canonical", href: `${SITE}/` }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              name: "Marian Atlas",
+              url: `${SITE}/`,
+              description:
+                "An interactive atlas of Marian apparitions worldwide — from Guadalupe to Fátima, Lourdes to Medjugorje.",
+            },
+            {
+              "@type": "Organization",
+              name: "Marian Atlas",
+              url: `${SITE}/`,
+              description:
+                "A devotional atlas documenting Marian apparitions and their Church status.",
+            },
+          ],
+        }),
+      },
     ],
   }),
   component: BrowsePage,
 });
+
 
 type Filter = "all" | ApparitionStatus;
 
