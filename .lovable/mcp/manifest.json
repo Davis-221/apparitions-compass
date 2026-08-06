@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "sdk_version": "0.26.1",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "marian-pilgrim",
+      "version": "0.1.0",
+      "title": "Marian Pilgrim"
+    },
+    "tools": [
+      {
+        "name": "list_apparitions",
+        "title": "List apparitions",
+        "description": "List Marian apparitions in the catalogue, optionally filtered by Church status, country, or a free-text query over name, place, and seers.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "status": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "approved",
+                    "worthy",
+                    "investigation",
+                    "not_approved"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by Church status. Null for all statuses."
+            },
+            "country": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by country name. Null for all countries."
+            },
+            "query": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Free-text search over title, location, country and seers. Null for no search."
+            }
+          },
+          "required": [
+            "status",
+            "country",
+            "query"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_apparition",
+        "title": "Get apparition details",
+        "description": "Get the full record for one Marian apparition by slug: dates, seers, Church status, historical account, key messages, pilgrimage site, and any prayers tied to it.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Apparition slug, e.g. 'guadalupe', 'fatima', 'lourdes'."
+            }
+          },
+          "required": [
+            "slug"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_prayers",
+        "title": "List prayers",
+        "description": "List Marian prayers in the app's prayer library, optionally filtered by category or by the apparition they belong to. Returns full prayer text.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "category": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "marian",
+                    "rosary",
+                    "apparition"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by prayer category. Null for all categories."
+            },
+            "apparitionSlug": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Only prayers tied to this apparition slug. Null for no filter."
+            }
+          },
+          "required": [
+            "category",
+            "apparitionSlug"
+          ]
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
