@@ -58,6 +58,7 @@ export const Route = createFileRoute("/prayers/$slug")({
 
 function PrayerPage() {
   const { prayer } = Route.useLoaderData();
+  const [shareOpen, setShareOpen] = useState(false);
   const apparition = prayer.apparitionSlug
     ? APPARITIONS.find((a) => a.slug === prayer.apparitionSlug)
     : null;
@@ -73,7 +74,17 @@ function PrayerPage() {
           <ArrowLeft className="h-5 w-5" />
         </Link>
         <h1 className="truncate font-serif text-lg text-foreground">{prayer.title}</h1>
+        <button
+          onClick={() => setShareOpen(true)}
+          aria-label={`Share or print a prayer card for ${prayer.title}`}
+          className="ml-auto flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-gold)]/40 bg-white/5 text-[var(--color-gold)]"
+        >
+          <Share2 className="h-4.5 w-4.5" />
+        </button>
       </header>
+
+      <PrayerCardDialog prayer={prayer} open={shareOpen} onClose={() => setShareOpen(false)} />
+
 
       <main className="relative px-6 py-10">
         <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-72 star-field opacity-30 animate-twinkle" />
