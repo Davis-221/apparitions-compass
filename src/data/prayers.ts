@@ -103,7 +103,7 @@ export const PRAYERS: Prayer[] = [
     intro:
       "A daily devotion of purity and perseverance, promised by Our Lady to St. Mechtilde as a safeguard at the hour of death.",
     source: "Devotion revealed to St. Mechtilde of Hackeborn, 13th century",
-    text: "In honour of the Power of God the Father:\nHail Mary…\n\nIn honour of the Wisdom of God the Son:\nHail Mary…\n\nIn honour of the Love of God the Holy Spirit:\nHail Mary…\n\nO Mary, my Mother, keep me this day from mortal sin.\nBy thy holy and Immaculate Conception,\nmake my body pure and my soul holy.\nAmen.",
+    text: "In honour of the Power of God the Father:\nHail Mary, full of grace, the Lord is with thee.\nBlessed art thou amongst women,\nand blessed is the fruit of thy womb, Jesus.\nHoly Mary, Mother of God,\npray for us sinners,\nnow and at the hour of our death. Amen.\n\nIn honour of the Wisdom of God the Son:\nHail Mary, full of grace, the Lord is with thee.\nBlessed art thou amongst women,\nand blessed is the fruit of thy womb, Jesus.\nHoly Mary, Mother of God,\npray for us sinners,\nnow and at the hour of our death. Amen.\n\nIn honour of the Love of God the Holy Spirit:\nHail Mary, full of grace, the Lord is with thee.\nBlessed art thou amongst women,\nand blessed is the fruit of thy womb, Jesus.\nHoly Mary, Mother of God,\npray for us sinners,\nnow and at the hour of our death. Amen.\n\nO Mary, my Mother, keep me this day from mortal sin.\nBy thy holy and Immaculate Conception,\nmake my body pure and my soul holy.\nAmen.",
     howToPray: "Prayed each morning on rising and each night before sleep.",
   },
 
