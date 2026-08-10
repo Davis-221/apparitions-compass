@@ -222,10 +222,10 @@ const PRINT_CSS = `
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; background: #fff; }
   .sheet {
-    width: 148mm; min-height: 202mm; max-height: 205mm; padding: 14mm 16mm 12mm;
+    width: 148mm; height: 205mm; padding: 14mm 16mm 12mm;
     display: flex; flex-direction: column; align-items: center; text-align: center;
     color: #1d2440; background: #fdfaf3; overflow: hidden;
-    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-family: 'Cormorant Garamond', Georgia, serif; font-size: 13pt;
     position: relative; page-break-after: always; break-after: page;
     page-break-inside: avoid; break-inside: avoid;
   }
@@ -233,20 +233,21 @@ const PRINT_CSS = `
 
   .frame { position: absolute; inset: 8mm; border: 0.6pt solid #b9973f; border-radius: 3mm; }
   .frame::after { content: ''; position: absolute; inset: 2.5mm; border: 0.4pt solid rgba(185,151,63,0.4); border-radius: 2mm; }
-  .eyebrow { font-family: 'Karla', sans-serif; font-size: 8pt; letter-spacing: 0.28em; text-transform: uppercase; color: #a5842f; margin-bottom: 6mm; }
-  h1 { font-size: 26pt; font-style: italic; font-weight: 600; margin: 0; line-height: 1.15; }
-  .latin { font-style: italic; font-size: 11pt; color: #a5842f; margin-top: 2mm; }
-  .rule { width: 42mm; height: 0.6pt; background: #b9973f; margin: 7mm 0 2mm; }
-  .star { color: #b9973f; font-size: 9pt; margin-bottom: 6mm; }
-  .intro { font-style: italic; font-size: 10pt; color: #55597a; max-width: 100mm; margin: 0 0 6mm; line-height: 1.5; }
-  .body p { font-size: 13pt; line-height: 1.62; margin: 0 0 4mm; max-width: 106mm; }
-  .how { font-family: 'Karla', sans-serif; font-size: 8.5pt; color: #55597a; max-width: 100mm; margin-top: 6mm; line-height: 1.5; }
-  footer { margin-top: auto; padding-top: 8mm; }
-  .source { font-style: italic; font-size: 8.5pt; color: #6b6f8c; }
-  .url { font-family: 'Karla', sans-serif; font-size: 7.5pt; letter-spacing: 0.12em; color: #a5842f; margin-top: 2mm; text-transform: uppercase; }
-  .cover h1 { font-size: 34pt; }
-  .toc { font-family: 'Karla', sans-serif; font-size: 9pt; color: #3a3f5c; text-align: left; max-width: 108mm; column-count: 2; column-gap: 8mm; margin-top: 6mm; }
+  .eyebrow { font-family: 'Karla', sans-serif; font-size: 0.62em; letter-spacing: 0.28em; text-transform: uppercase; color: #a5842f; margin-bottom: 5mm; }
+  h1 { font-size: 2em; font-style: italic; font-weight: 600; margin: 0; line-height: 1.15; }
+  .latin { font-style: italic; font-size: 0.85em; color: #a5842f; margin-top: 2mm; }
+  .rule { width: 42mm; height: 0.6pt; background: #b9973f; margin: 6mm 0 2mm; }
+  .star { color: #b9973f; font-size: 0.7em; margin-bottom: 5mm; }
+  .intro { font-style: italic; font-size: 0.77em; color: #55597a; max-width: 100mm; margin: 0 0 5mm; line-height: 1.5; }
+  .body p { font-size: 1em; line-height: 1.6; margin: 0 0 3.5mm; max-width: 106mm; }
+  .how { font-family: 'Karla', sans-serif; font-size: 0.65em; color: #55597a; max-width: 100mm; margin-top: 5mm; line-height: 1.5; }
+  footer { margin-top: auto; padding-top: 6mm; }
+  .source { font-style: italic; font-size: 0.65em; color: #6b6f8c; }
+  .url { font-family: 'Karla', sans-serif; font-size: 0.58em; letter-spacing: 0.12em; color: #a5842f; margin-top: 2mm; text-transform: uppercase; }
+  .cover h1 { font-size: 2.6em; }
+  .toc { font-family: 'Karla', sans-serif; font-size: 0.69em; color: #3a3f5c; text-align: left; max-width: 108mm; column-count: 2; column-gap: 8mm; margin-top: 6mm; }
   .toc div { break-inside: avoid; margin-bottom: 1.6mm; }
+
 `;
 
 const FONT_LINKS = `<link rel="preconnect" href="https://fonts.googleapis.com" />
