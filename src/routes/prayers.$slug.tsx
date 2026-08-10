@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, MapPin } from "lucide-react";
+import { ArrowLeft, MapPin, Share2, Printer } from "lucide-react";
 import { getPrayer, CATEGORY_LABEL, type PrayerCategory } from "@/data/prayers";
 import { APPARITIONS } from "@/data/apparitions";
+import { PrayerCardDialog } from "@/components/PrayerCardDialog";
+
 
 const SITE = "https://apparitions-compass.lovable.app";
 
@@ -55,6 +58,7 @@ export const Route = createFileRoute("/prayers/$slug")({
 
 function PrayerPage() {
   const { prayer } = Route.useLoaderData();
+  const [shareOpen, setShareOpen] = useState(false);
   const apparition = prayer.apparitionSlug
     ? APPARITIONS.find((a) => a.slug === prayer.apparitionSlug)
     : null;
@@ -70,7 +74,17 @@ function PrayerPage() {
           <ArrowLeft className="h-5 w-5" />
         </Link>
         <h1 className="truncate font-serif text-lg text-foreground">{prayer.title}</h1>
+        <button
+          onClick={() => setShareOpen(true)}
+          aria-label={`Share or print a prayer card for ${prayer.title}`}
+          className="ml-auto flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-gold)]/40 bg-white/5 text-[var(--color-gold)]"
+        >
+          <Share2 className="h-4.5 w-4.5" />
+        </button>
       </header>
+
+      <PrayerCardDialog prayer={prayer} open={shareOpen} onClose={() => setShareOpen(false)} />
+
 
       <main className="relative px-6 py-10">
         <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-72 star-field opacity-30 animate-twinkle" />
@@ -154,7 +168,14 @@ function PrayerPage() {
             <div className="gold-hairline w-12" />
           </div>
 
-          <div className="mt-6 text-center">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <button
+              onClick={() => setShareOpen(true)}
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[oklch(0.83_0.12_220)] to-[oklch(0.87_0.10_90)] px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-[oklch(0.20_0.08_265)]"
+            >
+              <Printer className="h-3.5 w-3.5" />
+              Prayer card / PDF
+            </button>
             <Link
               to="/prayers"
               className="inline-flex items-center gap-2 rounded-full border border-[var(--color-gold)]/40 px-5 py-2.5 text-xs uppercase tracking-[0.2em] text-[var(--color-gold)]"
@@ -162,6 +183,7 @@ function PrayerPage() {
               More prayers
             </Link>
           </div>
+
         </div>
       </main>
     </div>
