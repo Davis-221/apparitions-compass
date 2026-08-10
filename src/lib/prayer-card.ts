@@ -274,15 +274,29 @@ function sheetHtml(prayer: Prayer, url: string) {
 </div>`;
 }
 
+const FIT_SCRIPT = `
+<script>
+  window.__fit = function () {
+    var sheets = document.querySelectorAll('.sheet');
+    for (var i = 0; i < sheets.length; i++) {
+      var s = sheets[i], z = 1;
+      while (s.scrollHeight > s.clientHeight + 1 && z > 0.55) {
+        z -= 0.03;
+        s.style.zoom = z;
+      }
+    }
+  };
+<\/script>`;
+
 function printDocument(title: string, inner: string) {
   const html = `<!doctype html><html><head><meta charset="utf-8" />
 <title>${esc(title)}</title>
 ${FONT_LINKS}
-<style>${PRINT_CSS}</style></head><body>${inner}</body></html>`;
+<style>${PRINT_CSS}</style></head><body>${inner}${FIT_SCRIPT}</body></html>`;
 
   const iframe = document.createElement("iframe");
   iframe.setAttribute("aria-hidden", "true");
-  iframe.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0;opacity:0;";
+  iframe.style.cssText = "position:fixed;right:0;bottom:0;width:210mm;height:297mm;border:0;opacity:0;";
   document.body.appendChild(iframe);
   const doc = iframe.contentDocument!;
   doc.open();
@@ -291,13 +305,15 @@ ${FONT_LINKS}
 
   const go = () => {
     try {
+      (iframe.contentWindow as any)?.__fit?.();
       iframe.contentWindow?.focus();
       iframe.contentWindow?.print();
     } catch {}
     setTimeout(() => iframe.remove(), 60000);
   };
   // give webfonts a moment so the sheet prints in its proper type
-  setTimeout(go, 700);
+  setTimeout(go, 900);
+
 }
 
 /** Opens a print-ready A5 devotional sheet in a hidden iframe and triggers Print / Save as PDF. */
