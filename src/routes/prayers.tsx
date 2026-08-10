@@ -173,8 +173,30 @@ function PrayersPage() {
                             </div>
                           )}
                         </div>
-                        <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[var(--color-gold)]/40 text-[var(--color-gold)] transition-transform group-active:scale-95">
-                          <Sparkles className="h-3.5 w-3.5" />
+                        <div className="mt-0.5 flex shrink-0 flex-col items-center gap-2">
+                          <div className="flex h-8 w-8 items-center justify-center rounded-full border border-[var(--color-gold)]/40 text-[var(--color-gold)] transition-transform group-active:scale-95">
+                            <Sparkles className="h-3.5 w-3.5" />
+                          </div>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              toggle(p.slug);
+                            }}
+                            aria-label={
+                              isFavorite(p.slug)
+                                ? `Remove ${p.title} from saved prayers`
+                                : `Save ${p.title} to your prayers`
+                            }
+                            aria-pressed={isFavorite(p.slug)}
+                            className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/5 text-[var(--color-rose-soft)] active:scale-95"
+                          >
+                            <Heart
+                              className="h-3.5 w-3.5"
+                              fill={isFavorite(p.slug) ? "currentColor" : "none"}
+                            />
+                          </button>
                         </div>
                       </Link>
                     </li>
