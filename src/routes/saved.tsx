@@ -46,6 +46,8 @@ function statusHue(status: ApparitionStatus) {
 function SavedPage() {
   const { favorites } = useFavorites();
   const saved = APPARITIONS.filter((a) => favorites.includes(a.slug));
+  const { favorites: prayerFavorites, toggle: togglePrayer } = usePrayerFavorites();
+  const savedPrayers = PRAYERS.filter((p) => prayerFavorites.includes(p.slug));
   const [shareTarget, setShareTarget] = useState<Apparition | null>(null);
 
   return (
