@@ -145,6 +145,45 @@ function SavedPage() {
             ))}
           </ul>
         )}
+
+        {savedPrayers.length > 0 && (
+          <section className="mt-10">
+            <div className="mb-4 flex items-center gap-3">
+              <BookOpen className="h-4 w-4 text-[var(--color-gold)]" />
+              <h2 className="font-serif text-2xl text-foreground">Saved prayers</h2>
+              <div className="h-px flex-1 bg-gradient-to-r from-[var(--color-gold)]/60 to-transparent" />
+            </div>
+            <ul className="space-y-2.5">
+              {savedPrayers.map((p) => (
+                <li key={p.slug}>
+                  <div className="glass-card relative flex items-center gap-3 rounded-2xl px-4 py-3.5">
+                    <Link
+                      to="/prayers/$slug"
+                      params={{ slug: p.slug }}
+                      className="min-w-0 flex-1 active:scale-[0.99]"
+                    >
+                      <div className="font-serif text-lg leading-tight text-foreground">
+                        {p.title}
+                      </div>
+                      {p.latinTitle && (
+                        <div className="mt-0.5 font-serif text-xs italic text-[var(--color-gold)]/80">
+                          {p.latinTitle}
+                        </div>
+                      )}
+                    </Link>
+                    <button
+                      onClick={() => togglePrayer(p.slug)}
+                      aria-label={`Remove ${p.title} from saved prayers`}
+                      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-[var(--color-rose-soft)] active:scale-95"
+                    >
+                      <Heart className="h-4 w-4" fill="currentColor" />
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </main>
       {shareTarget && (
         <ShareCardDialog
