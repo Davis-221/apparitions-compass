@@ -60,6 +60,8 @@ export const Route = createFileRoute("/prayers/$slug")({
 function PrayerPage() {
   const { prayer } = Route.useLoaderData();
   const [shareOpen, setShareOpen] = useState(false);
+  const { toggle, isFavorite } = usePrayerFavorites();
+  const saved = isFavorite(prayer.slug);
   const apparition = prayer.apparitionSlug
     ? APPARITIONS.find((a) => a.slug === prayer.apparitionSlug)
     : null;
