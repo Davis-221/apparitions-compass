@@ -81,7 +81,7 @@ function SavedPage() {
               Nothing kept yet
             </h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              Tap the heart on any apparition to keep it here.
+              Tap the heart on any apparition or prayer to keep it here.
             </p>
             <Link
               to="/"
