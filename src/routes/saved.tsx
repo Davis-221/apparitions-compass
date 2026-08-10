@@ -71,7 +71,7 @@ function SavedPage() {
       </header>
 
       <main className="px-5">
-        {saved.length === 0 ? (
+        {saved.length === 0 && savedPrayers.length === 0 ? (
           <div className="mt-8 flex flex-col items-center px-6 text-center">
             <div className="relative flex h-20 w-20 items-center justify-center rounded-full glass-card">
               <span className="absolute inset-0 rounded-full bg-[oklch(0.78_0.15_25/0.35)] blur-2xl animate-halo" />
