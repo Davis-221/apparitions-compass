@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { BookOpen, Sparkles, Download } from "lucide-react";
+import { BookOpen, Sparkles, Download, Heart } from "lucide-react";
 import { PRAYERS, CATEGORY_LABEL, type PrayerCategory } from "@/data/prayers";
 import { APPARITIONS } from "@/data/apparitions";
 import { ExportPrayersDialog } from "@/components/ExportPrayersDialog";
+import { usePrayerFavorites } from "@/hooks/use-prayer-favorites";
 
 
 const SITE = "https://apparitions-compass.lovable.app";
