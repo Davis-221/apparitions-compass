@@ -275,26 +275,23 @@ function sheetHtml(prayer: Prayer, url: string) {
 </div>`;
 }
 
-const FIT_SCRIPT = `
-<script>
-  window.__fit = function () {
-    var sheets = document.querySelectorAll('.sheet');
-    for (var i = 0; i < sheets.length; i++) {
-      var s = sheets[i], size = 13;
-      while (s.scrollHeight > s.clientHeight + 1 && size > 6.5) {
-        size -= 0.3;
-        s.style.fontSize = size + 'pt';
-      }
+/** Shrinks each sheet's base type until its content fits one A5 page. */
+function fitSheets(doc: Document) {
+  const sheets = doc.querySelectorAll<HTMLElement>(".sheet");
+  sheets.forEach((s) => {
+    let size = 13;
+    while (s.scrollHeight > s.clientHeight + 1 && size > 6.5) {
+      size -= 0.3;
+      s.style.fontSize = `${size}pt`;
     }
-  };
-
-<\/script>`;
+  });
+}
 
 function printDocument(title: string, inner: string) {
   const html = `<!doctype html><html><head><meta charset="utf-8" />
 <title>${esc(title)}</title>
 ${FONT_LINKS}
-<style>${PRINT_CSS}</style></head><body>${inner}${FIT_SCRIPT}</body></html>`;
+<style>${PRINT_CSS}</style></head><body>${inner}</body></html>`;
 
   const iframe = document.createElement("iframe");
   iframe.setAttribute("aria-hidden", "true");
@@ -304,10 +301,11 @@ ${FONT_LINKS}
   doc.open();
   doc.write(html);
   doc.close();
+  (iframe.contentWindow as any).__fit = () => fitSheets(doc);
 
   const go = () => {
     try {
-      (iframe.contentWindow as any)?.__fit?.();
+      fitSheets(doc);
       iframe.contentWindow?.focus();
       iframe.contentWindow?.print();
     } catch {}
@@ -315,8 +313,8 @@ ${FONT_LINKS}
   };
   // give webfonts a moment so the sheet prints in its proper type
   setTimeout(go, 900);
-
 }
+
 
 /** Opens a print-ready A5 devotional sheet in a hidden iframe and triggers Print / Save as PDF. */
 export function printPrayer(prayer: Prayer, url: string) {
