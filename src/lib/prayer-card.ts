@@ -222,13 +222,15 @@ const PRINT_CSS = `
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; background: #fff; }
   .sheet {
-    width: 148mm; min-height: 210mm; padding: 16mm 16mm 14mm;
+    width: 148mm; min-height: 202mm; max-height: 205mm; padding: 14mm 16mm 12mm;
     display: flex; flex-direction: column; align-items: center; text-align: center;
-    color: #1d2440; background: #fdfaf3;
+    color: #1d2440; background: #fdfaf3; overflow: hidden;
     font-family: 'Cormorant Garamond', Georgia, serif;
     position: relative; page-break-after: always; break-after: page;
+    page-break-inside: avoid; break-inside: avoid;
   }
   .sheet:last-child { page-break-after: auto; break-after: auto; }
+
   .frame { position: absolute; inset: 8mm; border: 0.6pt solid #b9973f; border-radius: 3mm; }
   .frame::after { content: ''; position: absolute; inset: 2.5mm; border: 0.4pt solid rgba(185,151,63,0.4); border-radius: 2mm; }
   .eyebrow { font-family: 'Karla', sans-serif; font-size: 8pt; letter-spacing: 0.28em; text-transform: uppercase; color: #a5842f; margin-bottom: 6mm; }
