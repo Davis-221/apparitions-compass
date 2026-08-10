@@ -280,13 +280,14 @@ const FIT_SCRIPT = `
   window.__fit = function () {
     var sheets = document.querySelectorAll('.sheet');
     for (var i = 0; i < sheets.length; i++) {
-      var s = sheets[i], z = 1;
-      while (s.scrollHeight > s.clientHeight + 1 && z > 0.55) {
-        z -= 0.03;
-        s.style.zoom = z;
+      var s = sheets[i], size = 13;
+      while (s.scrollHeight > s.clientHeight + 1 && size > 6.5) {
+        size -= 0.3;
+        s.style.fontSize = size + 'pt';
       }
     }
   };
+
 <\/script>`;
 
 function printDocument(title: string, inner: string) {
