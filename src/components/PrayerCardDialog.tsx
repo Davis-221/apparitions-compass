@@ -91,7 +91,7 @@ export function PrayerCardDialog({ prayer, open, onClose }: Props) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-black/70 backdrop-blur-md sm:items-center"
+      className="fixed inset-0 z-[60] flex items-end justify-center bg-black/70 backdrop-blur-md sm:items-center"
       onClick={onClose}
     >
       <div
