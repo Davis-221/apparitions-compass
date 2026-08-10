@@ -1,9 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Heart, Share2 } from "lucide-react";
+import { Heart, Share2, BookOpen } from "lucide-react";
 import { useState } from "react";
 import { APPARITIONS, type ApparitionStatus, type Apparition } from "@/data/apparitions";
+import { PRAYERS } from "@/data/prayers";
 import { StatusBadge } from "@/components/StatusBadge";
 import { useFavorites } from "@/hooks/use-favorites";
+import { usePrayerFavorites } from "@/hooks/use-prayer-favorites";
 import { ShareCardDialog } from "@/components/ShareCardDialog";
 import { apparitionImage } from "@/data/apparition-images";
 
