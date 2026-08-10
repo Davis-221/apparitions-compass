@@ -124,6 +124,31 @@ function PrayersPage() {
 
 
       <main className="px-5">
+        {savedPrayers.length > 0 && (
+          <section className="mb-10">
+            <p className="text-[10px] uppercase tracking-[0.28em] text-[var(--color-gold)]">
+              Kept close
+            </p>
+            <div className="mb-4 mt-1 flex items-center gap-3">
+              <h2 className="font-serif text-2xl text-foreground">Your saved prayers</h2>
+              <div className="h-px flex-1 bg-gradient-to-r from-[var(--color-gold)]/60 to-transparent" />
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {savedPrayers.map((p) => (
+                <Link
+                  key={p.slug}
+                  to="/prayers/$slug"
+                  params={{ slug: p.slug }}
+                  className="glass-card inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-xs text-foreground active:scale-[0.98]"
+                >
+                  <Heart className="h-3 w-3 text-[var(--color-rose-soft)]" fill="currentColor" />
+                  {p.title}
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
         {SECTIONS.map(({ key, eyebrow, blurb }) => {
           const prayers = PRAYERS.filter((p) => p.category === key);
           if (prayers.length === 0) return null;
