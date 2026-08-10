@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, MapPin } from "lucide-react";
+import { ArrowLeft, MapPin, Share2 } from "lucide-react";
 import { getPrayer, CATEGORY_LABEL, type PrayerCategory } from "@/data/prayers";
 import { APPARITIONS } from "@/data/apparitions";
+import { PrayerCardDialog } from "@/components/PrayerCardDialog";
+
 
 const SITE = "https://apparitions-compass.lovable.app";
 
