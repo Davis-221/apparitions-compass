@@ -79,6 +79,8 @@ const SECTIONS: { key: PrayerCategory; eyebrow: string; blurb: string }[] = [
 
 function PrayersPage() {
   const [exportOpen, setExportOpen] = useState(false);
+  const { favorites, toggle, isFavorite } = usePrayerFavorites();
+  const savedPrayers = PRAYERS.filter((p) => favorites.includes(p.slug));
   return (
     <div className="pb-8">
 
