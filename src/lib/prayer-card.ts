@@ -276,27 +276,20 @@ function sheetHtml(prayer: Prayer, url: string) {
 }
 
 /**
- * Shrinks each sheet's base type until it fits one A5 page. Very long prayers
- * (litanies, the Rosary guide) stop at a readable floor and flow onto a second
- * page instead of becoming unreadable.
+ * Shrinks each sheet's base type until the whole prayer fits on one A5 page,
+ * so no devotional sheet is ever split or clipped mid-prayer.
  */
 function fitSheets(doc: Document) {
   const sheets = doc.querySelectorAll<HTMLElement>(".sheet");
   sheets.forEach((s) => {
     let size = 13;
-    while (s.scrollHeight > s.clientHeight + 1 && size > 9) {
-      size -= 0.3;
+    while (s.scrollHeight > s.clientHeight + 1 && size > 7) {
+      size -= 0.25;
       s.style.fontSize = `${size}pt`;
-    }
-    if (s.scrollHeight > s.clientHeight + 1) {
-      s.style.height = "auto";
-      s.style.minHeight = "205mm";
-      s.style.overflow = "visible";
-      s.style.breakInside = "auto";
-      s.style.pageBreakInside = "auto";
     }
   });
 }
+
 
 
 function printDocument(title: string, inner: string) {
