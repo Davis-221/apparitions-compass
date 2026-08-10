@@ -217,19 +217,7 @@ function esc(s: string) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-/** Opens a print-ready A5 devotional sheet in a hidden iframe and triggers Print / Save as PDF. */
-export function printPrayer(prayer: Prayer, url: string) {
-  const body = esc(prayer.text)
-    .split("\n\n")
-    .map((p) => `<p>${p.replace(/\n/g, "<br/>")}</p>`)
-    .join("");
-
-  const html = `<!doctype html><html><head><meta charset="utf-8" />
-<title>${esc(prayer.title)} — Prayer Card</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Karla:wght@400;600&display=swap" rel="stylesheet" />
-<style>
+const PRINT_CSS = `
   @page { size: A5 portrait; margin: 0; }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; background: #fff; }
@@ -238,8 +226,9 @@ export function printPrayer(prayer: Prayer, url: string) {
     display: flex; flex-direction: column; align-items: center; text-align: center;
     color: #1d2440; background: #fdfaf3;
     font-family: 'Cormorant Garamond', Georgia, serif;
-    position: relative;
+    position: relative; page-break-after: always; break-after: page;
   }
+  .sheet:last-child { page-break-after: auto; break-after: auto; }
   .frame { position: absolute; inset: 8mm; border: 0.6pt solid #b9973f; border-radius: 3mm; }
   .frame::after { content: ''; position: absolute; inset: 2.5mm; border: 0.4pt solid rgba(185,151,63,0.4); border-radius: 2mm; }
   .eyebrow { font-family: 'Karla', sans-serif; font-size: 8pt; letter-spacing: 0.28em; text-transform: uppercase; color: #a5842f; margin-bottom: 6mm; }
@@ -253,8 +242,22 @@ export function printPrayer(prayer: Prayer, url: string) {
   footer { margin-top: auto; padding-top: 8mm; }
   .source { font-style: italic; font-size: 8.5pt; color: #6b6f8c; }
   .url { font-family: 'Karla', sans-serif; font-size: 7.5pt; letter-spacing: 0.12em; color: #a5842f; margin-top: 2mm; text-transform: uppercase; }
-</style></head>
-<body><div class="sheet"><div class="frame"></div>
+  .cover h1 { font-size: 34pt; }
+  .toc { font-family: 'Karla', sans-serif; font-size: 9pt; color: #3a3f5c; text-align: left; max-width: 108mm; column-count: 2; column-gap: 8mm; margin-top: 6mm; }
+  .toc div { break-inside: avoid; margin-bottom: 1.6mm; }
+`;
+
+const FONT_LINKS = `<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Karla:wght@400;600&display=swap" rel="stylesheet" />`;
+
+function sheetHtml(prayer: Prayer, url: string) {
+  const body = esc(prayer.text)
+    .split("\n\n")
+    .map((p) => `<p>${p.replace(/\n/g, "<br/>")}</p>`)
+    .join("");
+
+  return `<div class="sheet"><div class="frame"></div>
   <div class="eyebrow">${esc(CATEGORY_LABEL[prayer.category])}</div>
   <h1>${esc(prayer.title)}</h1>
   ${prayer.latinTitle ? `<div class="latin">${esc(prayer.latinTitle)}</div>` : ""}
@@ -266,7 +269,14 @@ export function printPrayer(prayer: Prayer, url: string) {
     ${prayer.source ? `<div class="source">${esc(prayer.source)}</div>` : ""}
     <div class="url">${esc(shortUrl(url))}</div>
   </footer>
-</div></body></html>`;
+</div>`;
+}
+
+function printDocument(title: string, inner: string) {
+  const html = `<!doctype html><html><head><meta charset="utf-8" />
+<title>${esc(title)}</title>
+${FONT_LINKS}
+<style>${PRINT_CSS}</style></head><body>${inner}</body></html>`;
 
   const iframe = document.createElement("iframe");
   iframe.setAttribute("aria-hidden", "true");
@@ -287,3 +297,117 @@ export function printPrayer(prayer: Prayer, url: string) {
   // give webfonts a moment so the sheet prints in its proper type
   setTimeout(go, 700);
 }
+
+/** Opens a print-ready A5 devotional sheet in a hidden iframe and triggers Print / Save as PDF. */
+export function printPrayer(prayer: Prayer, url: string) {
+  printDocument(`${prayer.title} — Prayer Card`, sheetHtml(prayer, url));
+}
+
+/** Prints every prayer as one A5 booklet (cover + contents + one sheet per prayer). */
+export function printAllPrayers(prayers: Prayer[], origin?: string) {
+  const base = origin ?? (typeof window === "undefined" ? "" : window.location.origin);
+  const toc = prayers
+    .map((p, i) => `<div>${i + 1}. ${esc(p.title)}</div>`)
+    .join("");
+
+  const cover = `<div class="sheet cover"><div class="frame"></div>
+  <div class="eyebrow">A devotional booklet</div>
+  <h1>Prayers to Our Mother</h1>
+  <div class="latin">Ad Jesum per Mariam</div>
+  <div class="rule"></div><div class="star">&#10022;</div>
+  <p class="intro">${prayers.length} authentic Marian prayers — from the Hail Mary and the Rosary to the litanies, consecrations and the words she herself gave at her apparitions.</p>
+  <div class="toc">${toc}</div>
+  <footer><div class="url">${esc(shortUrl(`${base}/prayers`))}</div></footer>
+</div>`;
+
+  const sheets = prayers.map((p) => sheetHtml(p, `${base}/prayers/${p.slug}`)).join("");
+  printDocument("Prayers to Our Mother — Booklet", cover + sheets);
+}
+
+/* ---------------- ZIP of prayer-card PNGs ---------------- */
+
+const CRC_TABLE = (() => {
+  const t = new Uint32Array(256);
+  for (let n = 0; n < 256; n++) {
+    let c = n;
+    for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+    t[n] = c >>> 0;
+  }
+  return t;
+})();
+
+function crc32(buf: Uint8Array) {
+  let c = 0xffffffff;
+  for (let i = 0; i < buf.length; i++) c = CRC_TABLE[(c ^ buf[i]) & 0xff] ^ (c >>> 8);
+  return (c ^ 0xffffffff) >>> 0;
+}
+
+/** Minimal store-only (uncompressed) ZIP writer. */
+function makeZip(files: { name: string; data: Uint8Array }[]): Blob {
+  const enc = new TextEncoder();
+  const chunks: Uint8Array[] = [];
+  const central: Uint8Array[] = [];
+  let offset = 0;
+
+  const u32 = (v: number) => new Uint8Array([v & 255, (v >>> 8) & 255, (v >>> 16) & 255, (v >>> 24) & 255]);
+  const u16 = (v: number) => new Uint8Array([v & 255, (v >>> 8) & 255]);
+  const concat = (parts: Uint8Array[]) => {
+    const len = parts.reduce((s, p) => s + p.length, 0);
+    const out = new Uint8Array(len);
+    let o = 0;
+    for (const p of parts) {
+      out.set(p, o);
+      o += p.length;
+    }
+    return out;
+  };
+
+  for (const f of files) {
+    const name = enc.encode(f.name);
+    const crc = crc32(f.data);
+    const local = concat([
+      u32(0x04034b50), u16(20), u16(0), u16(0), u16(0), u16(0),
+      u32(crc), u32(f.data.length), u32(f.data.length), u16(name.length), u16(0),
+      name, f.data,
+    ]);
+    chunks.push(local);
+    central.push(
+      concat([
+        u32(0x02014b50), u16(20), u16(20), u16(0), u16(0), u16(0), u16(0),
+        u32(crc), u32(f.data.length), u32(f.data.length),
+        u16(name.length), u16(0), u16(0), u16(0), u16(0), u32(0), u32(offset),
+        name,
+      ]),
+    );
+    offset += local.length;
+  }
+
+  const cd = concat(central);
+  const end = concat([
+    u32(0x06054b50), u16(0), u16(0), u16(files.length), u16(files.length),
+    u32(cd.length), u32(offset), u16(0),
+  ]);
+  return new Blob([concat(chunks), cd, end], { type: "application/zip" });
+}
+
+/** Renders every prayer card to PNG and packs them into a single ZIP download. */
+export async function exportPrayerCardsZip(
+  prayers: Prayer[],
+  onProgress?: (done: number, total: number) => void,
+  origin?: string,
+): Promise<Blob> {
+  const base = origin ?? (typeof window === "undefined" ? "" : window.location.origin);
+  const files: { name: string; data: Uint8Array }[] = [];
+  for (let i = 0; i < prayers.length; i++) {
+    const p = prayers[i];
+    const blob = await renderPrayerCard(p, `${base}/prayers/${p.slug}`);
+    files.push({
+      name: `${String(i + 1).padStart(2, "0")}-${p.slug}.png`,
+      data: new Uint8Array(await blob.arrayBuffer()),
+    });
+    onProgress?.(i + 1, prayers.length);
+    await new Promise((r) => setTimeout(r, 0));
+  }
+  return makeZip(files);
+}
+

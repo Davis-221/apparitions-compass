@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { BookOpen, Sparkles } from "lucide-react";
+import { BookOpen, Sparkles, Download } from "lucide-react";
 import { PRAYERS, CATEGORY_LABEL, type PrayerCategory } from "@/data/prayers";
 import { APPARITIONS } from "@/data/apparitions";
+import { ExportPrayersDialog } from "@/components/ExportPrayersDialog";
+
 
 const SITE = "https://apparitions-compass.lovable.app";
 
@@ -74,8 +77,10 @@ const SECTIONS: { key: PrayerCategory; eyebrow: string; blurb: string }[] = [
 ];
 
 function PrayersPage() {
+  const [exportOpen, setExportOpen] = useState(false);
   return (
     <div className="pb-8">
+
       <header className="safe-area-top relative overflow-hidden px-6 pt-10 pb-9">
         <div className="absolute inset-0 -z-10 star-field opacity-40 animate-twinkle" />
         <div className="absolute right-[-50px] top-[-50px] -z-10 h-56 w-56 rounded-full bg-[oklch(0.87_0.10_90/0.3)] blur-3xl animate-halo" />
@@ -104,7 +109,16 @@ function PrayersPage() {
             {PRAYERS.length} prayers
           </span>
         </div>
+
+        <button
+          onClick={() => setExportOpen(true)}
+          className="mt-5 inline-flex items-center gap-2 rounded-full border border-[var(--color-gold)]/40 bg-white/5 px-4 py-2.5 text-[11px] uppercase tracking-[0.2em] text-[var(--color-gold)] transition-transform active:scale-[0.98]"
+        >
+          <Download className="h-3.5 w-3.5" />
+          Export all prayers
+        </button>
       </header>
+
 
       <main className="px-5">
         {SECTIONS.map(({ key, eyebrow, blurb }) => {
@@ -177,6 +191,9 @@ function PrayersPage() {
           </span>
         </p>
       </main>
+
+      <ExportPrayersDialog open={exportOpen} onClose={() => setExportOpen(false)} />
     </div>
+
   );
 }
