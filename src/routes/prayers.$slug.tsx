@@ -168,7 +168,14 @@ function PrayerPage() {
             <div className="gold-hairline w-12" />
           </div>
 
-          <div className="mt-6 text-center">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <button
+              onClick={() => setShareOpen(true)}
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[oklch(0.83_0.12_220)] to-[oklch(0.87_0.10_90)] px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-[oklch(0.20_0.08_265)]"
+            >
+              <Printer className="h-3.5 w-3.5" />
+              Prayer card / PDF
+            </button>
             <Link
               to="/prayers"
               className="inline-flex items-center gap-2 rounded-full border border-[var(--color-gold)]/40 px-5 py-2.5 text-xs uppercase tracking-[0.2em] text-[var(--color-gold)]"
@@ -176,6 +183,7 @@ function PrayerPage() {
               More prayers
             </Link>
           </div>
+
         </div>
       </main>
     </div>
