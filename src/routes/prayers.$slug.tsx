@@ -78,9 +78,17 @@ function PrayerPage() {
         </Link>
         <h1 className="truncate font-serif text-lg text-foreground">{prayer.title}</h1>
         <button
+          onClick={() => toggle(prayer.slug)}
+          aria-label={saved ? `Remove ${prayer.title} from saved prayers` : `Save ${prayer.title}`}
+          aria-pressed={saved}
+          className="ml-auto flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-[var(--color-rose-soft)] active:scale-95"
+        >
+          <Heart className="h-4.5 w-4.5" fill={saved ? "currentColor" : "none"} />
+        </button>
+        <button
           onClick={() => setShareOpen(true)}
           aria-label={`Share or print a prayer card for ${prayer.title}`}
-          className="ml-auto flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-gold)]/40 bg-white/5 text-[var(--color-gold)]"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-gold)]/40 bg-white/5 text-[var(--color-gold)]"
         >
           <Share2 className="h-4.5 w-4.5" />
         </button>
