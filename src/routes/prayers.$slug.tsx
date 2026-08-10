@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, MapPin } from "lucide-react";
-import { getPrayer, CATEGORY_LABEL } from "@/data/prayers";
+import { getPrayer, CATEGORY_LABEL, type PrayerCategory } from "@/data/prayers";
 import { APPARITIONS } from "@/data/apparitions";
 
 const SITE = "https://apparitions-compass.lovable.app";
@@ -81,7 +81,7 @@ function PrayerPage() {
           <div className="mb-6 flex items-center justify-center gap-3">
             <div className="gold-hairline w-12" />
             <span className="text-[10px] uppercase tracking-[0.3em] text-[var(--color-gold)]">
-              {CATEGORY_LABEL[prayer.category]}
+              {CATEGORY_LABEL[prayer.category as PrayerCategory]}
             </span>
             <div className="gold-hairline w-12" />
           </div>

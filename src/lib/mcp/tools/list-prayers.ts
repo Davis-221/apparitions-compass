@@ -9,7 +9,7 @@ export default defineTool({
     "List Marian prayers in the app's prayer library, optionally filtered by category or by the apparition they belong to. Returns full prayer text.",
   inputSchema: {
     category: z
-      .enum(["marian", "rosary", "apparition"])
+      .enum(["marian", "rosary", "litany", "consecration", "apparition"])
       .nullable()
       .describe("Filter by prayer category. Null for all categories."),
     apparitionSlug: z
