@@ -1,9 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Heart, Share2 } from "lucide-react";
+import { Heart, Share2, BookOpen } from "lucide-react";
 import { useState } from "react";
 import { APPARITIONS, type ApparitionStatus, type Apparition } from "@/data/apparitions";
+import { PRAYERS } from "@/data/prayers";
 import { StatusBadge } from "@/components/StatusBadge";
 import { useFavorites } from "@/hooks/use-favorites";
+import { usePrayerFavorites } from "@/hooks/use-prayer-favorites";
 import { ShareCardDialog } from "@/components/ShareCardDialog";
 import { apparitionImage } from "@/data/apparition-images";
 
@@ -44,6 +46,8 @@ function statusHue(status: ApparitionStatus) {
 function SavedPage() {
   const { favorites } = useFavorites();
   const saved = APPARITIONS.filter((a) => favorites.includes(a.slug));
+  const { favorites: prayerFavorites, toggle: togglePrayer } = usePrayerFavorites();
+  const savedPrayers = PRAYERS.filter((p) => prayerFavorites.includes(p.slug));
   const [shareTarget, setShareTarget] = useState<Apparition | null>(null);
 
   return (
@@ -67,7 +71,7 @@ function SavedPage() {
       </header>
 
       <main className="px-5">
-        {saved.length === 0 ? (
+        {saved.length === 0 && savedPrayers.length === 0 ? (
           <div className="mt-8 flex flex-col items-center px-6 text-center">
             <div className="relative flex h-20 w-20 items-center justify-center rounded-full glass-card">
               <span className="absolute inset-0 rounded-full bg-[oklch(0.78_0.15_25/0.35)] blur-2xl animate-halo" />
@@ -77,7 +81,7 @@ function SavedPage() {
               Nothing kept yet
             </h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              Tap the heart on any apparition to keep it here.
+              Tap the heart on any apparition or prayer to keep it here.
             </p>
             <Link
               to="/"
@@ -140,6 +144,45 @@ function SavedPage() {
               </li>
             ))}
           </ul>
+        )}
+
+        {savedPrayers.length > 0 && (
+          <section className="mt-10">
+            <div className="mb-4 flex items-center gap-3">
+              <BookOpen className="h-4 w-4 text-[var(--color-gold)]" />
+              <h2 className="font-serif text-2xl text-foreground">Saved prayers</h2>
+              <div className="h-px flex-1 bg-gradient-to-r from-[var(--color-gold)]/60 to-transparent" />
+            </div>
+            <ul className="space-y-2.5">
+              {savedPrayers.map((p) => (
+                <li key={p.slug}>
+                  <div className="glass-card relative flex items-center gap-3 rounded-2xl px-4 py-3.5">
+                    <Link
+                      to="/prayers/$slug"
+                      params={{ slug: p.slug }}
+                      className="min-w-0 flex-1 active:scale-[0.99]"
+                    >
+                      <div className="font-serif text-lg leading-tight text-foreground">
+                        {p.title}
+                      </div>
+                      {p.latinTitle && (
+                        <div className="mt-0.5 font-serif text-xs italic text-[var(--color-gold)]/80">
+                          {p.latinTitle}
+                        </div>
+                      )}
+                    </Link>
+                    <button
+                      onClick={() => togglePrayer(p.slug)}
+                      aria-label={`Remove ${p.title} from saved prayers`}
+                      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-[var(--color-rose-soft)] active:scale-95"
+                    >
+                      <Heart className="h-4 w-4" fill="currentColor" />
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </section>
         )}
       </main>
       {shareTarget && (

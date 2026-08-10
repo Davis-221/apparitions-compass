@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { BookOpen, Sparkles, Download } from "lucide-react";
+import { BookOpen, Sparkles, Download, Heart } from "lucide-react";
 import { PRAYERS, CATEGORY_LABEL, type PrayerCategory } from "@/data/prayers";
 import { APPARITIONS } from "@/data/apparitions";
 import { ExportPrayersDialog } from "@/components/ExportPrayersDialog";
+import { usePrayerFavorites } from "@/hooks/use-prayer-favorites";
 
 
 const SITE = "https://apparitions-compass.lovable.app";
@@ -78,6 +79,8 @@ const SECTIONS: { key: PrayerCategory; eyebrow: string; blurb: string }[] = [
 
 function PrayersPage() {
   const [exportOpen, setExportOpen] = useState(false);
+  const { favorites, toggle, isFavorite } = usePrayerFavorites();
+  const savedPrayers = PRAYERS.filter((p) => favorites.includes(p.slug));
   return (
     <div className="pb-8">
 
@@ -121,6 +124,31 @@ function PrayersPage() {
 
 
       <main className="px-5">
+        {savedPrayers.length > 0 && (
+          <section className="mb-10">
+            <p className="text-[10px] uppercase tracking-[0.28em] text-[var(--color-gold)]">
+              Kept close
+            </p>
+            <div className="mb-4 mt-1 flex items-center gap-3">
+              <h2 className="font-serif text-2xl text-foreground">Your saved prayers</h2>
+              <div className="h-px flex-1 bg-gradient-to-r from-[var(--color-gold)]/60 to-transparent" />
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {savedPrayers.map((p) => (
+                <Link
+                  key={p.slug}
+                  to="/prayers/$slug"
+                  params={{ slug: p.slug }}
+                  className="glass-card inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-xs text-foreground active:scale-[0.98]"
+                >
+                  <Heart className="h-3 w-3 text-[var(--color-rose-soft)]" fill="currentColor" />
+                  {p.title}
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
         {SECTIONS.map(({ key, eyebrow, blurb }) => {
           const prayers = PRAYERS.filter((p) => p.category === key);
           if (prayers.length === 0) return null;
@@ -172,8 +200,30 @@ function PrayersPage() {
                             </div>
                           )}
                         </div>
-                        <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[var(--color-gold)]/40 text-[var(--color-gold)] transition-transform group-active:scale-95">
-                          <Sparkles className="h-3.5 w-3.5" />
+                        <div className="mt-0.5 flex shrink-0 flex-col items-center gap-2">
+                          <div className="flex h-8 w-8 items-center justify-center rounded-full border border-[var(--color-gold)]/40 text-[var(--color-gold)] transition-transform group-active:scale-95">
+                            <Sparkles className="h-3.5 w-3.5" />
+                          </div>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              toggle(p.slug);
+                            }}
+                            aria-label={
+                              isFavorite(p.slug)
+                                ? `Remove ${p.title} from saved prayers`
+                                : `Save ${p.title} to your prayers`
+                            }
+                            aria-pressed={isFavorite(p.slug)}
+                            className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/5 text-[var(--color-rose-soft)] active:scale-95"
+                          >
+                            <Heart
+                              className="h-3.5 w-3.5"
+                              fill={isFavorite(p.slug) ? "currentColor" : "none"}
+                            />
+                          </button>
                         </div>
                       </Link>
                     </li>
