@@ -63,8 +63,13 @@ export function applyTheme(id: ThemeId) {
   if (id === "aurora") root.removeAttribute("data-theme");
   else root.setAttribute("data-theme", id);
   const option = THEMES.find((t) => t.id === id);
-  root.classList.toggle("dark", option?.mode !== "light");
-  root.style.colorScheme = option?.mode === "light" ? "light" : "dark";
+  if (option?.mode === "light") {
+    root.classList.remove("dark");
+    root.style.colorScheme = "light";
+  } else {
+    root.classList.remove("dark");
+    root.style.removeProperty("color-scheme");
+  }
 }
 
 export function useTheme() {
