@@ -38,7 +38,7 @@
 
 :root {
   --radius: 1rem;
-  /* Marian Aurora — deep night sky */
+  /* Marian Aurora — deep night sky (default) */
   --background: oklch(0.22 0.08 265);
   --foreground: oklch(0.96 0.02 90);
   --card: oklch(0.28 0.07 258);
@@ -61,6 +61,180 @@
   --gold: oklch(0.87 0.10 90);
   --glow: oklch(0.83 0.12 220);
   --rose-soft: oklch(0.78 0.11 20);
+
+  /* themeable atmosphere */
+  --grad-a: oklch(0.55 0.18 260 / 0.55);
+  --grad-b: oklch(0.72 0.14 210 / 0.35);
+  --grad-c: oklch(0.55 0.14 285 / 0.35);
+  --aurora-a: oklch(0.72 0.16 215 / 0.55);
+  --aurora-b: oklch(0.65 0.18 300 / 0.45);
+  --aurora-c: oklch(0.55 0.15 260 / 0.6);
+  --star: oklch(1 0 0 / 0.8);
+  --glass-border: oklch(1 0 0 / 0.12);
+  --glass-shadow: oklch(0 0 0 / 0.5);
+  --glass-tint: 55%;
+}
+
+/* ── Celestial Dawn — light sky blue & gold ───────────────── */
+[data-theme="dawn"] {
+  --background: oklch(0.975 0.012 240);
+  --foreground: oklch(0.28 0.06 262);
+  --card: oklch(0.995 0.006 250);
+  --card-foreground: oklch(0.28 0.06 262);
+  --popover: oklch(0.995 0.006 250);
+  --popover-foreground: oklch(0.28 0.06 262);
+  --primary: oklch(0.55 0.14 250);
+  --primary-foreground: oklch(0.99 0.01 250);
+  --secondary: oklch(0.93 0.03 245);
+  --secondary-foreground: oklch(0.30 0.06 262);
+  --muted: oklch(0.94 0.02 245);
+  --muted-foreground: oklch(0.48 0.04 258);
+  --accent: oklch(0.72 0.12 85);
+  --accent-foreground: oklch(0.25 0.05 265);
+  --border: oklch(0.30 0.05 262 / 14%);
+  --input: oklch(0.30 0.05 262 / 16%);
+  --ring: oklch(0.55 0.14 250 / 45%);
+  --gold: oklch(0.68 0.12 85);
+  --glow: oklch(0.62 0.13 245);
+  --rose-soft: oklch(0.72 0.10 20);
+  --grad-a: oklch(0.80 0.10 245 / 0.45);
+  --grad-b: oklch(0.90 0.07 95 / 0.45);
+  --grad-c: oklch(0.85 0.08 300 / 0.30);
+  --aurora-a: oklch(0.85 0.09 235 / 0.55);
+  --aurora-b: oklch(0.90 0.08 90 / 0.45);
+  --aurora-c: oklch(0.86 0.08 300 / 0.45);
+  --star: oklch(0.60 0.10 250 / 0.45);
+  --glass-border: oklch(0.30 0.05 262 / 0.12);
+  --glass-shadow: oklch(0.35 0.06 262 / 0.18);
+  --glass-tint: 78%;
+}
+
+/* ── Lily & Linen — light warm parchment ─────────────────── */
+[data-theme="linen"] {
+  --background: oklch(0.972 0.018 85);
+  --foreground: oklch(0.29 0.04 55);
+  --card: oklch(0.995 0.010 85);
+  --card-foreground: oklch(0.29 0.04 55);
+  --popover: oklch(0.995 0.010 85);
+  --popover-foreground: oklch(0.29 0.04 55);
+  --primary: oklch(0.52 0.10 40);
+  --primary-foreground: oklch(0.98 0.01 85);
+  --secondary: oklch(0.93 0.03 80);
+  --secondary-foreground: oklch(0.31 0.04 55);
+  --muted: oklch(0.94 0.025 80);
+  --muted-foreground: oklch(0.49 0.03 60);
+  --accent: oklch(0.66 0.11 60);
+  --accent-foreground: oklch(0.99 0.01 85);
+  --border: oklch(0.35 0.04 55 / 14%);
+  --input: oklch(0.35 0.04 55 / 16%);
+  --ring: oklch(0.52 0.10 40 / 45%);
+  --gold: oklch(0.64 0.11 75);
+  --glow: oklch(0.66 0.10 55);
+  --rose-soft: oklch(0.72 0.09 25);
+  --grad-a: oklch(0.90 0.06 75 / 0.55);
+  --grad-b: oklch(0.88 0.06 30 / 0.35);
+  --grad-c: oklch(0.92 0.05 110 / 0.35);
+  --aurora-a: oklch(0.90 0.07 70 / 0.55);
+  --aurora-b: oklch(0.88 0.07 30 / 0.45);
+  --aurora-c: oklch(0.92 0.05 110 / 0.45);
+  --star: oklch(0.55 0.08 60 / 0.35);
+  --glass-border: oklch(0.35 0.04 55 / 0.12);
+  --glass-shadow: oklch(0.40 0.05 55 / 0.18);
+  --glass-tint: 78%;
+}
+
+/* ── Byzantine Gold — dark plum & gilt ───────────────────── */
+[data-theme="byzantine"] {
+  --background: oklch(0.19 0.06 320);
+  --foreground: oklch(0.96 0.02 85);
+  --card: oklch(0.25 0.06 320);
+  --card-foreground: oklch(0.96 0.02 85);
+  --popover: oklch(0.25 0.06 320);
+  --popover-foreground: oklch(0.96 0.02 85);
+  --primary: oklch(0.84 0.13 85);
+  --primary-foreground: oklch(0.20 0.06 320);
+  --secondary: oklch(0.31 0.07 320);
+  --secondary-foreground: oklch(0.96 0.02 85);
+  --muted: oklch(0.29 0.05 320);
+  --muted-foreground: oklch(0.76 0.04 60);
+  --accent: oklch(0.75 0.14 25);
+  --accent-foreground: oklch(0.18 0.06 320);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.84 0.13 85 / 55%);
+  --gold: oklch(0.86 0.13 88);
+  --glow: oklch(0.84 0.13 85);
+  --rose-soft: oklch(0.76 0.12 20);
+  --grad-a: oklch(0.45 0.15 330 / 0.55);
+  --grad-b: oklch(0.70 0.13 70 / 0.28);
+  --grad-c: oklch(0.42 0.13 300 / 0.40);
+  --aurora-a: oklch(0.62 0.15 340 / 0.5);
+  --aurora-b: oklch(0.75 0.13 75 / 0.35);
+  --aurora-c: oklch(0.50 0.13 310 / 0.55);
+}
+
+/* ── Tilma Emerald — dark green & gold (Guadalupe) ───────── */
+[data-theme="emerald"] {
+  --background: oklch(0.20 0.05 165);
+  --foreground: oklch(0.96 0.02 90);
+  --card: oklch(0.26 0.05 165);
+  --card-foreground: oklch(0.96 0.02 90);
+  --popover: oklch(0.26 0.05 165);
+  --popover-foreground: oklch(0.96 0.02 90);
+  --primary: oklch(0.80 0.13 165);
+  --primary-foreground: oklch(0.18 0.05 165);
+  --secondary: oklch(0.31 0.05 165);
+  --secondary-foreground: oklch(0.96 0.02 90);
+  --muted: oklch(0.29 0.04 165);
+  --muted-foreground: oklch(0.76 0.03 150);
+  --accent: oklch(0.85 0.12 88);
+  --accent-foreground: oklch(0.18 0.05 165);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.80 0.13 165 / 55%);
+  --gold: oklch(0.86 0.12 88);
+  --glow: oklch(0.80 0.13 165);
+  --rose-soft: oklch(0.78 0.11 20);
+  --grad-a: oklch(0.48 0.13 170 / 0.55);
+  --grad-b: oklch(0.72 0.12 120 / 0.28);
+  --grad-c: oklch(0.42 0.10 200 / 0.40);
+  --aurora-a: oklch(0.66 0.14 170 / 0.5);
+  --aurora-b: oklch(0.78 0.12 110 / 0.35);
+  --aurora-c: oklch(0.50 0.12 200 / 0.55);
+}
+
+/* ── Rosa Mystica — light rose & lavender ────────────────── */
+[data-theme="rosa"] {
+  --background: oklch(0.975 0.012 350);
+  --foreground: oklch(0.30 0.06 330);
+  --card: oklch(0.995 0.008 350);
+  --card-foreground: oklch(0.30 0.06 330);
+  --popover: oklch(0.995 0.008 350);
+  --popover-foreground: oklch(0.30 0.06 330);
+  --primary: oklch(0.58 0.14 340);
+  --primary-foreground: oklch(0.99 0.01 350);
+  --secondary: oklch(0.93 0.03 340);
+  --secondary-foreground: oklch(0.32 0.06 330);
+  --muted: oklch(0.94 0.025 340);
+  --muted-foreground: oklch(0.50 0.04 330);
+  --accent: oklch(0.68 0.11 300);
+  --accent-foreground: oklch(0.99 0.01 350);
+  --border: oklch(0.35 0.05 330 / 14%);
+  --input: oklch(0.35 0.05 330 / 16%);
+  --ring: oklch(0.58 0.14 340 / 45%);
+  --gold: oklch(0.68 0.11 80);
+  --glow: oklch(0.66 0.13 340);
+  --rose-soft: oklch(0.70 0.12 20);
+  --grad-a: oklch(0.88 0.07 340 / 0.55);
+  --grad-b: oklch(0.88 0.07 300 / 0.40);
+  --grad-c: oklch(0.92 0.05 60 / 0.35);
+  --aurora-a: oklch(0.88 0.08 340 / 0.55);
+  --aurora-b: oklch(0.86 0.08 300 / 0.45);
+  --aurora-c: oklch(0.92 0.06 60 / 0.45);
+  --star: oklch(0.58 0.10 335 / 0.4);
+  --glass-border: oklch(0.35 0.05 330 / 0.12);
+  --glass-shadow: oklch(0.40 0.06 330 / 0.18);
+  --glass-tint: 78%;
 }
 
 @layer base {
@@ -75,9 +249,9 @@
   }
   body {
     background-image:
-      radial-gradient(ellipse 80% 55% at 20% -10%, oklch(0.55 0.18 260 / 0.55), transparent 60%),
-      radial-gradient(ellipse 70% 50% at 100% 10%, oklch(0.72 0.14 210 / 0.35), transparent 65%),
-      radial-gradient(ellipse 90% 60% at 50% 110%, oklch(0.55 0.14 285 / 0.35), transparent 60%);
+      radial-gradient(ellipse 80% 55% at 20% -10%, var(--grad-a), transparent 60%),
+      radial-gradient(ellipse 70% 50% at 100% 10%, var(--grad-b), transparent 65%),
+      radial-gradient(ellipse 90% 60% at 50% 110%, var(--grad-c), transparent 60%);
     background-attachment: fixed;
   }
   h1, h2, h3, h4, .font-serif {
@@ -100,31 +274,31 @@
     inset: 0;
     z-index: -1;
     background:
-      radial-gradient(60% 45% at 25% 20%, oklch(0.72 0.16 215 / 0.55), transparent 65%),
-      radial-gradient(55% 40% at 85% 30%, oklch(0.65 0.18 300 / 0.45), transparent 70%),
-      radial-gradient(70% 50% at 50% 100%, oklch(0.55 0.15 260 / 0.6), transparent 65%);
+      radial-gradient(60% 45% at 25% 20%, var(--aurora-a), transparent 65%),
+      radial-gradient(55% 40% at 85% 30%, var(--aurora-b), transparent 70%),
+      radial-gradient(70% 50% at 50% 100%, var(--aurora-c), transparent 65%);
     filter: blur(20px);
   }
 }
 
 @utility star-field {
   background-image:
-    radial-gradient(1px 1px at 12% 22%, oklch(1 0 0 / 0.8), transparent 60%),
-    radial-gradient(1px 1px at 78% 14%, oklch(1 0 0 / 0.7), transparent 60%),
-    radial-gradient(1.2px 1.2px at 45% 65%, oklch(1 0 0 / 0.85), transparent 60%),
-    radial-gradient(1px 1px at 30% 80%, oklch(1 0 0 / 0.6), transparent 60%),
-    radial-gradient(1.4px 1.4px at 88% 72%, oklch(1 0 0 / 0.8), transparent 60%),
-    radial-gradient(1px 1px at 62% 40%, oklch(1 0 0 / 0.55), transparent 60%),
-    radial-gradient(0.8px 0.8px at 18% 55%, oklch(1 0 0 / 0.55), transparent 60%);
+    radial-gradient(1px 1px at 12% 22%, var(--star), transparent 60%),
+    radial-gradient(1px 1px at 78% 14%, var(--star), transparent 60%),
+    radial-gradient(1.2px 1.2px at 45% 65%, var(--star), transparent 60%),
+    radial-gradient(1px 1px at 30% 80%, var(--star), transparent 60%),
+    radial-gradient(1.4px 1.4px at 88% 72%, var(--star), transparent 60%),
+    radial-gradient(1px 1px at 62% 40%, var(--star), transparent 60%),
+    radial-gradient(0.8px 0.8px at 18% 55%, var(--star), transparent 60%);
 }
 
 @utility glass-card {
-  background: color-mix(in oklab, var(--card) 55%, transparent);
+  background: color-mix(in oklab, var(--card) var(--glass-tint), transparent);
   backdrop-filter: blur(18px) saturate(140%);
-  border: 1px solid oklch(1 0 0 / 0.12);
+  border: 1px solid var(--glass-border);
   box-shadow:
     0 1px 0 oklch(1 0 0 / 0.08) inset,
-    0 20px 40px -20px oklch(0 0 0 / 0.5);
+    0 20px 40px -20px var(--glass-shadow);
 }
 
 @utility gold-hairline {
@@ -133,14 +307,14 @@
 }
 
 @utility text-glow {
-  text-shadow: 0 0 30px oklch(0.83 0.14 220 / 0.5);
+  text-shadow: 0 0 30px color-mix(in oklab, var(--glow) 55%, transparent);
 }
 
 @utility btn-glow {
   box-shadow:
     0 0 0 1px oklch(1 0 0 / 0.15) inset,
-    0 10px 30px -10px oklch(0.83 0.14 220 / 0.7),
-    0 0 40px -5px oklch(0.83 0.14 220 / 0.4);
+    0 10px 30px -10px color-mix(in oklab, var(--glow) 70%, transparent),
+    0 0 40px -5px color-mix(in oklab, var(--glow) 40%, transparent);
 }
 
 @keyframes twinkle {
@@ -168,3 +342,5 @@
   background-size: 200% 100%;
   animation: shimmer 3s linear infinite;
 }
+
+html { transition: background-color 0.4s ease, color 0.4s ease; }
