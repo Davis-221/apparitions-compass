@@ -170,7 +170,7 @@ function MapPage() {
             <Link
               to="/apparition/$slug"
               params={{ slug: selected.slug }}
-              className="btn-glow mt-3 inline-flex rounded-full bg-gradient-to-r from-[oklch(0.83_0.12_220)] to-[oklch(0.87_0.10_90)] px-4 py-2 text-xs font-medium text-[oklch(0.20_0.08_265)]"
+              className="btn-glow mt-3 inline-flex rounded-full bg-gradient-to-r from-[var(--primary)] to-[var(--gold)] px-4 py-2 text-xs font-medium text-[var(--primary-foreground)]"
             >
               Read the story of {selected.title} →
             </Link>

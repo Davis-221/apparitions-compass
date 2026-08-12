@@ -85,7 +85,7 @@ function SavedPage() {
             </p>
             <Link
               to="/"
-              className="btn-glow mt-6 rounded-full bg-gradient-to-r from-[oklch(0.83_0.12_220)] to-[oklch(0.87_0.10_90)] px-6 py-2.5 text-sm font-medium text-[oklch(0.20_0.08_265)]"
+              className="btn-glow mt-6 rounded-full bg-gradient-to-r from-[var(--primary)] to-[var(--gold)] px-6 py-2.5 text-sm font-medium text-[var(--primary-foreground)]"
             >
               Browse apparitions
             </Link>
@@ -117,7 +117,7 @@ function SavedPage() {
                         />
                       )}
                       <div className="absolute inset-0 star-field opacity-20 mix-blend-screen" />
-                      <div className="absolute right-[-8px] top-[-8px] h-10 w-10 rounded-full bg-[oklch(0.87_0.10_90/0.35)] blur-xl" />
+                      <div className="absolute right-[-8px] top-[-8px] h-10 w-10 rounded-full bg-[color-mix(in_oklab,var(--gold)_35%,transparent)] blur-xl" />
                       <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-1 text-center font-serif text-xs italic text-white">
                         {a.year}
                       </div>
@@ -135,7 +135,7 @@ function SavedPage() {
                   </Link>
                   <button
                     onClick={() => setShareTarget(a)}
-                    className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/85 backdrop-blur-xl active:scale-95"
+                    className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-border bg-secondary/50 text-white/85 backdrop-blur-xl active:scale-95"
                     aria-label={`Share ${a.title}`}
                   >
                     <Share2 className="h-4 w-4" />
@@ -174,7 +174,7 @@ function SavedPage() {
                     <button
                       onClick={() => togglePrayer(p.slug)}
                       aria-label={`Remove ${p.title} from saved prayers`}
-                      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-[var(--color-rose-soft)] active:scale-95"
+                      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border bg-secondary/50 text-[var(--color-rose-soft)] active:scale-95"
                     >
                       <Heart className="h-4 w-4" fill="currentColor" />
                     </button>

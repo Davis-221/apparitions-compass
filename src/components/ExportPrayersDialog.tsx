@@ -73,7 +73,7 @@ export function ExportPrayersDialog({ open, onClose }: Props) {
         <button
           onClick={exportPdf}
           disabled={busy}
-          className="btn-glow mt-5 flex w-full items-center gap-3 rounded-2xl bg-gradient-to-r from-[oklch(0.83_0.12_220)] to-[oklch(0.87_0.10_90)] px-4 py-4 text-left text-[oklch(0.20_0.08_265)] disabled:opacity-50"
+          className="btn-glow mt-5 flex w-full items-center gap-3 rounded-2xl bg-gradient-to-r from-[var(--primary)] to-[var(--gold)] px-4 py-4 text-left text-[var(--primary-foreground)] disabled:opacity-50"
         >
           <FileText className="h-5 w-5 shrink-0" />
           <span>
@@ -87,7 +87,7 @@ export function ExportPrayersDialog({ open, onClose }: Props) {
         <button
           onClick={exportZip}
           disabled={busy}
-          className="mt-3 flex w-full items-center gap-3 rounded-2xl border border-white/15 bg-white/5 px-4 py-4 text-left text-white disabled:opacity-60"
+          className="mt-3 flex w-full items-center gap-3 rounded-2xl border border-border bg-secondary/50 px-4 py-4 text-left text-white disabled:opacity-60"
         >
           {busy ? (
             <Loader2 className="h-5 w-5 shrink-0 animate-spin" />
