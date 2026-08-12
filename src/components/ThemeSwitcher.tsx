@@ -20,7 +20,7 @@ export function ThemeSwitcher() {
   const light = themes.filter((t) => t.mode === "light");
 
   return (
-    <div ref={ref} className="fixed right-4 top-4 z-50 safe-area-top">
+    <div ref={ref} className="fixed bottom-24 right-4 z-50">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -32,7 +32,7 @@ export function ThemeSwitcher() {
       </button>
 
       {open && (
-        <div className="glass-card absolute right-0 mt-3 w-72 rounded-3xl p-4">
+        <div className="glass-card absolute bottom-14 right-0 w-72 rounded-3xl p-4">
           <p className="font-serif text-lg leading-none">Choose a theme</p>
           <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
             Light & dark devotional palettes
