@@ -153,7 +153,7 @@ function BrowsePage() {
               onChange={(e) => setQuery(e.target.value)}
               aria-label="Search apparitions by place, seer, or year"
               placeholder="Search sacred places, seers, years…"
-              className="w-full rounded-full border border-white/15 bg-white/5 pl-10 pr-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground outline-none focus:ring-2 focus:ring-ring"
+              className="w-full rounded-full border border-[oklch(0.65_0.18_300/0.35)] bg-gradient-to-r from-[oklch(0.42_0.18_300/0.45)] via-[oklch(0.34_0.15_285/0.35)] to-[oklch(0.42_0.18_300/0.45)] pl-10 pr-4 py-2.5 text-sm text-foreground placeholder:text-[oklch(0.85_0.03_270/0.7)] outline-none focus:ring-2 focus:ring-[oklch(0.65_0.18_300/0.6)] shadow-[0_0_30px_-8px_oklch(0.55_0.20_300/0.5)]"
             />
           </div>
 
