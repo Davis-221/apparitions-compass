@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { BottomNav } from "@/components/BottomNav";
+import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 
 function NotFoundComponent() {
   return (
@@ -120,6 +121,12 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var t=localStorage.getItem('marian-theme');var l=['dawn','linen','rosa'];var d=document.documentElement;if(t&&t!=='aurora'){d.setAttribute('data-theme',t);}d.classList.toggle('dark',!t||l.indexOf(t)===-1);d.style.colorScheme=t&&l.indexOf(t)!==-1?'light':'dark';}catch(e){}})();",
+          }}
+        />
       </head>
       <body>
         {children}
@@ -137,6 +144,7 @@ function RootComponent() {
       <div className="min-h-screen pb-20">
         <Outlet />
       </div>
+      <ThemeSwitcher />
       <BottomNav />
     </QueryClientProvider>
   );
