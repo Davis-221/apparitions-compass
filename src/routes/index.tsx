@@ -119,12 +119,12 @@ function BrowsePage() {
       {/* Sticky glass header */}
       <header className="safe-area-top sticky top-0 z-40">
         <div className="relative px-5 pt-5 pb-3">
-          <div className="absolute inset-0 -z-10 bg-[oklch(0.22_0.08_265/0.7)] backdrop-blur-2xl border-b border-white/10" />
+          <div className="absolute inset-0 -z-10 bg-[color-mix(in_oklab,var(--background)_80%,transparent)] backdrop-blur-2xl border-b border-border" />
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="relative flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-[oklch(0.83_0.12_220)] to-[oklch(0.87_0.10_90)]">
-                <Sparkles className="h-4 w-4 text-[oklch(0.20_0.08_265)]" />
-                <span className="absolute inset-0 -z-10 rounded-full bg-[oklch(0.83_0.14_220/0.5)] blur-lg animate-halo" />
+              <div className="relative flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-[var(--primary)] to-[var(--gold)]">
+                <Sparkles className="h-4 w-4 text-[var(--primary-foreground)]" />
+                <span className="absolute inset-0 -z-10 rounded-full bg-[color-mix(in_oklab,var(--glow)_50%,transparent)] blur-lg animate-halo" />
               </div>
               <div>
                 <p className="text-[10px] uppercase tracking-[0.25em] text-[var(--color-gold)]">
@@ -140,7 +140,7 @@ function BrowsePage() {
             </div>
             <Link
               to="/map"
-              className="flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-[11px] text-foreground/80"
+              className="flex items-center gap-1 rounded-full border border-border bg-secondary/50 px-3 py-1.5 text-[11px] text-foreground/80"
             >
               <MapPin className="h-3 w-3" /> World
             </Link>
@@ -153,7 +153,7 @@ function BrowsePage() {
               onChange={(e) => setQuery(e.target.value)}
               aria-label="Search apparitions by place, seer, or year"
               placeholder="Search sacred places, seers, years…"
-              className="w-full rounded-full border border-[oklch(0.65_0.18_300/0.35)] bg-gradient-to-r from-[oklch(0.42_0.18_300/0.45)] via-[oklch(0.34_0.15_285/0.35)] to-[oklch(0.42_0.18_300/0.45)] pl-10 pr-4 py-2.5 text-sm text-foreground placeholder:text-[oklch(0.85_0.03_270/0.7)] outline-none focus:ring-2 focus:ring-[oklch(0.65_0.18_300/0.6)] shadow-[0_0_30px_-8px_oklch(0.55_0.20_300/0.5)]"
+              className="w-full rounded-full border border-[color-mix(in_oklab,var(--primary)_35%,transparent)] bg-gradient-to-r from-[color-mix(in_oklab,var(--primary)_28%,var(--card))] via-[color-mix(in_oklab,var(--accent)_18%,var(--card))] to-[color-mix(in_oklab,var(--primary)_28%,var(--card))] pl-10 pr-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground outline-none focus:ring-2 focus:ring-ring shadow-[0_0_30px_-8px_color-mix(in_oklab,var(--glow)_50%,transparent)]"
             />
           </div>
 
@@ -194,8 +194,8 @@ function BrowsePage() {
           />
           <div className="absolute inset-0 star-field opacity-30 mix-blend-screen" />
           {/* Aureole */}
-          <div className="absolute right-[-40px] top-[-40px] h-56 w-56 rounded-full bg-[oklch(0.87_0.10_90/0.35)] blur-3xl animate-halo" />
-          <div className="absolute bottom-[-30px] left-[-30px] h-48 w-48 rounded-full bg-[oklch(0.72_0.16_215/0.35)] blur-3xl" />
+          <div className="absolute right-[-40px] top-[-40px] h-56 w-56 rounded-full bg-[color-mix(in_oklab,var(--gold)_35%,transparent)] blur-3xl animate-halo" />
+          <div className="absolute bottom-[-30px] left-[-30px] h-48 w-48 rounded-full bg-[color-mix(in_oklab,var(--glow)_35%,transparent)] blur-3xl" />
           <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
 
 
@@ -274,8 +274,8 @@ function BrowsePage() {
                   onClick={() => setFilter(key)}
                   className={`shrink-0 rounded-full border px-3.5 py-1.5 text-xs font-medium transition-all ${
                     active
-                      ? "border-transparent bg-gradient-to-r from-[oklch(0.83_0.12_220)] to-[oklch(0.87_0.10_90)] text-[oklch(0.20_0.08_265)] shadow-[0_8px_20px_-8px_oklch(0.83_0.14_220/0.6)]"
-                      : "border-white/15 bg-white/5 text-foreground/80 hover:bg-white/10"
+                      ? "border-transparent bg-gradient-to-r from-[var(--primary)] to-[var(--gold)] text-[var(--primary-foreground)] shadow-[0_8px_20px_-8px_color-mix(in_oklab,var(--glow)_60%,transparent)]"
+                      : "border-border bg-secondary/50 text-foreground/80 hover:bg-secondary"
                   }`}
                 >
                   {label}
@@ -301,7 +301,7 @@ function BrowsePage() {
           </div>
         ))}
         {filtered.length === 0 && (
-          <div className="mt-10 rounded-2xl border border-dashed border-white/15 p-8 text-center">
+          <div className="mt-10 rounded-2xl border border-dashed border-border p-8 text-center">
             <p className="font-serif text-lg text-foreground">Nothing here yet</p>
             <p className="mt-1 text-sm text-muted-foreground">
               Try another status or search term.
@@ -365,7 +365,7 @@ function HeroCard({ a, priority }: { a: Apparition; priority?: boolean }) {
         />
       )}
       <div className="absolute inset-0 star-field opacity-25 mix-blend-screen" />
-      <div className="absolute right-[-30px] top-[-30px] h-40 w-40 rounded-full bg-[oklch(0.87_0.10_90/0.25)] blur-3xl" />
+      <div className="absolute right-[-30px] top-[-30px] h-40 w-40 rounded-full bg-[color-mix(in_oklab,var(--gold)_25%,transparent)] blur-3xl" />
       <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black/85 to-transparent" />
 
 
@@ -418,7 +418,7 @@ function SmallCard({ a }: { a: Apparition }) {
         />
       )}
       <div className="absolute inset-0 star-field opacity-20 mix-blend-screen" />
-      <div className="absolute right-[-16px] top-[-16px] h-20 w-20 rounded-full bg-[oklch(0.87_0.10_90/0.25)] blur-2xl" />
+      <div className="absolute right-[-16px] top-[-16px] h-20 w-20 rounded-full bg-[color-mix(in_oklab,var(--gold)_25%,transparent)] blur-2xl" />
       <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black/85 to-transparent" />
 
 

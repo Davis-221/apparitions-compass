@@ -68,11 +68,11 @@ function PrayerPage() {
 
   return (
     <div className="min-h-screen pb-12">
-      <header className="safe-area-top sticky top-0 z-40 flex items-center gap-2 border-b border-white/10 bg-[oklch(0.22_0.08_265/0.7)] px-3 py-3 backdrop-blur-2xl">
+      <header className="safe-area-top sticky top-0 z-40 flex items-center gap-2 border-b border-border bg-[color-mix(in_oklab,var(--background)_80%,transparent)] px-3 py-3 backdrop-blur-2xl">
         <Link
           to="/prayers"
           aria-label="Back to prayers"
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-foreground"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border bg-secondary/50 text-foreground"
         >
           <ArrowLeft className="h-5 w-5" />
         </Link>
@@ -81,7 +81,7 @@ function PrayerPage() {
           onClick={() => toggle(prayer.slug)}
           aria-label={saved ? `Remove ${prayer.title} from saved prayers` : `Save ${prayer.title}`}
           aria-pressed={saved}
-          className="ml-auto flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-[var(--color-rose-soft)] active:scale-95"
+          className="ml-auto flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border bg-secondary/50 text-[var(--color-rose-soft)] active:scale-95"
         >
           <Heart className="h-4.5 w-4.5" fill={saved ? "currentColor" : "none"} />
         </button>
@@ -99,7 +99,7 @@ function PrayerPage() {
 
       <main className="relative px-6 py-10">
         <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-72 star-field opacity-30 animate-twinkle" />
-        <div className="pointer-events-none absolute right-[-40px] top-8 -z-10 h-56 w-56 rounded-full bg-[oklch(0.87_0.10_90/0.25)] blur-3xl animate-halo" />
+        <div className="pointer-events-none absolute right-[-40px] top-8 -z-10 h-56 w-56 rounded-full bg-[color-mix(in_oklab,var(--gold)_25%,transparent)] blur-3xl animate-halo" />
         <div className="pointer-events-none absolute left-[-60px] top-1/2 -z-10 h-52 w-52 rounded-full bg-[oklch(0.83_0.12_220/0.18)] blur-3xl" />
 
         <div className="mx-auto max-w-xl">
@@ -182,7 +182,7 @@ function PrayerPage() {
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             <button
               onClick={() => setShareOpen(true)}
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[oklch(0.83_0.12_220)] to-[oklch(0.87_0.10_90)] px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-[oklch(0.20_0.08_265)]"
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[var(--primary)] to-[var(--gold)] px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--primary-foreground)]"
             >
               <Printer className="h-3.5 w-3.5" />
               Prayer card / PDF

@@ -217,7 +217,7 @@ function PrayersPage() {
                                 : `Save ${p.title} to your prayers`
                             }
                             aria-pressed={isFavorite(p.slug)}
-                            className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/5 text-[var(--color-rose-soft)] active:scale-95"
+                            className="flex h-8 w-8 items-center justify-center rounded-full border border-border bg-secondary/50 text-[var(--color-rose-soft)] active:scale-95"
                           >
                             <Heart
                               className="h-3.5 w-3.5"

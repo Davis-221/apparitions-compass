@@ -94,7 +94,7 @@ function ApparitionPage() {
           }}
         />
         <div className="absolute inset-0 star-field opacity-25 mix-blend-screen" />
-        <div className="absolute right-[-60px] top-[-60px] h-72 w-72 rounded-full bg-[oklch(0.87_0.10_90/0.25)] blur-3xl animate-halo" />
+        <div className="absolute right-[-60px] top-[-60px] h-72 w-72 rounded-full bg-[color-mix(in_oklab,var(--gold)_25%,transparent)] blur-3xl animate-halo" />
         <div className="absolute bottom-[-40px] left-[-40px] h-64 w-64 rounded-full bg-[oklch(0.72_0.16_215/0.25)] blur-3xl" />
         <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
 

@@ -169,7 +169,7 @@ function ApprovedPage() {
             </p>
             <Link
               to="/"
-              className="btn-glow mt-4 inline-flex rounded-full bg-gradient-to-r from-[oklch(0.83_0.12_220)] to-[oklch(0.87_0.10_90)] px-6 py-2.5 text-sm font-medium text-[oklch(0.20_0.08_265)]"
+              className="btn-glow mt-4 inline-flex rounded-full bg-gradient-to-r from-[var(--primary)] to-[var(--gold)] px-6 py-2.5 text-sm font-medium text-[var(--primary-foreground)]"
             >
               Browse the atlas
             </Link>

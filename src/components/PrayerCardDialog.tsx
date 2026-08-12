@@ -150,7 +150,7 @@ export function PrayerCardDialog({ prayer, open, onClose }: Props) {
           <button
             onClick={download}
             disabled={!blob}
-            className="flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-3 text-sm font-medium text-white disabled:opacity-50"
+            className="flex items-center justify-center gap-2 rounded-full border border-border bg-secondary/50 px-4 py-3 text-sm font-medium text-white disabled:opacity-50"
           >
             <Download className="h-4 w-4" />
             Save image
@@ -158,7 +158,7 @@ export function PrayerCardDialog({ prayer, open, onClose }: Props) {
           <button
             onClick={share}
             disabled={!blob}
-            className="btn-glow flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[oklch(0.83_0.12_220)] to-[oklch(0.87_0.10_90)] px-4 py-3 text-sm font-semibold text-[oklch(0.20_0.08_265)] disabled:opacity-50"
+            className="btn-glow flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[var(--primary)] to-[var(--gold)] px-4 py-3 text-sm font-semibold text-[var(--primary-foreground)] disabled:opacity-50"
           >
             <Share2 className="h-4 w-4" />
             Share
