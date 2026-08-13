@@ -209,22 +209,22 @@ function BrowsePage() {
           </div>
 
           {/* Year - massive */}
-          <div className="pointer-events-none absolute right-5 top-16 font-serif text-[92px] italic leading-none text-[var(--on-media)]/10">
+          <div className="hero-rise pointer-events-none absolute right-5 top-16 font-serif text-[92px] italic leading-none text-[var(--on-media)]/10">
             {current.year}
           </div>
 
           {/* Content */}
           <div className="media-ink absolute inset-x-0 bottom-0 p-5">
-            <p className="text-[11px] uppercase tracking-[0.25em] text-[var(--gold-on-media)]">
+            <p className="hero-rise hero-delay-1 text-[11px] uppercase tracking-[0.25em] text-[var(--gold-on-media)]">
               {current.country} · {current.dates}
             </p>
-            <h2 className="mt-2 font-serif text-3xl leading-tight text-[var(--on-media)] halo-text">
+            <h2 className="hero-rise hero-delay-2 mt-2 font-serif text-3xl leading-tight text-[var(--on-media)] halo-text">
               {current.title}
             </h2>
-            <p className="mt-2 line-clamp-2 text-sm text-[var(--on-media)]/85">
+            <p className="hero-rise hero-delay-3 mt-2 line-clamp-2 text-sm text-[var(--on-media)]/85">
               {current.summary}
             </p>
-            <div className="mt-4 flex items-center justify-between">
+            <div className="hero-rise hero-delay-4 mt-4 flex items-center justify-between">
               <span className="inline-flex items-center gap-1.5 text-xs font-medium text-[var(--on-media)] group-active:translate-x-0.5 transition-transform">
                 Enter the story <ArrowUpRight className="h-3.5 w-3.5" />
               </span>
