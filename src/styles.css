@@ -527,11 +527,51 @@ html.theme-transition *:not(svg *) {
   will-change: transform, opacity;
 }
 
+/* ── Floating devotional objects ────────────────────────── */
+@keyframes floater-bob {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(var(--drift, 0px), -22px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes floater-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.floater {
+  position: absolute;
+  display: block;
+  will-change: transform;
+  animation-name: floater-bob;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.floater-spin {
+  will-change: transform;
+  animation-name: floater-spin;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .ken-burns, .star-drift, .glow-breathe, .hero-sheen, .hero-rise, .particle {
+  .ken-burns, .star-drift, .glow-breathe, .hero-sheen, .hero-rise, .particle,
+  .floater, .floater-spin {
     animation: none !important;
   }
 }
+
 
 
 /* ── Word-by-word text reveal ───────────────────────────── */

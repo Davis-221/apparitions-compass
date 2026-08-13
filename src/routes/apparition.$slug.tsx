@@ -10,6 +10,8 @@ import { apparitionImage } from "@/data/apparition-images";
 import { WordByWord } from "@/components/WordByWord";
 import { ParallaxHero, ParallaxLayer } from "@/components/ParallaxHero";
 import { GlowingParticles } from "@/components/GlowingParticles";
+import { FloatingObjects } from "@/components/FloatingObjects";
+
 
 
 const SITE = "https://apparitions-compass.lovable.app";
@@ -109,6 +111,10 @@ function ApparitionPage() {
         <ParallaxLayer depth={0.32} className="absolute inset-0 pointer-events-none">
           <GlowingParticles count={28} color="var(--gold)" />
         </ParallaxLayer>
+        <ParallaxLayer depth={0.4} className="absolute inset-0 pointer-events-none">
+          <FloatingObjects count={6} size={42} color="var(--gold)" />
+        </ParallaxLayer>
+
 
         <ParallaxLayer depth={0.18} className="absolute inset-0 pointer-events-none">
           <div className="absolute right-[-60px] top-[-60px] h-72 w-72 rounded-full bg-[color-mix(in_oklab,var(--gold)_25%,transparent)] blur-3xl animate-halo" />

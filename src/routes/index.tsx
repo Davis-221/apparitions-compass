@@ -4,6 +4,8 @@ import { Search, Sparkles, ArrowUpRight, MapPin } from "lucide-react";
 import { WordByWord } from "@/components/WordByWord";
 import { ParallaxHero, ParallaxLayer } from "@/components/ParallaxHero";
 import { GlowingParticles } from "@/components/GlowingParticles";
+import { FloatingObjects } from "@/components/FloatingObjects";
+
 import {
   APPARITIONS,
   STATUS_LABEL,
@@ -212,6 +214,10 @@ function BrowsePage() {
             <ParallaxLayer depth={0.28} className="absolute inset-0 pointer-events-none">
               <GlowingParticles count={30} color="var(--gold)" />
             </ParallaxLayer>
+            <ParallaxLayer depth={0.36} className="absolute inset-0 pointer-events-none">
+              <FloatingObjects count={7} size={40} color="var(--gold)" />
+            </ParallaxLayer>
+
 
             {/* Aureole */}
             <ParallaxLayer depth={0.18} className="absolute inset-0 pointer-events-none">
