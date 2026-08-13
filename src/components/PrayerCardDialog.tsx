@@ -95,7 +95,7 @@ export function PrayerCardDialog({ prayer, open, onClose }: Props) {
       onClick={onClose}
     >
       <div
-        className="relative max-h-[92vh] w-full max-w-md overflow-y-auto rounded-t-3xl border border-white/10 bg-[oklch(0.16_0.06_265)] p-5 pb-8 shadow-2xl sm:rounded-3xl"
+        className="relative max-h-[92vh] w-full max-w-md overflow-y-auto rounded-t-3xl border border-border bg-popover p-5 pb-8 shadow-2xl sm:rounded-3xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between">
@@ -107,14 +107,14 @@ export function PrayerCardDialog({ prayer, open, onClose }: Props) {
           </div>
           <button
             onClick={onClose}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/80"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-muted/50 text-muted-foreground"
             aria-label="Close"
           >
             <X className="h-4 w-4" />
           </button>
         </div>
 
-        <div className="relative mt-4 overflow-hidden rounded-2xl border border-white/10 bg-black/40">
+        <div className="relative mt-4 overflow-hidden rounded-2xl border border-border bg-muted/40">
           <div className="aspect-[4/5] w-full">
             {previewUrl ? (
               <img
@@ -123,23 +123,23 @@ export function PrayerCardDialog({ prayer, open, onClose }: Props) {
                 className="h-full w-full object-cover"
               />
             ) : (
-              <div className="flex h-full w-full items-center justify-center text-white/50">
+              <div className="flex h-full w-full items-center justify-center text-muted-foreground">
                 <Loader2 className="h-6 w-6 animate-spin" />
               </div>
             )}
             {loading && previewUrl && (
               <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                <Loader2 className="h-6 w-6 animate-spin text-white" />
+                <Loader2 className="h-6 w-6 animate-spin text-foreground" />
               </div>
             )}
           </div>
         </div>
 
-        <div className="mt-4 flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2.5">
-          <span className="truncate text-xs text-white/80">{url}</span>
+        <div className="mt-4 flex items-center gap-2 rounded-full border border-border bg-muted/50 px-4 py-2.5">
+          <span className="truncate text-xs text-muted-foreground">{url}</span>
           <button
             onClick={copyLink}
-            className="ml-auto flex items-center gap-1 rounded-full bg-white/10 px-3 py-1 text-[11px] font-medium text-white"
+            className="ml-auto flex items-center gap-1 rounded-full bg-muted px-3 py-1 text-[11px] font-medium text-foreground"
           >
             {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
             {copied ? "Copied" : "Copy"}
@@ -150,7 +150,7 @@ export function PrayerCardDialog({ prayer, open, onClose }: Props) {
           <button
             onClick={download}
             disabled={!blob}
-            className="flex items-center justify-center gap-2 rounded-full border border-border bg-secondary/50 px-4 py-3 text-sm font-medium text-white disabled:opacity-50"
+            className="flex items-center justify-center gap-2 rounded-full border border-border bg-secondary/50 px-4 py-3 text-sm font-medium text-foreground disabled:opacity-50"
           >
             <Download className="h-4 w-4" />
             Save image

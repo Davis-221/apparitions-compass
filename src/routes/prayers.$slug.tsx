@@ -88,7 +88,7 @@ function PrayerPage() {
         <button
           onClick={() => setShareOpen(true)}
           aria-label={`Share or print a prayer card for ${prayer.title}`}
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-gold)]/40 bg-white/5 text-[var(--color-gold)]"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--color-gold)]/40 bg-muted/40 text-[var(--color-gold)]"
         >
           <Share2 className="h-4.5 w-4.5" />
         </button>
@@ -134,7 +134,7 @@ function PrayerPage() {
           </div>
 
           {prayer.howToPray && (
-            <div className="mt-5 rounded-2xl border border-[var(--color-gold)]/25 bg-white/[0.03] px-5 py-4">
+            <div className="mt-5 rounded-2xl border border-[var(--color-gold)]/25 bg-muted/30 px-5 py-4">
               <p className="text-[10px] uppercase tracking-[0.25em] text-[var(--color-gold)]">
                 How to pray it
               </p>

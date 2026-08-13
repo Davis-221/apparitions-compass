@@ -167,7 +167,7 @@ function ApparitionPage() {
             {a.messages.map((m: string, i: number) => (
               <li
                 key={i}
-                className="relative rounded-2xl border border-white/10 bg-white/5 p-4 pl-6 font-serif text-lg italic leading-relaxed text-foreground"
+                className="relative rounded-2xl border border-border bg-muted/40 p-4 pl-6 font-serif text-lg italic leading-relaxed text-foreground"
               >
                 <span className="absolute left-0 top-4 bottom-4 w-[3px] rounded-full bg-gradient-to-b from-[var(--color-gold)] to-[oklch(0.83_0.12_220)]" />
                 <Sparkles className="absolute right-3 top-3 h-3.5 w-3.5 text-[var(--color-gold)]/70" />

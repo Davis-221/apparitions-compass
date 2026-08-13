@@ -115,7 +115,7 @@ function PrayersPage() {
 
         <button
           onClick={() => setExportOpen(true)}
-          className="mt-5 inline-flex items-center gap-2 rounded-full border border-[var(--color-gold)]/40 bg-white/5 px-4 py-2.5 text-[11px] uppercase tracking-[0.2em] text-[var(--color-gold)] transition-transform active:scale-[0.98]"
+          className="mt-5 inline-flex items-center gap-2 rounded-full border border-[var(--color-gold)]/40 bg-muted/40 px-4 py-2.5 text-[11px] uppercase tracking-[0.2em] text-[var(--color-gold)] transition-transform active:scale-[0.98]"
         >
           <Download className="h-3.5 w-3.5" />
           Export all prayers
