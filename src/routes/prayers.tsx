@@ -8,6 +8,8 @@ import { usePrayerFavorites } from "@/hooks/use-prayer-favorites";
 import { WordByWord } from "@/components/WordByWord";
 import { ParallaxHero, ParallaxLayer } from "@/components/ParallaxHero";
 import { GlowingParticles } from "@/components/GlowingParticles";
+import { FloatingObjects } from "@/components/FloatingObjects";
+
 
 
 
@@ -95,6 +97,10 @@ function PrayersPage() {
         <ParallaxLayer depth={0.34} className="absolute inset-0 -z-10 pointer-events-none">
           <GlowingParticles count={22} color="var(--gold)" />
         </ParallaxLayer>
+        <ParallaxLayer depth={0.4} className="absolute inset-0 -z-10 pointer-events-none">
+          <FloatingObjects count={6} size={36} color="var(--gold)" />
+        </ParallaxLayer>
+
 
         <ParallaxLayer depth={0.18} className="absolute inset-0 -z-10 pointer-events-none">
           <div className="absolute right-[-50px] top-[-50px] h-56 w-56 rounded-full bg-[oklch(0.87_0.10_90/0.3)] blur-3xl animate-halo" />
