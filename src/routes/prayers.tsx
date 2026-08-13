@@ -85,27 +85,27 @@ function PrayersPage() {
     <div className="pb-8">
 
       <header className="safe-area-top relative overflow-hidden px-6 pt-10 pb-9">
-        <div className="absolute inset-0 -z-10 star-field opacity-40 animate-twinkle" />
+        <div className="star-drift absolute inset-0 -z-10 star-field opacity-40" />
         <div className="absolute right-[-50px] top-[-50px] -z-10 h-56 w-56 rounded-full bg-[oklch(0.87_0.10_90/0.3)] blur-3xl animate-halo" />
-        <div className="absolute left-[-60px] bottom-[-60px] -z-10 h-48 w-48 rounded-full bg-[oklch(0.83_0.12_220/0.22)] blur-3xl" />
+        <div className="glow-breathe absolute left-[-60px] bottom-[-60px] -z-10 h-48 w-48 rounded-full bg-[oklch(0.83_0.12_220/0.22)] blur-3xl" />
 
-        <div className="flex items-center gap-2">
+        <div className="hero-rise flex items-center gap-2">
           <BookOpen className="h-4 w-4 text-[var(--color-gold)]" />
           <p className="text-[11px] uppercase tracking-[0.28em] text-[var(--color-gold)]">
             Ora et labora
           </p>
         </div>
-        <h1 className="mt-2 font-serif text-[2.6rem] leading-[1.05] text-foreground halo-text">
+        <h1 className="hero-rise hero-delay-1 mt-2 font-serif text-[2.6rem] leading-[1.05] text-foreground halo-text">
           Prayers to
           <br />
           Our Mother
         </h1>
-        <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
+        <p className="hero-rise hero-delay-2 mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
           &ldquo;Behold thy Mother.&rdquo; From the Cross He gave her to us — and
           the Church has never stopped answering. Every word here is hers, or
           was given to her, or was given by her.
         </p>
-        <div className="mt-5 flex items-center gap-3">
+        <div className="hero-rise hero-delay-3 mt-5 flex items-center gap-3">
           <div className="gold-hairline w-14" />
           <span className="text-[var(--color-gold)]">✦</span>
           <span className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground">

@@ -180,7 +180,7 @@ function BrowsePage() {
             <img
               src={apparitionImage(current.slug)}
               alt={current.title}
-              className="absolute inset-0 h-full w-full object-cover object-top opacity-90"
+              className="ken-burns absolute inset-0 h-full w-full object-cover object-top opacity-90"
               width={768}
               height={960}
             />
@@ -192,10 +192,11 @@ function BrowsePage() {
                 "radial-gradient(circle at 75% 30%, oklch(0.90 0.10 220 / 0.35), transparent 55%), radial-gradient(circle at 30% 75%, oklch(0.87 0.14 90 / 0.25), transparent 55%)",
             }}
           />
-          <div className="absolute inset-0 star-field opacity-30 mix-blend-screen" />
+          <div className="star-drift absolute inset-0 star-field opacity-30 mix-blend-screen" />
           {/* Aureole */}
           <div className="absolute right-[-40px] top-[-40px] h-56 w-56 rounded-full bg-[color-mix(in_oklab,var(--gold)_35%,transparent)] blur-3xl animate-halo" />
-          <div className="absolute bottom-[-30px] left-[-30px] h-48 w-48 rounded-full bg-[color-mix(in_oklab,var(--glow)_35%,transparent)] blur-3xl" />
+          <div className="glow-breathe absolute bottom-[-30px] left-[-30px] h-48 w-48 rounded-full bg-[color-mix(in_oklab,var(--glow)_35%,transparent)] blur-3xl" />
+          <div className="hero-sheen mix-blend-screen" />
           <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
 
 
@@ -208,22 +209,22 @@ function BrowsePage() {
           </div>
 
           {/* Year - massive */}
-          <div className="pointer-events-none absolute right-5 top-16 font-serif text-[92px] italic leading-none text-[var(--on-media)]/10">
+          <div className="hero-rise pointer-events-none absolute right-5 top-16 font-serif text-[92px] italic leading-none text-[var(--on-media)]/10">
             {current.year}
           </div>
 
           {/* Content */}
           <div className="media-ink absolute inset-x-0 bottom-0 p-5">
-            <p className="text-[11px] uppercase tracking-[0.25em] text-[var(--gold-on-media)]">
+            <p className="hero-rise hero-delay-1 text-[11px] uppercase tracking-[0.25em] text-[var(--gold-on-media)]">
               {current.country} · {current.dates}
             </p>
-            <h2 className="mt-2 font-serif text-3xl leading-tight text-[var(--on-media)] halo-text">
+            <h2 className="hero-rise hero-delay-2 mt-2 font-serif text-3xl leading-tight text-[var(--on-media)] halo-text">
               {current.title}
             </h2>
-            <p className="mt-2 line-clamp-2 text-sm text-[var(--on-media)]/85">
+            <p className="hero-rise hero-delay-3 mt-2 line-clamp-2 text-sm text-[var(--on-media)]/85">
               {current.summary}
             </p>
-            <div className="mt-4 flex items-center justify-between">
+            <div className="hero-rise hero-delay-4 mt-4 flex items-center justify-between">
               <span className="inline-flex items-center gap-1.5 text-xs font-medium text-[var(--on-media)] group-active:translate-x-0.5 transition-transform">
                 Enter the story <ArrowUpRight className="h-3.5 w-3.5" />
               </span>

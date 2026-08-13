@@ -429,3 +429,71 @@ html.theme-transition *:not(svg *) {
 }
 
 
+
+/* ── Animated hero sections ──────────────────────────────── */
+@keyframes ken-burns {
+  0%   { transform: scale(1.06) translate3d(0, 0, 0); }
+  50%  { transform: scale(1.16) translate3d(-1.5%, -1.8%, 0); }
+  100% { transform: scale(1.06) translate3d(1.5%, -0.6%, 0); }
+}
+@keyframes star-drift {
+  0%   { transform: translate3d(0, 0, 0); opacity: 0.55; }
+  50%  { transform: translate3d(-2%, 1.5%, 0); opacity: 1; }
+  100% { transform: translate3d(2%, -1.5%, 0); opacity: 0.6; }
+}
+@keyframes hero-sheen {
+  0%   { transform: translate3d(-120%, 0, 0) rotate(8deg); opacity: 0; }
+  12%  { opacity: 0.5; }
+  55%  { opacity: 0.25; }
+  100% { transform: translate3d(180%, 0, 0) rotate(8deg); opacity: 0; }
+}
+@keyframes hero-rise {
+  from { opacity: 0; transform: translate3d(0, 14px, 0); filter: blur(6px); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); filter: blur(0); }
+}
+@keyframes glow-breathe {
+  0%, 100% { opacity: 0.45; transform: scale(1); }
+  50%      { opacity: 0.9; transform: scale(1.12); }
+}
+
+@utility ken-burns {
+  animation: ken-burns 26s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@utility star-drift {
+  animation: star-drift 22s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+@utility glow-breathe {
+  animation: glow-breathe 7s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+@utility hero-sheen {
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  left: 0;
+  width: 45%;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    color-mix(in oklab, var(--on-media) 22%, transparent),
+    transparent
+  );
+  filter: blur(10px);
+  animation: hero-sheen 9s ease-in-out infinite;
+}
+@utility hero-rise {
+  animation: hero-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.hero-delay-1 { animation-delay: 0.08s; }
+.hero-delay-2 { animation-delay: 0.18s; }
+.hero-delay-3 { animation-delay: 0.3s; }
+.hero-delay-4 { animation-delay: 0.42s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ken-burns, .star-drift, .glow-breathe, .hero-sheen, .hero-rise {
+    animation: none !important;
+  }
+}
