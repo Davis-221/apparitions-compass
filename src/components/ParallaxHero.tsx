@@ -70,7 +70,12 @@ export function ParallaxLayer({
     <motion.div
       className={className}
       data-parallax-layer={depth}
-      style={{ y, scale: scaleValue }}
+      style={{
+        y,
+        scale: scaleValue,
+        willChange: "transform",
+        backfaceVisibility: "hidden",
+      }}
       // Keep transform-only for GPU compositing
       initial={false}
     >
