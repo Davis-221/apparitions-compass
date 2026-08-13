@@ -7,6 +7,7 @@ import { StatusBadge } from "@/components/StatusBadge";
 import { useFavorites } from "@/hooks/use-favorites";
 import { ShareCardDialog } from "@/components/ShareCardDialog";
 import { apparitionImage } from "@/data/apparition-images";
+import { WordByWord } from "@/components/WordByWord";
 
 const SITE = "https://apparitions-compass.lovable.app";
 
@@ -138,7 +139,12 @@ function ApparitionPage() {
             <StatusBadge status={a.status} />
           </div>
           <h1 className="hero-rise hero-delay-2 mt-3 font-serif text-4xl leading-[1.05] halo-text">
-            {a.title}
+            <WordByWord
+              text={a.title}
+              delay={0.4}
+              stagger={0.06}
+              duration={0.5}
+            />
           </h1>
           <p className="hero-rise hero-delay-3 mt-2 text-sm text-[var(--on-media)]/85">
             {a.location} · {a.country}

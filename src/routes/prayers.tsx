@@ -5,6 +5,7 @@ import { PRAYERS, CATEGORY_LABEL, type PrayerCategory } from "@/data/prayers";
 import { APPARITIONS } from "@/data/apparitions";
 import { ExportPrayersDialog } from "@/components/ExportPrayersDialog";
 import { usePrayerFavorites } from "@/hooks/use-prayer-favorites";
+import { WordByWord } from "@/components/WordByWord";
 
 
 const SITE = "https://apparitions-compass.lovable.app";
@@ -96,9 +97,13 @@ function PrayersPage() {
           </p>
         </div>
         <h1 className="hero-rise hero-delay-1 mt-2 font-serif text-[2.6rem] leading-[1.05] text-foreground halo-text">
-          Prayers to
-          <br />
-          Our Mother
+          <WordByWord
+            text="Prayers to\nOur Mother"
+            preserveLines
+            delay={0.2}
+            stagger={0.07}
+            duration={0.55}
+          />
         </h1>
         <p className="hero-rise hero-delay-2 mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
           &ldquo;Behold thy Mother.&rdquo; From the Cross He gave her to us — and

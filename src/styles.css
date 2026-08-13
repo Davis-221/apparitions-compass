@@ -497,3 +497,31 @@ html.theme-transition *:not(svg *) {
     animation: none !important;
   }
 }
+
+/* ── Word-by-word text reveal ───────────────────────────── */
+@keyframes word-in {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0) scale(0.96);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.animate-word-in {
+  animation: word-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.word-by-word {
+  /* Ensure words animate cleanly without breaking layout */
+  word-spacing: 0.02em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-word-in { animation: none !important; }
+  .word-by-word span { opacity: 1 !important; filter: none !important; transform: none !important; }
+}
