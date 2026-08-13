@@ -463,7 +463,7 @@ function HeroCard({ a, priority, onShare }: { a: Apparition; priority?: boolean;
         {a.year}
       </div>
 
-      <div className="media-ink absolute inset-x-0 bottom-0 p-4">
+      <div className="media-ink absolute inset-x-0 bottom-0 p-4 pr-16">
         <p className="text-[10px] uppercase tracking-[0.22em] text-[var(--gold-on-media)]">
           {a.location} · {a.country}
         </p>
@@ -471,11 +471,12 @@ function HeroCard({ a, priority, onShare }: { a: Apparition; priority?: boolean;
           {a.title}
         </h3>
       </div>
+      <ShareButton a={a} onShare={onShare} />
     </Link>
   );
 }
 
-function SmallCard({ a }: { a: Apparition }) {
+function SmallCard({ a, onShare }: { a: Apparition; onShare: ShareHandler }) {
   const hue = statusHue(a.status);
   const img = apparitionImage(a.slug);
   return (
