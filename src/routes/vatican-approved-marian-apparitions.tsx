@@ -67,25 +67,31 @@ function ApprovedPage() {
 
   return (
     <div className="pb-8">
-      <header className="safe-area-top relative overflow-hidden px-6 pt-8 pb-8">
-        <div className="absolute inset-0 -z-10 star-field opacity-40" />
-        <div className="absolute right-[-40px] top-[-40px] -z-10 h-48 w-48 rounded-full bg-[oklch(0.72_0.16_160/0.3)] blur-3xl animate-halo" />
-        <div className="flex items-center gap-2">
-          <ShieldCheck className="h-4 w-4 text-[var(--color-gold)]" />
-          <p className="text-[11px] uppercase tracking-[0.25em] text-[var(--color-gold)]">
-            Approved by the Church
+      <ParallaxHero className="safe-area-top relative overflow-hidden px-6 pt-8 pb-8" as="header">
+        <ParallaxLayer depth={0.3} className="absolute inset-0 -z-10 pointer-events-none">
+          <div className="absolute inset-0 star-field opacity-40" />
+        </ParallaxLayer>
+        <ParallaxLayer depth={0.18} className="absolute inset-0 -z-10 pointer-events-none">
+          <div className="absolute right-[-40px] top-[-40px] h-48 w-48 rounded-full bg-[oklch(0.72_0.16_160/0.3)] blur-3xl animate-halo" />
+        </ParallaxLayer>
+        <ParallaxLayer depth={-0.08} maxOffset={40}>
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="h-4 w-4 text-[var(--color-gold)]" />
+            <p className="text-[11px] uppercase tracking-[0.25em] text-[var(--color-gold)]">
+              Approved by the Church
+            </p>
+          </div>
+          <h1 className="mt-2 font-serif text-4xl leading-tight text-foreground halo-text">
+            Vatican Approved Marian Apparitions
+          </h1>
+          <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
+            {approved.length} apparitions in this atlas carry formal Church approval —
+            meaning a bishop, with the Holy See's support, declared them worthy of
+            belief and permitted public devotion at the site.
           </p>
-        </div>
-        <h1 className="mt-2 font-serif text-4xl leading-tight text-foreground halo-text">
-          Vatican Approved Marian Apparitions
-        </h1>
-        <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
-          {approved.length} apparitions in this atlas carry formal Church approval —
-          meaning a bishop, with the Holy See's support, declared them worthy of
-          belief and permitted public devotion at the site.
-        </p>
-        <div className="mt-4 gold-hairline w-16" />
-      </header>
+          <div className="mt-4 gold-hairline w-16" />
+        </ParallaxLayer>
+      </ParallaxHero>
 
       <main className="px-5">
         <section>
