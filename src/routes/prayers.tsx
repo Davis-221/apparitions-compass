@@ -107,7 +107,8 @@ function PrayersPage() {
         </div>
         <h1 className="hero-rise hero-delay-1 mt-2 font-serif text-[2.6rem] leading-[1.05] text-foreground halo-text">
           <WordByWord
-            text={"Prayers to\nOur Mother"}
+            text={`Prayers to
+Our Mother`}
             preserveLines
             delay={0.2}
             stagger={0.07}
