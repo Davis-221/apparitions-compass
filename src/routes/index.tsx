@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { Search, Sparkles, ArrowUpRight, MapPin } from "lucide-react";
+import { Search, Sparkles, ArrowUpRight, MapPin, Share2 } from "lucide-react";
+import { ShareCardDialog } from "@/components/ShareCardDialog";
 import { WordByWord } from "@/components/WordByWord";
 import { ParallaxHero, ParallaxLayer } from "@/components/ParallaxHero";
 import { GlowingParticles } from "@/components/GlowingParticles";
