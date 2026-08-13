@@ -100,6 +100,7 @@ function useRotatingFeatured() {
 function BrowsePage() {
   const [filter, setFilter] = useState<Filter>("all");
   const [query, setQuery] = useState("");
+  const [shareTarget, setShareTarget] = useState<Apparition | null>(null);
   const { current, index, count, setIndex } = useRotatingFeatured();
 
   const filtered = useMemo(() => {
