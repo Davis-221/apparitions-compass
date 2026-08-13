@@ -209,6 +209,10 @@ function BrowsePage() {
             <ParallaxLayer depth={0.25} className="absolute inset-0">
               <div className="star-drift absolute inset-0 star-field opacity-30 mix-blend-screen" />
             </ParallaxLayer>
+            <ParallaxLayer depth={0.28} className="absolute inset-0 pointer-events-none">
+              <GlowingParticles count={30} color="var(--gold)" />
+            </ParallaxLayer>
+
             {/* Aureole */}
             <ParallaxLayer depth={0.18} className="absolute inset-0 pointer-events-none">
               <div className="absolute right-[-40px] top-[-40px] h-56 w-56 rounded-full bg-[color-mix(in_oklab,var(--gold)_35%,transparent)] blur-3xl animate-halo" />

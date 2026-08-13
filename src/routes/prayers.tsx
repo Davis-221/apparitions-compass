@@ -92,6 +92,10 @@ function PrayersPage() {
         <ParallaxLayer depth={0.3} className="absolute inset-0 -z-10">
           <div className="star-drift absolute inset-0 star-field opacity-40" />
         </ParallaxLayer>
+        <ParallaxLayer depth={0.34} className="absolute inset-0 -z-10 pointer-events-none">
+          <GlowingParticles count={22} color="var(--gold)" />
+        </ParallaxLayer>
+
         <ParallaxLayer depth={0.18} className="absolute inset-0 -z-10 pointer-events-none">
           <div className="absolute right-[-50px] top-[-50px] h-56 w-56 rounded-full bg-[oklch(0.87_0.10_90/0.3)] blur-3xl animate-halo" />
         </ParallaxLayer>

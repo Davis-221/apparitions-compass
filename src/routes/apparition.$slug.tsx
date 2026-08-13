@@ -106,6 +106,10 @@ function ApparitionPage() {
         <ParallaxLayer depth={0.28} className="absolute inset-0">
           <div className="star-drift absolute inset-0 star-field opacity-25 mix-blend-screen" />
         </ParallaxLayer>
+        <ParallaxLayer depth={0.32} className="absolute inset-0 pointer-events-none">
+          <GlowingParticles count={28} color="var(--gold)" />
+        </ParallaxLayer>
+
         <ParallaxLayer depth={0.18} className="absolute inset-0 pointer-events-none">
           <div className="absolute right-[-60px] top-[-60px] h-72 w-72 rounded-full bg-[color-mix(in_oklab,var(--gold)_25%,transparent)] blur-3xl animate-halo" />
         </ParallaxLayer>
