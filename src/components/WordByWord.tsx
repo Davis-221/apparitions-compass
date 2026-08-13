@@ -1,4 +1,4 @@
-import { useEffect, useState, Fragment } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 interface WordByWordProps {
