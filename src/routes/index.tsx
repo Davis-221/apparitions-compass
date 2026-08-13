@@ -201,7 +201,7 @@ function BrowsePage() {
 
           {/* Top row */}
           <div className="relative flex items-start justify-between p-5">
-            <span className="rounded-full border border-[var(--on-media-border)] bg-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-[var(--on-media)]/90 backdrop-blur-md">
+            <span className="rounded-full border border-[var(--on-media-border)] bg-[oklch(1_0_0/0.14)] px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-[var(--on-media)]/90 backdrop-blur-md">
               Featured
             </span>
             <StatusBadge status={current.status} />
@@ -237,7 +237,7 @@ function BrowsePage() {
                     }}
                     aria-label={`Show featured ${k + 1}`}
                     className={`h-1 rounded-full transition-all ${
-                      k === index ? "w-6 bg-white" : "w-1.5 bg-white/40"
+                      k === index ? "w-6 bg-[var(--on-media)]" : "w-1.5 bg-[var(--on-media)]/40"
                     }`}
                   />
                 ))}
@@ -370,7 +370,7 @@ function HeroCard({ a, priority }: { a: Apparition; priority?: boolean }) {
 
 
       <div className="relative flex items-start justify-between p-4">
-        <span className="rounded-full border border-[var(--on-media-border)] bg-white/10 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.2em] text-[var(--on-media)]/90 backdrop-blur-md">
+        <span className="rounded-full border border-[var(--on-media-border)] bg-[oklch(1_0_0/0.14)] px-2.5 py-0.5 text-[10px] uppercase tracking-[0.2em] text-[var(--on-media)]/90 backdrop-blur-md">
           {priority ? "Latest" : "Chronicle"}
         </span>
         <StatusBadge status={a.status} />
