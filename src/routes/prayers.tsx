@@ -254,7 +254,9 @@ Our Mother`}
                           </button>
                         </div>
                       </Link>
+                      </Reveal>
                     </li>
+
                   );
                 })}
               </ul>
