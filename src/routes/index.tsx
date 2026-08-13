@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { Search, Sparkles, ArrowUpRight, MapPin } from "lucide-react";
 import { WordByWord } from "@/components/WordByWord";
+import { ParallaxHero, ParallaxLayer } from "@/components/ParallaxHero";
 import {
   APPARITIONS,
   STATUS_LABEL,
@@ -10,6 +11,7 @@ import {
 } from "@/data/apparitions";
 import { StatusBadge } from "@/components/StatusBadge";
 import { apparitionImage } from "@/data/apparition-images";
+
 
 const SITE = "https://apparitions-compass.lovable.app";
 
@@ -163,42 +165,59 @@ function BrowsePage() {
 
       {/* Hero — rotating featured apparition */}
       <section className="px-5 pt-4">
-        <Link
-          to="/apparition/$slug"
-          params={{ slug: current.slug }}
+        <ParallaxHero
           key={current.slug}
-          className="group relative block h-[380px] overflow-hidden rounded-3xl border border-[var(--glass-border)] animate-[fade-in_0.6s_ease-out]"
+          className="h-[380px] overflow-hidden rounded-3xl border border-[var(--glass-border)] animate-[fade-in_0.6s_ease-out]"
+          as="div"
         >
-          {/* Celestial layered background */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(120% 90% at 20% 10%, oklch(0.55 0.20 260) 0%, oklch(0.28 0.10 265) 55%, oklch(0.18 0.06 265) 100%)",
-            }}
-          />
-          {apparitionImage(current.slug) && (
-            <img
-              src={apparitionImage(current.slug)}
-              alt={current.title}
-              className="ken-burns absolute inset-0 h-full w-full object-cover object-top opacity-90"
-              width={768}
-              height={960}
-            />
-          )}
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle at 75% 30%, oklch(0.90 0.10 220 / 0.35), transparent 55%), radial-gradient(circle at 30% 75%, oklch(0.87 0.14 90 / 0.25), transparent 55%)",
-            }}
-          />
-          <div className="star-drift absolute inset-0 star-field opacity-30 mix-blend-screen" />
-          {/* Aureole */}
-          <div className="absolute right-[-40px] top-[-40px] h-56 w-56 rounded-full bg-[color-mix(in_oklab,var(--gold)_35%,transparent)] blur-3xl animate-halo" />
-          <div className="glow-breathe absolute bottom-[-30px] left-[-30px] h-48 w-48 rounded-full bg-[color-mix(in_oklab,var(--glow)_35%,transparent)] blur-3xl" />
-          <div className="hero-sheen mix-blend-screen" />
-          <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+          <Link
+            to="/apparition/$slug"
+            params={{ slug: current.slug }}
+            className="group relative block h-full"
+          >
+            {/* Celestial layered background */}
+            <ParallaxLayer depth={0.05} className="absolute inset-0">
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "radial-gradient(120% 90% at 20% 10%, oklch(0.55 0.20 260) 0%, oklch(0.28 0.10 265) 55%, oklch(0.18 0.06 265) 100%)",
+                }}
+              />
+            </ParallaxLayer>
+            {apparitionImage(current.slug) && (
+              <ParallaxLayer depth={0.32} scale={[1.02, 1.1]} maxOffset={55} className="absolute inset-0">
+                <img
+                  src={apparitionImage(current.slug)}
+                  alt={current.title}
+                  className="ken-burns absolute inset-0 h-full w-full object-cover object-top opacity-90"
+                  width={768}
+                  height={960}
+                />
+              </ParallaxLayer>
+            )}
+            <ParallaxLayer depth={0.12} className="absolute inset-0">
+              <div
+                className="absolute inset-0"
+                style={{
+                  backgroundImage:
+                    "radial-gradient(circle at 75% 30%, oklch(0.90 0.10 220 / 0.35), transparent 55%), radial-gradient(circle at 30% 75%, oklch(0.87 0.14 90 / 0.25), transparent 55%)",
+                }}
+              />
+            </ParallaxLayer>
+            <ParallaxLayer depth={0.25} className="absolute inset-0">
+              <div className="star-drift absolute inset-0 star-field opacity-30 mix-blend-screen" />
+            </ParallaxLayer>
+            {/* Aureole */}
+            <ParallaxLayer depth={0.18} className="absolute inset-0 pointer-events-none">
+              <div className="absolute right-[-40px] top-[-40px] h-56 w-56 rounded-full bg-[color-mix(in_oklab,var(--gold)_35%,transparent)] blur-3xl animate-halo" />
+            </ParallaxLayer>
+            <ParallaxLayer depth={0.22} className="absolute inset-0 pointer-events-none">
+              <div className="glow-breathe absolute bottom-[-30px] left-[-30px] h-48 w-48 rounded-full bg-[color-mix(in_oklab,var(--glow)_35%,transparent)] blur-3xl" />
+            </ParallaxLayer>
+            <div className="hero-sheen mix-blend-screen" />
+            <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+
 
 
           {/* Top row */}
@@ -257,6 +276,7 @@ function BrowsePage() {
             </div>
           </div>
         </Link>
+        </ParallaxHero>
 
         {/* Stats strip */}
         <div className="mt-4 grid grid-cols-3 gap-2">

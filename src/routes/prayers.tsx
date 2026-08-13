@@ -6,6 +6,8 @@ import { APPARITIONS } from "@/data/apparitions";
 import { ExportPrayersDialog } from "@/components/ExportPrayersDialog";
 import { usePrayerFavorites } from "@/hooks/use-prayer-favorites";
 import { WordByWord } from "@/components/WordByWord";
+import { ParallaxHero, ParallaxLayer } from "@/components/ParallaxHero";
+
 
 
 const SITE = "https://apparitions-compass.lovable.app";
@@ -85,10 +87,17 @@ function PrayersPage() {
   return (
     <div className="pb-8">
 
-      <header className="safe-area-top relative overflow-hidden px-6 pt-10 pb-9">
-        <div className="star-drift absolute inset-0 -z-10 star-field opacity-40" />
-        <div className="absolute right-[-50px] top-[-50px] -z-10 h-56 w-56 rounded-full bg-[oklch(0.87_0.10_90/0.3)] blur-3xl animate-halo" />
-        <div className="glow-breathe absolute left-[-60px] bottom-[-60px] -z-10 h-48 w-48 rounded-full bg-[oklch(0.83_0.12_220/0.22)] blur-3xl" />
+      <ParallaxHero className="safe-area-top relative overflow-hidden px-6 pt-10 pb-9" as="header">
+        <ParallaxLayer depth={0.3} className="absolute inset-0 -z-10">
+          <div className="star-drift absolute inset-0 star-field opacity-40" />
+        </ParallaxLayer>
+        <ParallaxLayer depth={0.18} className="absolute inset-0 -z-10 pointer-events-none">
+          <div className="absolute right-[-50px] top-[-50px] h-56 w-56 rounded-full bg-[oklch(0.87_0.10_90/0.3)] blur-3xl animate-halo" />
+        </ParallaxLayer>
+        <ParallaxLayer depth={0.22} className="absolute inset-0 -z-10 pointer-events-none">
+          <div className="glow-breathe absolute left-[-60px] bottom-[-60px] h-48 w-48 rounded-full bg-[oklch(0.83_0.12_220/0.22)] blur-3xl" />
+        </ParallaxLayer>
+
 
         <div className="hero-rise flex items-center gap-2">
           <BookOpen className="h-4 w-4 text-[var(--color-gold)]" />
@@ -98,7 +107,8 @@ function PrayersPage() {
         </div>
         <h1 className="hero-rise hero-delay-1 mt-2 font-serif text-[2.6rem] leading-[1.05] text-foreground halo-text">
           <WordByWord
-            text="Prayers to\nOur Mother"
+            text={`Prayers to
+Our Mother`}
             preserveLines
             delay={0.2}
             stagger={0.07}
@@ -125,7 +135,7 @@ function PrayersPage() {
           <Download className="h-3.5 w-3.5" />
           Export all prayers
         </button>
-      </header>
+      </ParallaxHero>
 
 
       <main className="px-5">
