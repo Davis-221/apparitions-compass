@@ -132,7 +132,7 @@ function ApparitionPage() {
           {a.year}
         </div>
 
-        <div className="absolute inset-x-0 bottom-0 px-6 pb-6 text-[var(--on-media)]">
+        <div className="media-ink absolute inset-x-0 bottom-0 px-6 pb-6 text-[var(--on-media)]">
           <StatusBadge status={a.status} />
           <h1 className="mt-3 font-serif text-4xl leading-[1.05] text-glow">
             {a.title}

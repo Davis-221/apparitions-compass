@@ -213,7 +213,7 @@ function BrowsePage() {
           </div>
 
           {/* Content */}
-          <div className="absolute inset-x-0 bottom-0 p-5">
+          <div className="media-ink absolute inset-x-0 bottom-0 p-5">
             <p className="text-[11px] uppercase tracking-[0.25em] text-[var(--gold-on-media)]">
               {current.country} · {current.dates}
             </p>
@@ -380,7 +380,7 @@ function HeroCard({ a, priority }: { a: Apparition; priority?: boolean }) {
         {a.year}
       </div>
 
-      <div className="absolute inset-x-0 bottom-0 p-4">
+      <div className="media-ink absolute inset-x-0 bottom-0 p-4">
         <p className="text-[10px] uppercase tracking-[0.22em] text-[var(--gold-on-media)]">
           {a.location} · {a.country}
         </p>
@@ -426,7 +426,7 @@ function SmallCard({ a }: { a: Apparition }) {
         {a.year}
       </div>
 
-      <div className="absolute inset-x-0 bottom-0 p-3">
+      <div className="media-ink absolute inset-x-0 bottom-0 p-3">
         <p className="text-[9px] uppercase tracking-[0.2em] text-[var(--gold-on-media)]">
           {a.country}
         </p>
