@@ -5,6 +5,8 @@ import { WordByWord } from "@/components/WordByWord";
 import { ParallaxHero, ParallaxLayer } from "@/components/ParallaxHero";
 import { GlowingParticles } from "@/components/GlowingParticles";
 import { FloatingObjects } from "@/components/FloatingObjects";
+import { Reveal } from "@/components/Reveal";
+
 
 import {
   APPARITIONS,
@@ -333,16 +335,23 @@ function BrowsePage() {
       <main className="mt-4 space-y-5 px-5">
         {chunkMagazine(filtered).map((group, gi) => (
           <div key={gi} className="space-y-3">
-            {group.hero && <HeroCard a={group.hero} priority={gi === 0} />}
+            {group.hero && (
+              <Reveal delay={gi * 60}>
+                <HeroCard a={group.hero} priority={gi === 0} />
+              </Reveal>
+            )}
             {group.pair.length > 0 && (
               <div className="grid grid-cols-2 gap-3">
-                {group.pair.map((a) => (
-                  <SmallCard key={a.slug} a={a} />
+                {group.pair.map((a, pi) => (
+                  <Reveal key={a.slug} delay={gi * 60 + pi * 80 + 60}>
+                    <SmallCard a={a} />
+                  </Reveal>
                 ))}
               </div>
             )}
           </div>
         ))}
+
         {filtered.length === 0 && (
           <div className="mt-10 rounded-2xl border border-dashed border-border p-8 text-center">
             <p className="font-serif text-lg text-foreground">Nothing here yet</p>
@@ -389,7 +398,7 @@ function HeroCard({ a, priority }: { a: Apparition; priority?: boolean }) {
     <Link
       to="/apparition/$slug"
       params={{ slug: a.slug }}
-      className="group relative block h-56 overflow-hidden rounded-3xl border border-[var(--glass-border)] active:scale-[0.99] transition-transform"
+      className="card-anim card-sheen group relative block h-56 overflow-hidden rounded-3xl border border-[var(--glass-border)]"
     >
       <div
         className="absolute inset-0"
@@ -402,7 +411,7 @@ function HeroCard({ a, priority }: { a: Apparition; priority?: boolean }) {
           src={img}
           alt={a.title}
           loading={priority ? "eager" : "lazy"}
-          className="absolute inset-0 h-full w-full object-cover object-top opacity-90"
+          className="card-media absolute inset-0 h-full w-full object-cover object-top opacity-90"
           width={768}
           height={960}
         />
@@ -442,7 +451,7 @@ function SmallCard({ a }: { a: Apparition }) {
     <Link
       to="/apparition/$slug"
       params={{ slug: a.slug }}
-      className="group relative block h-44 overflow-hidden rounded-2xl border border-[var(--glass-border)] active:scale-[0.98] transition-transform"
+      className="card-anim card-sheen group relative block h-44 overflow-hidden rounded-2xl border border-[var(--glass-border)]"
     >
       <div
         className="absolute inset-0"
@@ -455,7 +464,7 @@ function SmallCard({ a }: { a: Apparition }) {
           src={img}
           alt={a.title}
           loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover object-top opacity-90"
+          className="card-media absolute inset-0 h-full w-full object-cover object-top opacity-90"
           width={768}
           height={960}
         />

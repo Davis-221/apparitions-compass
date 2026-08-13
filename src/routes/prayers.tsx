@@ -9,6 +9,7 @@ import { WordByWord } from "@/components/WordByWord";
 import { ParallaxHero, ParallaxLayer } from "@/components/ParallaxHero";
 import { GlowingParticles } from "@/components/GlowingParticles";
 import { FloatingObjects } from "@/components/FloatingObjects";
+import { Reveal } from "@/components/Reveal";
 
 
 
@@ -194,16 +195,17 @@ Our Mother`}
               </p>
 
               <ul className="space-y-2.5">
-                {prayers.map((p) => {
+                {prayers.map((p, pi) => {
                   const app = p.apparitionSlug
                     ? APPARITIONS.find((a) => a.slug === p.apparitionSlug)
                     : null;
                   return (
                     <li key={p.slug}>
+                      <Reveal delay={Math.min(pi, 6) * 70}>
                       <Link
                         to="/prayers/$slug"
                         params={{ slug: p.slug }}
-                        className="glass-card group relative flex items-start gap-3 overflow-hidden rounded-2xl px-4 py-4 transition-transform active:scale-[0.99]"
+                        className="glass-card card-anim card-sheen group relative flex items-start gap-3 overflow-hidden rounded-2xl px-4 py-4"
                       >
                         <span className="pointer-events-none absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-[var(--color-gold)]/50 to-transparent" />
                         <div className="min-w-0 flex-1">
@@ -252,7 +254,9 @@ Our Mother`}
                           </button>
                         </div>
                       </Link>
+                      </Reveal>
                     </li>
+
                   );
                 })}
               </ul>
