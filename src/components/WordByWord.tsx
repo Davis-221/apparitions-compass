@@ -48,22 +48,20 @@ export function WordByWord({
           const currentIndex = wordIndex++;
           const isLastWord = isLastLine && i === words.length - 1;
           return (
-            <Fragment key={i}>
-              <span
-                className={cn(
-                  "inline-block will-change-transform",
-                  started && "animate-word-in"
-                )}
-                style={{
-                  animationDelay: `${currentIndex * stagger}s`,
-                  animationDuration: `${duration}s`,
-                  animationFillMode: "both",
-                }}
-              >
-                {word}
-              </span>
-              {!isLastWord && " "}
-            </Fragment>
+            <span
+              key={i}
+              className={cn(
+                "inline-block will-change-transform",
+                started && "animate-word-in"
+              )}
+              style={{
+                animationDelay: `${currentIndex * stagger}s`,
+                animationDuration: `${duration}s`,
+                animationFillMode: "both",
+              }}
+            >
+              {isLastWord ? word : `${word}\u00A0`}
+            </span>
           );
         })}
         {!isLastLine && <br />}
