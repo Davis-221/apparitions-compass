@@ -363,6 +363,43 @@
 
 html { transition: background-color 0.4s ease, color 0.4s ease; }
 
+/* ── Theme switching: seamless crossfade ─────────────────── */
+html.theme-transition,
+html.theme-transition body,
+html.theme-transition body::before {
+  transition:
+    background-color 0.5s ease,
+    background-image 0.5s ease,
+    color 0.5s ease,
+    opacity 0.5s ease;
+}
+html.theme-transition *:not(svg *) {
+  transition:
+    background-color 0.5s ease,
+    border-color 0.5s ease,
+    color 0.5s ease,
+    fill 0.5s ease,
+    stroke 0.5s ease,
+    box-shadow 0.5s ease,
+    text-shadow 0.5s ease;
+}
+
+/* View Transitions crossfade when supported */
+::view-transition-old(root) {
+  animation: theme-fade-out 0.45s ease both;
+}
+::view-transition-new(root) {
+  animation: theme-fade-in 0.45s ease both;
+}
+@keyframes theme-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes theme-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 @keyframes aurora-drift {
   0%   { transform: translate3d(-2%, -1%, 0) scale(1.02); opacity: 0.42; }
   50%  { transform: translate3d(2%, 1.5%, 0) scale(1.08); opacity: 0.58; }
@@ -372,5 +409,8 @@ html { transition: background-color 0.4s ease, color 0.4s ease; }
 @media (prefers-reduced-motion: reduce) {
   body::before { animation: none; }
   .animate-twinkle, .animate-float-slow, .animate-halo, .animate-shimmer { animation: none; }
+  html.theme-transition, html.theme-transition *:not(svg *) { transition-duration: 0.01ms !important; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
 }
+
 
