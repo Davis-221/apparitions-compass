@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { ParallaxHero, ParallaxLayer } from "@/components/ParallaxHero";
 import { ShieldCheck } from "lucide-react";
 import { APPARITIONS } from "@/data/apparitions";
 import { StatusBadge } from "@/components/StatusBadge";
