@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { ParallaxHero, ParallaxLayer } from "@/components/ParallaxHero";
 import { Heart, Share2, BookOpen } from "lucide-react";
 import { useState } from "react";
 import { APPARITIONS, type ApparitionStatus, type Apparition } from "@/data/apparitions";
