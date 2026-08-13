@@ -7,6 +7,7 @@ import { ParallaxHero, ParallaxLayer } from "@/components/ParallaxHero";
 import { GlowingParticles } from "@/components/GlowingParticles";
 import { FloatingObjects } from "@/components/FloatingObjects";
 import { Reveal } from "@/components/Reveal";
+import logoAsset from "@/assets/marian-apparitions-logo.png.asset.json";
 
 
 import {
@@ -132,8 +133,13 @@ function BrowsePage() {
           <div className="absolute inset-0 -z-10 bg-[color-mix(in_oklab,var(--background)_80%,transparent)] backdrop-blur-2xl border-b border-border" />
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="relative flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-[var(--primary)] to-[var(--gold)]">
-                <Sparkles className="h-4 w-4 text-[var(--primary-foreground)]" />
+              <div className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-full ring-1 ring-[color-mix(in_oklab,var(--gold)_60%,transparent)]">
+                <img
+                  src={logoAsset.url}
+                  alt="Marian Apparitions emblem"
+                  className="h-full w-full object-cover"
+                  loading="eager"
+                />
                 <span className="absolute inset-0 -z-10 rounded-full bg-[color-mix(in_oklab,var(--glow)_50%,transparent)] blur-lg animate-halo" />
               </div>
               <div>
