@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { ParallaxHero, ParallaxLayer } from "@/components/ParallaxHero";
 import { Heart, Share2, BookOpen } from "lucide-react";
 import { useState } from "react";
 import { APPARITIONS, type ApparitionStatus, type Apparition } from "@/data/apparitions";
@@ -52,23 +53,29 @@ function SavedPage() {
 
   return (
     <div className="pb-8">
-      <header className="safe-area-top relative overflow-hidden px-6 pt-8 pb-8">
-        <div className="absolute inset-0 -z-10 star-field opacity-40" />
-        <div className="absolute right-[-40px] top-[-40px] -z-10 h-48 w-48 rounded-full bg-[oklch(0.78_0.15_25/0.3)] blur-3xl animate-halo" />
-        <div className="flex items-center gap-2">
-          <Heart className="h-4 w-4 text-[var(--color-rose-soft)]" />
-          <p className="text-[11px] uppercase tracking-[0.25em] text-[var(--color-gold)]">
-            Kept close
+      <ParallaxHero className="safe-area-top relative overflow-hidden px-6 pt-8 pb-8" as="header">
+        <ParallaxLayer depth={0.3} className="absolute inset-0 -z-10 pointer-events-none">
+          <div className="absolute inset-0 star-field opacity-40" />
+        </ParallaxLayer>
+        <ParallaxLayer depth={0.18} className="absolute inset-0 -z-10 pointer-events-none">
+          <div className="absolute right-[-40px] top-[-40px] h-48 w-48 rounded-full bg-[oklch(0.78_0.15_25/0.3)] blur-3xl animate-halo" />
+        </ParallaxLayer>
+        <ParallaxLayer depth={-0.08} maxOffset={40}>
+          <div className="flex items-center gap-2">
+            <Heart className="h-4 w-4 text-[var(--color-rose-soft)]" />
+            <p className="text-[11px] uppercase tracking-[0.25em] text-[var(--color-gold)]">
+              Kept close
+            </p>
+          </div>
+          <h1 className="mt-2 font-serif text-4xl leading-tight text-foreground halo-text">
+            Saved
+          </h1>
+          <p className="mt-2 max-w-sm text-sm text-muted-foreground">
+            Apparitions you've kept for prayer and reflection.
           </p>
-        </div>
-        <h1 className="mt-2 font-serif text-4xl leading-tight text-foreground halo-text">
-          Saved
-        </h1>
-        <p className="mt-2 max-w-sm text-sm text-muted-foreground">
-          Apparitions you've kept for prayer and reflection.
-        </p>
-        <div className="mt-4 gold-hairline w-16" />
-      </header>
+          <div className="mt-4 gold-hairline w-16" />
+        </ParallaxLayer>
+      </ParallaxHero>
 
       <main className="px-5">
         {saved.length === 0 && savedPrayers.length === 0 ? (
