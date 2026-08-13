@@ -80,10 +80,12 @@
   --on-media-soft: oklch(0.99 0.01 90 / 0.78);
   --on-media-border: oklch(1 0 0 / 0.22);
   --gold-on-media: oklch(0.88 0.11 88);
+  --halo-strength: 55%;
 }
 
 /* ── Celestial Dawn — light sky blue & gold ───────────────── */
 [data-theme="dawn"] {
+  --halo-strength: 16%;
   --background: oklch(0.975 0.012 240);
   --foreground: oklch(0.28 0.06 262);
   --card: oklch(0.995 0.006 250);
@@ -118,6 +120,7 @@
 
 /* ── Lily & Linen — light warm parchment ─────────────────── */
 [data-theme="linen"] {
+  --halo-strength: 16%;
   --background: oklch(0.972 0.018 85);
   --foreground: oklch(0.29 0.04 55);
   --card: oklch(0.995 0.010 85);
@@ -212,6 +215,7 @@
 
 /* ── Rosa Mystica — light rose & lavender ────────────────── */
 [data-theme="rosa"] {
+  --halo-strength: 16%;
   --background: oklch(0.975 0.012 350);
   --foreground: oklch(0.30 0.06 330);
   --card: oklch(0.995 0.008 350);
@@ -336,7 +340,7 @@
 }
 
 @utility halo-text {
-  text-shadow: 0 0 30px color-mix(in oklab, var(--glow) 55%, transparent);
+  text-shadow: 0 0 30px color-mix(in oklab, var(--glow) var(--halo-strength), transparent);
 }
 
 @utility btn-glow {
