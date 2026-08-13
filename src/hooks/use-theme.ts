@@ -1,9 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
-export type ThemeId = "aurora" | "byzantine" | "emerald" | "dawn" | "linen" | "rosa";
+export type ConcreteThemeId = "aurora" | "byzantine" | "emerald" | "dawn" | "linen" | "rosa";
+export type ThemeId = ConcreteThemeId | "auto";
 
 export interface ThemeOption {
-  id: ThemeId;
+  id: ConcreteThemeId;
   name: string;
   tagline: string;
   mode: "dark" | "light";
@@ -56,13 +57,25 @@ export const THEMES: ThemeOption[] = [
 ];
 
 const STORAGE_KEY = "marian-theme";
+const DARK_DEFAULT: ConcreteThemeId = "aurora";
+const LIGHT_DEFAULT: ConcreteThemeId = "dawn";
+
+function getSystemIsDark(): boolean {
+  return window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false;
+}
+
+export function resolveTheme(id: ThemeId): ConcreteThemeId {
+  if (id !== "auto") return id;
+  return getSystemIsDark() ? DARK_DEFAULT : LIGHT_DEFAULT;
+}
 
 export function applyTheme(id: ThemeId) {
   if (typeof document === "undefined") return;
+  const resolved = resolveTheme(id);
   const root = document.documentElement;
-  if (id === "aurora") root.removeAttribute("data-theme");
-  else root.setAttribute("data-theme", id);
-  const option = THEMES.find((t) => t.id === id);
+  if (resolved === "aurora") root.removeAttribute("data-theme");
+  else root.setAttribute("data-theme", resolved);
+  const option = THEMES.find((t) => t.id === resolved);
   if (option?.mode === "light") {
     root.classList.remove("dark");
     root.style.colorScheme = "light";
@@ -102,12 +115,22 @@ export function useTheme() {
 
   useEffect(() => {
     const stored = window.localStorage.getItem(STORAGE_KEY) as ThemeId | null;
-    if (stored && THEMES.some((t) => t.id === stored)) {
+    if (stored && (stored === "auto" || THEMES.some((t) => t.id === stored))) {
       setThemeState(stored);
       applyTheme(stored);
     } else {
       applyTheme("aurora");
     }
+
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    const onChange = () => {
+      const current = window.localStorage.getItem(STORAGE_KEY) as ThemeId | null;
+      if (current === "auto") {
+        applyTheme("auto");
+      }
+    };
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
   }, []);
 
   const setTheme = useCallback((id: ThemeId) => {
@@ -120,6 +143,7 @@ export function useTheme() {
     }
   }, []);
 
+  const effectiveTheme = useMemo(() => resolveTheme(theme), [theme]);
 
-  return { theme, setTheme, themes: THEMES };
+  return { theme, effectiveTheme, setTheme, themes: THEMES };
 }
