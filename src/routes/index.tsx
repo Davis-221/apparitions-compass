@@ -7,6 +7,7 @@ import { ParallaxHero, ParallaxLayer } from "@/components/ParallaxHero";
 import { GlowingParticles } from "@/components/GlowingParticles";
 import { FloatingObjects } from "@/components/FloatingObjects";
 import { Reveal } from "@/components/Reveal";
+import logoAsset from "@/assets/marian-apparitions-logo.png.asset.json";
 
 
 import {
