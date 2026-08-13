@@ -103,7 +103,7 @@ function ApparitionPage() {
           <Link
             to="/"
             aria-label="Back to all apparitions"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--on-media-border)] bg-white/10 text-[var(--on-media)] backdrop-blur-xl"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--on-media-border)] bg-[oklch(1_0_0/0.16)] text-[var(--on-media)] backdrop-blur-xl"
           >
             <ArrowLeft className="h-5 w-5" />
           </Link>
@@ -111,14 +111,14 @@ function ApparitionPage() {
             <button
               onClick={share}
               aria-label={`Share ${a.title}`}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--on-media-border)] bg-white/10 text-[var(--on-media)] backdrop-blur-xl"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--on-media-border)] bg-[oklch(1_0_0/0.16)] text-[var(--on-media)] backdrop-blur-xl"
             >
               <Share2 className="h-4 w-4" />
             </button>
             <button
               onClick={() => toggle(a.slug)}
               aria-label={fav ? `Remove ${a.title} from saved` : `Save ${a.title}`}
-              className="relative flex h-10 w-10 items-center justify-center rounded-full border border-[var(--on-media-border)] bg-white/10 text-[var(--on-media)] backdrop-blur-xl"
+              className="relative flex h-10 w-10 items-center justify-center rounded-full border border-[var(--on-media-border)] bg-[oklch(1_0_0/0.16)] text-[var(--on-media)] backdrop-blur-xl"
               aria-pressed={fav}
             >
 
