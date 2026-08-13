@@ -339,14 +339,14 @@ function BrowsePage() {
           <div key={gi} className="space-y-3">
             {group.hero && (
               <Reveal delay={gi * 60}>
-                <HeroCard a={group.hero} priority={gi === 0} />
+                <HeroCard a={group.hero} priority={gi === 0} onShare={setShareTarget} />
               </Reveal>
             )}
             {group.pair.length > 0 && (
               <div className="grid grid-cols-2 gap-3">
                 {group.pair.map((a, pi) => (
                   <Reveal key={a.slug} delay={gi * 60 + pi * 80 + 60}>
-                    <SmallCard a={a} />
+                    <SmallCard a={a} onShare={setShareTarget} />
                   </Reveal>
                 ))}
               </div>
@@ -363,6 +363,14 @@ function BrowsePage() {
           </div>
         )}
       </main>
+
+      {shareTarget && (
+        <ShareCardDialog
+          apparition={shareTarget}
+          open={!!shareTarget}
+          onClose={() => setShareTarget(null)}
+        />
+      )}
     </div>
   );
 }
