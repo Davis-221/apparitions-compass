@@ -401,7 +401,28 @@ function statusHue(status: ApparitionStatus) {
   }
 }
 
-function HeroCard({ a, priority }: { a: Apparition; priority?: boolean }) {
+type ShareHandler = (a: Apparition) => void;
+
+function ShareButton({ a, onShare, small }: { a: Apparition; onShare: ShareHandler; small?: boolean }) {
+  return (
+    <button
+      type="button"
+      aria-label={`Share ${a.title}`}
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onShare(a);
+      }}
+      className={`absolute z-10 grid place-items-center rounded-full border border-[var(--on-media-border)] bg-[oklch(0_0_0/0.35)] text-[var(--on-media)] backdrop-blur-md transition-transform hover:scale-110 active:scale-95 ${
+        small ? "bottom-2 right-2 h-8 w-8" : "bottom-3 right-3 h-10 w-10"
+      }`}
+    >
+      <Share2 className={small ? "h-3.5 w-3.5" : "h-4 w-4"} />
+    </button>
+  );
+}
+
+function HeroCard({ a, priority, onShare }: { a: Apparition; priority?: boolean; onShare: ShareHandler }) {
   const hue = statusHue(a.status);
   const img = apparitionImage(a.slug);
   return (
