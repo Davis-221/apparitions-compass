@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { Search, Sparkles, ArrowUpRight, MapPin } from "lucide-react";
+import { Search, Sparkles, ArrowUpRight, MapPin, Share2 } from "lucide-react";
+import { ShareCardDialog } from "@/components/ShareCardDialog";
 import { WordByWord } from "@/components/WordByWord";
 import { ParallaxHero, ParallaxLayer } from "@/components/ParallaxHero";
 import { GlowingParticles } from "@/components/GlowingParticles";
@@ -99,6 +100,7 @@ function useRotatingFeatured() {
 function BrowsePage() {
   const [filter, setFilter] = useState<Filter>("all");
   const [query, setQuery] = useState("");
+  const [shareTarget, setShareTarget] = useState<Apparition | null>(null);
   const { current, index, count, setIndex } = useRotatingFeatured();
 
   const filtered = useMemo(() => {
@@ -337,14 +339,14 @@ function BrowsePage() {
           <div key={gi} className="space-y-3">
             {group.hero && (
               <Reveal delay={gi * 60}>
-                <HeroCard a={group.hero} priority={gi === 0} />
+                <HeroCard a={group.hero} priority={gi === 0} onShare={setShareTarget} />
               </Reveal>
             )}
             {group.pair.length > 0 && (
               <div className="grid grid-cols-2 gap-3">
                 {group.pair.map((a, pi) => (
                   <Reveal key={a.slug} delay={gi * 60 + pi * 80 + 60}>
-                    <SmallCard a={a} />
+                    <SmallCard a={a} onShare={setShareTarget} />
                   </Reveal>
                 ))}
               </div>
@@ -361,6 +363,14 @@ function BrowsePage() {
           </div>
         )}
       </main>
+
+      {shareTarget && (
+        <ShareCardDialog
+          apparition={shareTarget}
+          open={!!shareTarget}
+          onClose={() => setShareTarget(null)}
+        />
+      )}
     </div>
   );
 }
@@ -391,7 +401,28 @@ function statusHue(status: ApparitionStatus) {
   }
 }
 
-function HeroCard({ a, priority }: { a: Apparition; priority?: boolean }) {
+type ShareHandler = (a: Apparition) => void;
+
+function ShareButton({ a, onShare, small }: { a: Apparition; onShare: ShareHandler; small?: boolean }) {
+  return (
+    <button
+      type="button"
+      aria-label={`Share ${a.title}`}
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        onShare(a);
+      }}
+      className={`absolute z-10 grid place-items-center rounded-full border border-[var(--on-media-border)] bg-[oklch(0_0_0/0.35)] text-[var(--on-media)] backdrop-blur-md transition-transform hover:scale-110 active:scale-95 ${
+        small ? "bottom-2 right-2 h-8 w-8" : "bottom-3 right-3 h-10 w-10"
+      }`}
+    >
+      <Share2 className={small ? "h-3.5 w-3.5" : "h-4 w-4"} />
+    </button>
+  );
+}
+
+function HeroCard({ a, priority, onShare }: { a: Apparition; priority?: boolean; onShare: ShareHandler }) {
   const hue = statusHue(a.status);
   const img = apparitionImage(a.slug);
   return (
@@ -432,7 +463,7 @@ function HeroCard({ a, priority }: { a: Apparition; priority?: boolean }) {
         {a.year}
       </div>
 
-      <div className="media-ink absolute inset-x-0 bottom-0 p-4">
+      <div className="media-ink absolute inset-x-0 bottom-0 p-4 pr-16">
         <p className="text-[10px] uppercase tracking-[0.22em] text-[var(--gold-on-media)]">
           {a.location} · {a.country}
         </p>
@@ -440,11 +471,12 @@ function HeroCard({ a, priority }: { a: Apparition; priority?: boolean }) {
           {a.title}
         </h3>
       </div>
+      <ShareButton a={a} onShare={onShare} />
     </Link>
   );
 }
 
-function SmallCard({ a }: { a: Apparition }) {
+function SmallCard({ a, onShare }: { a: Apparition; onShare: ShareHandler }) {
   const hue = statusHue(a.status);
   const img = apparitionImage(a.slug);
   return (
@@ -478,14 +510,15 @@ function SmallCard({ a }: { a: Apparition }) {
         {a.year}
       </div>
 
-      <div className="media-ink absolute inset-x-0 bottom-0 p-3">
+      <div className="media-ink absolute inset-x-0 bottom-0 p-3 pr-11">
         <p className="text-[9px] uppercase tracking-[0.2em] text-[var(--gold-on-media)]">
-          {a.country}
+          {a.location} · {a.country}
         </p>
         <h4 className="mt-1 line-clamp-2 font-serif text-base leading-tight text-[var(--on-media)]">
           {a.title}
         </h4>
       </div>
+      <ShareButton a={a} onShare={onShare} small />
     </Link>
   );
 }
