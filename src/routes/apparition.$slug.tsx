@@ -129,19 +129,21 @@ function ApparitionPage() {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute right-4 top-24 font-serif text-[120px] italic leading-none text-[var(--on-media)]/10">
+        <div className="hero-rise pointer-events-none absolute right-4 top-24 font-serif text-[120px] italic leading-none text-[var(--on-media)]/10">
           {a.year}
         </div>
 
         <div className="media-ink absolute inset-x-0 bottom-0 px-6 pb-6 text-[var(--on-media)]">
-          <StatusBadge status={a.status} />
-          <h1 className="mt-3 font-serif text-4xl leading-[1.05] halo-text">
+          <div className="hero-rise hero-delay-1">
+            <StatusBadge status={a.status} />
+          </div>
+          <h1 className="hero-rise hero-delay-2 mt-3 font-serif text-4xl leading-[1.05] halo-text">
             {a.title}
           </h1>
-          <p className="mt-2 text-sm text-[var(--on-media)]/85">
+          <p className="hero-rise hero-delay-3 mt-2 text-sm text-[var(--on-media)]/85">
             {a.location} · {a.country}
           </p>
-          <div className="mt-4 gold-hairline w-24" />
+          <div className="hero-rise hero-delay-4 mt-4 gold-hairline w-24" />
         </div>
       </div>
 
