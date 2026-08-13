@@ -166,7 +166,7 @@ function BrowsePage() {
           to="/apparition/$slug"
           params={{ slug: current.slug }}
           key={current.slug}
-          className="group relative block h-[380px] overflow-hidden rounded-3xl border border-white/15 animate-[fade-in_0.6s_ease-out]"
+          className="group relative block h-[380px] overflow-hidden rounded-3xl border border-[var(--glass-border)] animate-[fade-in_0.6s_ease-out]"
         >
           {/* Celestial layered background */}
           <div
@@ -346,7 +346,7 @@ function HeroCard({ a, priority }: { a: Apparition; priority?: boolean }) {
     <Link
       to="/apparition/$slug"
       params={{ slug: a.slug }}
-      className="group relative block h-56 overflow-hidden rounded-3xl border border-white/15 active:scale-[0.99] transition-transform"
+      className="group relative block h-56 overflow-hidden rounded-3xl border border-[var(--glass-border)] active:scale-[0.99] transition-transform"
     >
       <div
         className="absolute inset-0"
