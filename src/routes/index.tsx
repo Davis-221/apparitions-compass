@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { Search, Sparkles, ArrowUpRight, MapPin } from "lucide-react";
+import { WordByWord } from "@/components/WordByWord";
 import {
   APPARITIONS,
   STATUS_LABEL,
@@ -218,11 +219,21 @@ function BrowsePage() {
             <p className="hero-rise hero-delay-1 text-[11px] uppercase tracking-[0.25em] text-[var(--gold-on-media)]">
               {current.country} · {current.dates}
             </p>
-            <h2 className="hero-rise hero-delay-2 mt-2 font-serif text-3xl leading-tight text-[var(--on-media)] halo-text">
-              {current.title}
+            <h2 className="mt-2 font-serif text-3xl leading-tight text-[var(--on-media)] halo-text">
+              <WordByWord
+                text={current.title}
+                delay={0.3}
+                stagger={0.07}
+                duration={0.55}
+              />
             </h2>
-            <p className="hero-rise hero-delay-3 mt-2 line-clamp-2 text-sm text-[var(--on-media)]/85">
-              {current.summary}
+            <p className="mt-2 line-clamp-2 text-sm text-[var(--on-media)]/85">
+              <WordByWord
+                text={current.summary}
+                delay={0.6}
+                stagger={0.04}
+                duration={0.45}
+              />
             </p>
             <div className="hero-rise hero-delay-4 mt-4 flex items-center justify-between">
               <span className="inline-flex items-center gap-1.5 text-xs font-medium text-[var(--on-media)] group-active:translate-x-0.5 transition-transform">

@@ -5,6 +5,7 @@ import { getPrayer, CATEGORY_LABEL, type PrayerCategory } from "@/data/prayers";
 import { APPARITIONS } from "@/data/apparitions";
 import { PrayerCardDialog } from "@/components/PrayerCardDialog";
 import { usePrayerFavorites } from "@/hooks/use-prayer-favorites";
+import { WordByWord } from "@/components/WordByWord";
 
 
 const SITE = "https://apparitions-compass.lovable.app";
@@ -112,25 +113,46 @@ function PrayerPage() {
           </div>
 
           <h2 className="text-center font-serif text-3xl leading-tight text-foreground halo-text">
-            {prayer.title}
+            <WordByWord
+              text={prayer.title}
+              delay={0.2}
+              stagger={0.07}
+              duration={0.55}
+            />
           </h2>
           {prayer.latinTitle && (
             <p className="mt-1 text-center font-serif text-sm italic text-[var(--color-gold)]/85">
-              {prayer.latinTitle}
+              <WordByWord
+                text={prayer.latinTitle}
+                delay={0.6}
+                stagger={0.04}
+                duration={0.4}
+              />
             </p>
           )}
           {prayer.intro && (
             <p className="mx-auto mt-4 max-w-md text-center text-sm leading-relaxed text-muted-foreground">
-              {prayer.intro}
+              <WordByWord
+                text={prayer.intro}
+                delay={0.8}
+                stagger={0.03}
+                duration={0.4}
+              />
             </p>
           )}
 
           <div className="glass-card relative mt-8 overflow-hidden rounded-3xl px-6 py-9">
             <span className="pointer-events-none absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-[var(--color-gold)]/60 to-transparent" />
             <span className="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-[var(--color-gold)]/40 to-transparent" />
-            <p className="whitespace-pre-line text-center font-serif text-xl leading-[1.75] text-foreground">
-              {prayer.text}
-            </p>
+            <div className="whitespace-pre-line text-center font-serif text-xl leading-[1.75] text-foreground">
+              <WordByWord
+                text={prayer.text}
+                preserveLines
+                delay={1.0}
+                stagger={0.03}
+                duration={0.45}
+              />
+            </div>
           </div>
 
           {prayer.howToPray && (
