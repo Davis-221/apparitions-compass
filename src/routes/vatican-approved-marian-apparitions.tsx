@@ -75,7 +75,7 @@ function ApprovedPage() {
             Approved by the Church
           </p>
         </div>
-        <h1 className="mt-2 font-serif text-4xl leading-tight text-foreground text-glow">
+        <h1 className="mt-2 font-serif text-4xl leading-tight text-foreground halo-text">
           Vatican Approved Marian Apparitions
         </h1>
         <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">

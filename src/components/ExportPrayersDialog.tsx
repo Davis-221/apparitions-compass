@@ -47,7 +47,7 @@ export function ExportPrayersDialog({ open, onClose }: Props) {
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-md rounded-t-3xl border border-white/10 bg-[oklch(0.16_0.06_265)] p-5 pb-28 shadow-2xl sm:pb-8 sm:rounded-3xl"
+        className="relative w-full max-w-md rounded-t-3xl border border-border bg-popover p-5 pb-28 shadow-2xl sm:pb-8 sm:rounded-3xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-start justify-between">
@@ -59,7 +59,7 @@ export function ExportPrayersDialog({ open, onClose }: Props) {
           </div>
           <button
             onClick={onClose}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/80"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-muted/50 text-muted-foreground"
             aria-label="Close export dialog"
           >
             <X className="h-4 w-4" />
@@ -87,7 +87,7 @@ export function ExportPrayersDialog({ open, onClose }: Props) {
         <button
           onClick={exportZip}
           disabled={busy}
-          className="mt-3 flex w-full items-center gap-3 rounded-2xl border border-border bg-secondary/50 px-4 py-4 text-left text-white disabled:opacity-60"
+          className="mt-3 flex w-full items-center gap-3 rounded-2xl border border-border bg-secondary/50 px-4 py-4 text-left text-foreground disabled:opacity-60"
         >
           {busy ? (
             <Loader2 className="h-5 w-5 shrink-0 animate-spin" />
@@ -100,7 +100,7 @@ export function ExportPrayersDialog({ open, onClose }: Props) {
             <span className="block text-sm font-semibold">
               {busy ? "Rendering cards…" : "ZIP of prayer cards"}
             </span>
-            <span className="block text-[11px] text-white/60">
+            <span className="block text-[11px] text-muted-foreground">
               {busy
                 ? `${progress?.done} of ${progress?.total} rendered`
                 : finished
@@ -111,7 +111,7 @@ export function ExportPrayersDialog({ open, onClose }: Props) {
         </button>
 
         {busy && (
-          <div className="mt-4 h-1 w-full overflow-hidden rounded-full bg-white/10">
+          <div className="mt-4 h-1 w-full overflow-hidden rounded-full bg-muted">
             <div
               className="h-full bg-[var(--color-gold)] transition-[width] duration-200"
               style={{ width: `${((progress!.done / progress!.total) * 100).toFixed(1)}%` }}

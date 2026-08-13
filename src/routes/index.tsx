@@ -166,7 +166,7 @@ function BrowsePage() {
           to="/apparition/$slug"
           params={{ slug: current.slug }}
           key={current.slug}
-          className="group relative block h-[380px] overflow-hidden rounded-3xl border border-white/15 animate-[fade-in_0.6s_ease-out]"
+          className="group relative block h-[380px] overflow-hidden rounded-3xl border border-[var(--glass-border)] animate-[fade-in_0.6s_ease-out]"
         >
           {/* Celestial layered background */}
           <div
@@ -201,30 +201,30 @@ function BrowsePage() {
 
           {/* Top row */}
           <div className="relative flex items-start justify-between p-5">
-            <span className="rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-white/90 backdrop-blur-md">
+            <span className="rounded-full border border-[var(--on-media-border)] bg-[oklch(1_0_0/0.14)] px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-[var(--on-media)]/90 backdrop-blur-md">
               Featured
             </span>
             <StatusBadge status={current.status} />
           </div>
 
           {/* Year - massive */}
-          <div className="pointer-events-none absolute right-5 top-16 font-serif text-[92px] italic leading-none text-white/10">
+          <div className="pointer-events-none absolute right-5 top-16 font-serif text-[92px] italic leading-none text-[var(--on-media)]/10">
             {current.year}
           </div>
 
           {/* Content */}
-          <div className="absolute inset-x-0 bottom-0 p-5">
-            <p className="text-[11px] uppercase tracking-[0.25em] text-[var(--color-gold)]">
+          <div className="media-ink absolute inset-x-0 bottom-0 p-5">
+            <p className="text-[11px] uppercase tracking-[0.25em] text-[var(--gold-on-media)]">
               {current.country} · {current.dates}
             </p>
-            <h2 className="mt-2 font-serif text-3xl leading-tight text-white text-glow">
+            <h2 className="mt-2 font-serif text-3xl leading-tight text-[var(--on-media)] halo-text">
               {current.title}
             </h2>
-            <p className="mt-2 line-clamp-2 text-sm text-white/75">
+            <p className="mt-2 line-clamp-2 text-sm text-[var(--on-media)]/85">
               {current.summary}
             </p>
             <div className="mt-4 flex items-center justify-between">
-              <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white group-active:translate-x-0.5 transition-transform">
+              <span className="inline-flex items-center gap-1.5 text-xs font-medium text-[var(--on-media)] group-active:translate-x-0.5 transition-transform">
                 Enter the story <ArrowUpRight className="h-3.5 w-3.5" />
               </span>
               <div className="flex gap-1.5">
@@ -237,7 +237,7 @@ function BrowsePage() {
                     }}
                     aria-label={`Show featured ${k + 1}`}
                     className={`h-1 rounded-full transition-all ${
-                      k === index ? "w-6 bg-white" : "w-1.5 bg-white/40"
+                      k === index ? "w-6 bg-[var(--on-media)]" : "w-1.5 bg-[var(--on-media)]/40"
                     }`}
                   />
                 ))}
@@ -316,7 +316,7 @@ function BrowsePage() {
 function Stat({ label, value }: { label: string; value: number }) {
   return (
     <div className="glass-card rounded-2xl px-3 py-3 text-center">
-      <div className="font-serif text-2xl leading-none text-foreground text-glow">
+      <div className="font-serif text-2xl leading-none text-foreground halo-text">
         {value}
       </div>
       <div className="mt-1 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
@@ -346,7 +346,7 @@ function HeroCard({ a, priority }: { a: Apparition; priority?: boolean }) {
     <Link
       to="/apparition/$slug"
       params={{ slug: a.slug }}
-      className="group relative block h-56 overflow-hidden rounded-3xl border border-white/15 active:scale-[0.99] transition-transform"
+      className="group relative block h-56 overflow-hidden rounded-3xl border border-[var(--glass-border)] active:scale-[0.99] transition-transform"
     >
       <div
         className="absolute inset-0"
@@ -370,21 +370,21 @@ function HeroCard({ a, priority }: { a: Apparition; priority?: boolean }) {
 
 
       <div className="relative flex items-start justify-between p-4">
-        <span className="rounded-full border border-white/20 bg-white/10 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.2em] text-white/90 backdrop-blur-md">
+        <span className="rounded-full border border-[var(--on-media-border)] bg-[oklch(1_0_0/0.14)] px-2.5 py-0.5 text-[10px] uppercase tracking-[0.2em] text-[var(--on-media)]/90 backdrop-blur-md">
           {priority ? "Latest" : "Chronicle"}
         </span>
         <StatusBadge status={a.status} />
       </div>
 
-      <div className="pointer-events-none absolute right-4 top-10 font-serif text-6xl italic leading-none text-white/15">
+      <div className="pointer-events-none absolute right-4 top-10 font-serif text-6xl italic leading-none text-[var(--on-media)]/15">
         {a.year}
       </div>
 
-      <div className="absolute inset-x-0 bottom-0 p-4">
-        <p className="text-[10px] uppercase tracking-[0.22em] text-[var(--color-gold)]">
+      <div className="media-ink absolute inset-x-0 bottom-0 p-4">
+        <p className="text-[10px] uppercase tracking-[0.22em] text-[var(--gold-on-media)]">
           {a.location} · {a.country}
         </p>
-        <h3 className="mt-1.5 font-serif text-2xl leading-tight text-white">
+        <h3 className="mt-1.5 font-serif text-2xl leading-tight text-[var(--on-media)]">
           {a.title}
         </h3>
       </div>
@@ -399,7 +399,7 @@ function SmallCard({ a }: { a: Apparition }) {
     <Link
       to="/apparition/$slug"
       params={{ slug: a.slug }}
-      className="group relative block h-44 overflow-hidden rounded-2xl border border-white/12 active:scale-[0.98] transition-transform"
+      className="group relative block h-44 overflow-hidden rounded-2xl border border-[var(--glass-border)] active:scale-[0.98] transition-transform"
     >
       <div
         className="absolute inset-0"
@@ -422,15 +422,15 @@ function SmallCard({ a }: { a: Apparition }) {
       <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black/85 to-transparent" />
 
 
-      <div className="pointer-events-none absolute right-3 top-2 font-serif text-3xl italic leading-none text-white/20">
+      <div className="pointer-events-none absolute right-3 top-2 font-serif text-3xl italic leading-none text-[var(--on-media)]/20">
         {a.year}
       </div>
 
-      <div className="absolute inset-x-0 bottom-0 p-3">
-        <p className="text-[9px] uppercase tracking-[0.2em] text-[var(--color-gold)]">
+      <div className="media-ink absolute inset-x-0 bottom-0 p-3">
+        <p className="text-[9px] uppercase tracking-[0.2em] text-[var(--gold-on-media)]">
           {a.country}
         </p>
-        <h4 className="mt-1 line-clamp-2 font-serif text-base leading-tight text-white">
+        <h4 className="mt-1 line-clamp-2 font-serif text-base leading-tight text-[var(--on-media)]">
           {a.title}
         </h4>
       </div>

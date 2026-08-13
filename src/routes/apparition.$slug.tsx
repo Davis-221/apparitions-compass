@@ -103,7 +103,7 @@ function ApparitionPage() {
           <Link
             to="/"
             aria-label="Back to all apparitions"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-xl"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--on-media-border)] bg-[oklch(1_0_0/0.16)] text-[var(--on-media)] backdrop-blur-xl"
           >
             <ArrowLeft className="h-5 w-5" />
           </Link>
@@ -111,14 +111,14 @@ function ApparitionPage() {
             <button
               onClick={share}
               aria-label={`Share ${a.title}`}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-xl"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--on-media-border)] bg-[oklch(1_0_0/0.16)] text-[var(--on-media)] backdrop-blur-xl"
             >
               <Share2 className="h-4 w-4" />
             </button>
             <button
               onClick={() => toggle(a.slug)}
               aria-label={fav ? `Remove ${a.title} from saved` : `Save ${a.title}`}
-              className="relative flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-xl"
+              className="relative flex h-10 w-10 items-center justify-center rounded-full border border-[var(--on-media-border)] bg-[oklch(1_0_0/0.16)] text-[var(--on-media)] backdrop-blur-xl"
               aria-pressed={fav}
             >
 
@@ -128,16 +128,16 @@ function ApparitionPage() {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute right-4 top-24 font-serif text-[120px] italic leading-none text-white/10">
+        <div className="pointer-events-none absolute right-4 top-24 font-serif text-[120px] italic leading-none text-[var(--on-media)]/10">
           {a.year}
         </div>
 
-        <div className="absolute inset-x-0 bottom-0 px-6 pb-6 text-white">
+        <div className="media-ink absolute inset-x-0 bottom-0 px-6 pb-6 text-[var(--on-media)]">
           <StatusBadge status={a.status} />
-          <h1 className="mt-3 font-serif text-4xl leading-[1.05] text-glow">
+          <h1 className="mt-3 font-serif text-4xl leading-[1.05] halo-text">
             {a.title}
           </h1>
-          <p className="mt-2 text-sm text-white/80">
+          <p className="mt-2 text-sm text-[var(--on-media)]/85">
             {a.location} · {a.country}
           </p>
           <div className="mt-4 gold-hairline w-24" />
@@ -167,7 +167,7 @@ function ApparitionPage() {
             {a.messages.map((m: string, i: number) => (
               <li
                 key={i}
-                className="relative rounded-2xl border border-white/10 bg-white/5 p-4 pl-6 font-serif text-lg italic leading-relaxed text-foreground"
+                className="relative rounded-2xl border border-border bg-muted/40 p-4 pl-6 font-serif text-lg italic leading-relaxed text-foreground"
               >
                 <span className="absolute left-0 top-4 bottom-4 w-[3px] rounded-full bg-gradient-to-b from-[var(--color-gold)] to-[oklch(0.83_0.12_220)]" />
                 <Sparkles className="absolute right-3 top-3 h-3.5 w-3.5 text-[var(--color-gold)]/70" />

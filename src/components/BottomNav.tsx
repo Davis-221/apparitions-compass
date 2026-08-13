@@ -13,7 +13,7 @@ export function BottomNav() {
 
   return (
     <nav className="fixed inset-x-0 bottom-0 z-50 safe-area-bottom pointer-events-none">
-      <div className="pointer-events-auto mx-auto mb-3 flex max-w-md items-center justify-between gap-1 rounded-full border border-white/15 bg-[color-mix(in_oklab,var(--background)_80%,transparent)] px-2 py-2 backdrop-blur-2xl shadow-[0_20px_60px_-20px_oklch(0_0_0/0.6)]"
+      <div className="pointer-events-auto mx-auto mb-3 flex max-w-md items-center justify-between gap-1 rounded-full border border-[var(--glass-border)] bg-[color-mix(in_oklab,var(--background)_80%,transparent)] px-2 py-2 backdrop-blur-2xl shadow-[0_20px_60px_-20px_oklch(0_0_0/0.6)]"
            style={{ marginLeft: "0.75rem", marginRight: "0.75rem" }}>
         {tabs.map(({ to, label, icon: Icon }) => {
           const active = to === "/" ? pathname === "/" : pathname.startsWith(to);

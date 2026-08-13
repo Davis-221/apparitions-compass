@@ -61,7 +61,7 @@ function SavedPage() {
             Kept close
           </p>
         </div>
-        <h1 className="mt-2 font-serif text-4xl leading-tight text-foreground text-glow">
+        <h1 className="mt-2 font-serif text-4xl leading-tight text-foreground halo-text">
           Saved
         </h1>
         <p className="mt-2 max-w-sm text-sm text-muted-foreground">
@@ -118,7 +118,7 @@ function SavedPage() {
                       )}
                       <div className="absolute inset-0 star-field opacity-20 mix-blend-screen" />
                       <div className="absolute right-[-8px] top-[-8px] h-10 w-10 rounded-full bg-[color-mix(in_oklab,var(--gold)_35%,transparent)] blur-xl" />
-                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-1 text-center font-serif text-xs italic text-white">
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-1 text-center font-serif text-xs italic text-[var(--on-media)]">
                         {a.year}
                       </div>
                     </div>
@@ -135,7 +135,7 @@ function SavedPage() {
                   </Link>
                   <button
                     onClick={() => setShareTarget(a)}
-                    className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-border bg-secondary/50 text-white/85 backdrop-blur-xl active:scale-95"
+                    className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-border bg-secondary/50 text-[var(--on-media)]/85 backdrop-blur-xl active:scale-95"
                     aria-label={`Share ${a.title}`}
                   >
                     <Share2 className="h-4 w-4" />
