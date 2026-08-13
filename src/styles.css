@@ -254,6 +254,24 @@
       radial-gradient(ellipse 90% 60% at 50% 110%, var(--grad-c), transparent 60%);
     background-attachment: fixed;
   }
+  /* Living aurora layer — compositor-only transforms, no repaint */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: -25%;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(38% 30% at 25% 22%, var(--aurora-a), transparent 70%),
+      radial-gradient(34% 26% at 78% 34%, var(--aurora-b), transparent 72%),
+      radial-gradient(44% 32% at 52% 82%, var(--aurora-c), transparent 70%);
+    opacity: 0.5;
+    filter: blur(60px);
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    animation: aurora-drift 28s ease-in-out infinite alternate;
+  }
+
   h1, h2, h3, h4, .font-serif {
     font-family: var(--font-serif);
     letter-spacing: -0.015em;
@@ -344,3 +362,15 @@
 }
 
 html { transition: background-color 0.4s ease, color 0.4s ease; }
+
+@keyframes aurora-drift {
+  0%   { transform: translate3d(-2%, -1%, 0) scale(1.02); opacity: 0.42; }
+  50%  { transform: translate3d(2%, 1.5%, 0) scale(1.08); opacity: 0.58; }
+  100% { transform: translate3d(-1%, 2%, 0) scale(1.04); opacity: 0.46; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before { animation: none; }
+  .animate-twinkle, .animate-float-slow, .animate-halo, .animate-shimmer { animation: none; }
+}
+
