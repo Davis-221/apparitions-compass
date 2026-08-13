@@ -103,7 +103,7 @@ function ApparitionPage() {
           <Link
             to="/"
             aria-label="Back to all apparitions"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-xl"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--on-media-border)] bg-white/10 text-[var(--on-media)] backdrop-blur-xl"
           >
             <ArrowLeft className="h-5 w-5" />
           </Link>
@@ -111,14 +111,14 @@ function ApparitionPage() {
             <button
               onClick={share}
               aria-label={`Share ${a.title}`}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-xl"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--on-media-border)] bg-white/10 text-[var(--on-media)] backdrop-blur-xl"
             >
               <Share2 className="h-4 w-4" />
             </button>
             <button
               onClick={() => toggle(a.slug)}
               aria-label={fav ? `Remove ${a.title} from saved` : `Save ${a.title}`}
-              className="relative flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-xl"
+              className="relative flex h-10 w-10 items-center justify-center rounded-full border border-[var(--on-media-border)] bg-white/10 text-[var(--on-media)] backdrop-blur-xl"
               aria-pressed={fav}
             >
 
@@ -128,16 +128,16 @@ function ApparitionPage() {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute right-4 top-24 font-serif text-[120px] italic leading-none text-white/10">
+        <div className="pointer-events-none absolute right-4 top-24 font-serif text-[120px] italic leading-none text-[var(--on-media)]/10">
           {a.year}
         </div>
 
-        <div className="absolute inset-x-0 bottom-0 px-6 pb-6 text-white">
+        <div className="absolute inset-x-0 bottom-0 px-6 pb-6 text-[var(--on-media)]">
           <StatusBadge status={a.status} />
           <h1 className="mt-3 font-serif text-4xl leading-[1.05] text-glow">
             {a.title}
           </h1>
-          <p className="mt-2 text-sm text-white/80">
+          <p className="mt-2 text-sm text-[var(--on-media)]/85">
             {a.location} · {a.country}
           </p>
           <div className="mt-4 gold-hairline w-24" />
