@@ -111,7 +111,7 @@ function PrayerPage() {
             <div className="gold-hairline w-12" />
           </div>
 
-          <h2 className="text-center font-serif text-3xl leading-tight text-foreground text-glow">
+          <h2 className="text-center font-serif text-3xl leading-tight text-foreground halo-text">
             {prayer.title}
           </h2>
           {prayer.latinTitle && (

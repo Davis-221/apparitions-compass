@@ -335,7 +335,7 @@
   height: 1px;
 }
 
-@utility text-glow {
+@utility halo-text {
   text-shadow: 0 0 30px color-mix(in oklab, var(--glow) 55%, transparent);
 }
 

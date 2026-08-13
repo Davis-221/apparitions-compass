@@ -217,7 +217,7 @@ function BrowsePage() {
             <p className="text-[11px] uppercase tracking-[0.25em] text-[var(--gold-on-media)]">
               {current.country} · {current.dates}
             </p>
-            <h2 className="mt-2 font-serif text-3xl leading-tight text-[var(--on-media)] text-glow">
+            <h2 className="mt-2 font-serif text-3xl leading-tight text-[var(--on-media)] halo-text">
               {current.title}
             </h2>
             <p className="mt-2 line-clamp-2 text-sm text-[var(--on-media)]/85">
@@ -316,7 +316,7 @@ function BrowsePage() {
 function Stat({ label, value }: { label: string; value: number }) {
   return (
     <div className="glass-card rounded-2xl px-3 py-3 text-center">
-      <div className="font-serif text-2xl leading-none text-foreground text-glow">
+      <div className="font-serif text-2xl leading-none text-foreground halo-text">
         {value}
       </div>
       <div className="mt-1 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">

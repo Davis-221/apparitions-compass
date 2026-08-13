@@ -134,7 +134,7 @@ function ApparitionPage() {
 
         <div className="media-ink absolute inset-x-0 bottom-0 px-6 pb-6 text-[var(--on-media)]">
           <StatusBadge status={a.status} />
-          <h1 className="mt-3 font-serif text-4xl leading-[1.05] text-glow">
+          <h1 className="mt-3 font-serif text-4xl leading-[1.05] halo-text">
             {a.title}
           </h1>
           <p className="mt-2 text-sm text-[var(--on-media)]/85">

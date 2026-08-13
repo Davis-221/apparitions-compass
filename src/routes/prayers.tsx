@@ -95,7 +95,7 @@ function PrayersPage() {
             Ora et labora
           </p>
         </div>
-        <h1 className="mt-2 font-serif text-[2.6rem] leading-[1.05] text-foreground text-glow">
+        <h1 className="mt-2 font-serif text-[2.6rem] leading-[1.05] text-foreground halo-text">
           Prayers to
           <br />
           Our Mother

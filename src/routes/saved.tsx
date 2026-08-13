@@ -61,7 +61,7 @@ function SavedPage() {
             Kept close
           </p>
         </div>
-        <h1 className="mt-2 font-serif text-4xl leading-tight text-foreground text-glow">
+        <h1 className="mt-2 font-serif text-4xl leading-tight text-foreground halo-text">
           Saved
         </h1>
         <p className="mt-2 max-w-sm text-sm text-muted-foreground">
