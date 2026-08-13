@@ -510,14 +510,15 @@ function SmallCard({ a, onShare }: { a: Apparition; onShare: ShareHandler }) {
         {a.year}
       </div>
 
-      <div className="media-ink absolute inset-x-0 bottom-0 p-3">
+      <div className="media-ink absolute inset-x-0 bottom-0 p-3 pr-11">
         <p className="text-[9px] uppercase tracking-[0.2em] text-[var(--gold-on-media)]">
-          {a.country}
+          {a.location} · {a.country}
         </p>
         <h4 className="mt-1 line-clamp-2 font-serif text-base leading-tight text-[var(--on-media)]">
           {a.title}
         </h4>
       </div>
+      <ShareButton a={a} onShare={onShare} small />
     </Link>
   );
 }
