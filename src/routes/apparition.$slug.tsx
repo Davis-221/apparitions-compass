@@ -81,7 +81,7 @@ function ApparitionPage() {
           <img
             src={apparitionImage(a.slug)}
             alt={a.title}
-            className="absolute inset-0 h-full w-full object-cover object-top"
+            className="ken-burns absolute inset-0 h-full w-full object-cover object-top"
             width={768}
             height={960}
           />
@@ -93,9 +93,10 @@ function ApparitionPage() {
               "radial-gradient(circle at 75% 25%, oklch(0.90 0.12 220 / 0.30), transparent 55%), radial-gradient(circle at 30% 80%, oklch(0.87 0.14 90 / 0.25), transparent 55%)",
           }}
         />
-        <div className="absolute inset-0 star-field opacity-25 mix-blend-screen" />
+        <div className="star-drift absolute inset-0 star-field opacity-25 mix-blend-screen" />
         <div className="absolute right-[-60px] top-[-60px] h-72 w-72 rounded-full bg-[color-mix(in_oklab,var(--gold)_25%,transparent)] blur-3xl animate-halo" />
-        <div className="absolute bottom-[-40px] left-[-40px] h-64 w-64 rounded-full bg-[oklch(0.72_0.16_215/0.25)] blur-3xl" />
+        <div className="glow-breathe absolute bottom-[-40px] left-[-40px] h-64 w-64 rounded-full bg-[oklch(0.72_0.16_215/0.25)] blur-3xl" />
+        <div className="hero-sheen mix-blend-screen" />
         <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
 
 
