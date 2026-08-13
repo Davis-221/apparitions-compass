@@ -214,7 +214,7 @@ function BrowsePage() {
 
           {/* Content */}
           <div className="absolute inset-x-0 bottom-0 p-5">
-            <p className="text-[11px] uppercase tracking-[0.25em] text-[var(--color-gold)]">
+            <p className="text-[11px] uppercase tracking-[0.25em] text-[var(--gold-on-media)]">
               {current.country} · {current.dates}
             </p>
             <h2 className="mt-2 font-serif text-3xl leading-tight text-[var(--on-media)] text-glow">
@@ -381,7 +381,7 @@ function HeroCard({ a, priority }: { a: Apparition; priority?: boolean }) {
       </div>
 
       <div className="absolute inset-x-0 bottom-0 p-4">
-        <p className="text-[10px] uppercase tracking-[0.22em] text-[var(--color-gold)]">
+        <p className="text-[10px] uppercase tracking-[0.22em] text-[var(--gold-on-media)]">
           {a.location} · {a.country}
         </p>
         <h3 className="mt-1.5 font-serif text-2xl leading-tight text-[var(--on-media)]">
@@ -427,7 +427,7 @@ function SmallCard({ a }: { a: Apparition }) {
       </div>
 
       <div className="absolute inset-x-0 bottom-0 p-3">
-        <p className="text-[9px] uppercase tracking-[0.2em] text-[var(--color-gold)]">
+        <p className="text-[9px] uppercase tracking-[0.2em] text-[var(--gold-on-media)]">
           {a.country}
         </p>
         <h4 className="mt-1 line-clamp-2 font-serif text-base leading-tight text-[var(--on-media)]">
