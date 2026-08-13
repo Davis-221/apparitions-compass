@@ -5,6 +5,8 @@ import { WordByWord } from "@/components/WordByWord";
 import { ParallaxHero, ParallaxLayer } from "@/components/ParallaxHero";
 import { GlowingParticles } from "@/components/GlowingParticles";
 import { FloatingObjects } from "@/components/FloatingObjects";
+import { Reveal } from "@/components/Reveal";
+
 
 import {
   APPARITIONS,
@@ -333,16 +335,23 @@ function BrowsePage() {
       <main className="mt-4 space-y-5 px-5">
         {chunkMagazine(filtered).map((group, gi) => (
           <div key={gi} className="space-y-3">
-            {group.hero && <HeroCard a={group.hero} priority={gi === 0} />}
+            {group.hero && (
+              <Reveal delay={gi * 60}>
+                <HeroCard a={group.hero} priority={gi === 0} />
+              </Reveal>
+            )}
             {group.pair.length > 0 && (
               <div className="grid grid-cols-2 gap-3">
-                {group.pair.map((a) => (
-                  <SmallCard key={a.slug} a={a} />
+                {group.pair.map((a, pi) => (
+                  <Reveal key={a.slug} delay={gi * 60 + pi * 80 + 60}>
+                    <SmallCard a={a} />
+                  </Reveal>
                 ))}
               </div>
             )}
           </div>
         ))}
+
         {filtered.length === 0 && (
           <div className="mt-10 rounded-2xl border border-dashed border-border p-8 text-center">
             <p className="font-serif text-lg text-foreground">Nothing here yet</p>
