@@ -398,7 +398,7 @@ function HeroCard({ a, priority }: { a: Apparition; priority?: boolean }) {
     <Link
       to="/apparition/$slug"
       params={{ slug: a.slug }}
-      className="group relative block h-56 overflow-hidden rounded-3xl border border-[var(--glass-border)] active:scale-[0.99] transition-transform"
+      className="card-anim card-sheen group relative block h-56 overflow-hidden rounded-3xl border border-[var(--glass-border)]"
     >
       <div
         className="absolute inset-0"
@@ -411,7 +411,7 @@ function HeroCard({ a, priority }: { a: Apparition; priority?: boolean }) {
           src={img}
           alt={a.title}
           loading={priority ? "eager" : "lazy"}
-          className="absolute inset-0 h-full w-full object-cover object-top opacity-90"
+          className="card-media absolute inset-0 h-full w-full object-cover object-top opacity-90"
           width={768}
           height={960}
         />
@@ -451,7 +451,7 @@ function SmallCard({ a }: { a: Apparition }) {
     <Link
       to="/apparition/$slug"
       params={{ slug: a.slug }}
-      className="group relative block h-44 overflow-hidden rounded-2xl border border-[var(--glass-border)] active:scale-[0.98] transition-transform"
+      className="card-anim card-sheen group relative block h-44 overflow-hidden rounded-2xl border border-[var(--glass-border)]"
     >
       <div
         className="absolute inset-0"
@@ -464,7 +464,7 @@ function SmallCard({ a }: { a: Apparition }) {
           src={img}
           alt={a.title}
           loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover object-top opacity-90"
+          className="card-media absolute inset-0 h-full w-full object-cover object-top opacity-90"
           width={768}
           height={960}
         />
