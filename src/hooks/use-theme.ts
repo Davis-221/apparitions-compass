@@ -72,6 +72,31 @@ export function applyTheme(id: ThemeId) {
   }
 }
 
+let transitionTimer: ReturnType<typeof setTimeout> | undefined;
+
+function applyThemeAnimated(id: ThemeId) {
+  if (typeof document === "undefined") return applyTheme(id);
+  const root = document.documentElement;
+  const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+
+  const run = () => {
+    root.classList.add("theme-transition");
+    applyTheme(id);
+    if (transitionTimer) clearTimeout(transitionTimer);
+    transitionTimer = setTimeout(() => root.classList.remove("theme-transition"), 600);
+  };
+
+  const startViewTransition = (
+    document as Document & { startViewTransition?: (cb: () => void) => unknown }
+  ).startViewTransition;
+
+  if (!reduced && typeof startViewTransition === "function") {
+    startViewTransition.call(document, () => applyTheme(id));
+    return;
+  }
+  run();
+}
+
 export function useTheme() {
   const [theme, setThemeState] = useState<ThemeId>("aurora");
 
@@ -87,13 +112,14 @@ export function useTheme() {
 
   const setTheme = useCallback((id: ThemeId) => {
     setThemeState(id);
-    applyTheme(id);
+    applyThemeAnimated(id);
     try {
       window.localStorage.setItem(STORAGE_KEY, id);
     } catch {
       /* ignore */
     }
   }, []);
+
 
   return { theme, setTheme, themes: THEMES };
 }
