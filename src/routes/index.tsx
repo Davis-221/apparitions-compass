@@ -399,7 +399,7 @@ function SmallCard({ a }: { a: Apparition }) {
     <Link
       to="/apparition/$slug"
       params={{ slug: a.slug }}
-      className="group relative block h-44 overflow-hidden rounded-2xl border border-white/12 active:scale-[0.98] transition-transform"
+      className="group relative block h-44 overflow-hidden rounded-2xl border border-[var(--glass-border)] active:scale-[0.98] transition-transform"
     >
       <div
         className="absolute inset-0"
