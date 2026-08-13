@@ -36,8 +36,14 @@ export function Reveal({ children, delay = 0, className }: RevealProps) {
       { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
     );
     io.observe(el);
-    return () => io.disconnect();
+    // Safety net: never leave content hidden (odd scroll containers, no scroll)
+    const t = window.setTimeout(() => setShown(true), 1400);
+    return () => {
+      io.disconnect();
+      window.clearTimeout(t);
+    };
   }, []);
+
 
   return (
     <div
