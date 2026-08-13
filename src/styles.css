@@ -492,11 +492,47 @@ html.theme-transition *:not(svg *) {
 .hero-delay-3 { animation-delay: 0.3s; }
 .hero-delay-4 { animation-delay: 0.42s; }
 
+/* ── Glowing particles ───────────────────────────────────── */
+@keyframes particle-rise {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.75;
+  }
+  88% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate3d(var(--drift, 0), -140px, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes particle-twinkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform, opacity;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .ken-burns, .star-drift, .glow-breathe, .hero-sheen, .hero-rise {
+  .ken-burns, .star-drift, .glow-breathe, .hero-sheen, .hero-rise, .particle {
     animation: none !important;
   }
 }
+
 
 /* ── Word-by-word text reveal ───────────────────────────── */
 @keyframes word-in {
