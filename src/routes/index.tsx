@@ -180,7 +180,7 @@ function BrowsePage() {
             <img
               src={apparitionImage(current.slug)}
               alt={current.title}
-              className="absolute inset-0 h-full w-full object-cover object-top opacity-90"
+              className="ken-burns absolute inset-0 h-full w-full object-cover object-top opacity-90"
               width={768}
               height={960}
             />
@@ -192,10 +192,11 @@ function BrowsePage() {
                 "radial-gradient(circle at 75% 30%, oklch(0.90 0.10 220 / 0.35), transparent 55%), radial-gradient(circle at 30% 75%, oklch(0.87 0.14 90 / 0.25), transparent 55%)",
             }}
           />
-          <div className="absolute inset-0 star-field opacity-30 mix-blend-screen" />
+          <div className="star-drift absolute inset-0 star-field opacity-30 mix-blend-screen" />
           {/* Aureole */}
           <div className="absolute right-[-40px] top-[-40px] h-56 w-56 rounded-full bg-[color-mix(in_oklab,var(--gold)_35%,transparent)] blur-3xl animate-halo" />
-          <div className="absolute bottom-[-30px] left-[-30px] h-48 w-48 rounded-full bg-[color-mix(in_oklab,var(--glow)_35%,transparent)] blur-3xl" />
+          <div className="glow-breathe absolute bottom-[-30px] left-[-30px] h-48 w-48 rounded-full bg-[color-mix(in_oklab,var(--glow)_35%,transparent)] blur-3xl" />
+          <div className="hero-sheen mix-blend-screen" />
           <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
 
 
