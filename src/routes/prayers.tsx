@@ -7,6 +7,7 @@ import { ExportPrayersDialog } from "@/components/ExportPrayersDialog";
 import { usePrayerFavorites } from "@/hooks/use-prayer-favorites";
 import { WordByWord } from "@/components/WordByWord";
 import { ParallaxHero, ParallaxLayer } from "@/components/ParallaxHero";
+import { GlowingParticles } from "@/components/GlowingParticles";
 
 
 

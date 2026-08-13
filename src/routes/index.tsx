@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Search, Sparkles, ArrowUpRight, MapPin } from "lucide-react";
 import { WordByWord } from "@/components/WordByWord";
 import { ParallaxHero, ParallaxLayer } from "@/components/ParallaxHero";
+import { GlowingParticles } from "@/components/GlowingParticles";
 import {
   APPARITIONS,
   STATUS_LABEL,

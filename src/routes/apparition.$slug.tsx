@@ -9,6 +9,7 @@ import { ShareCardDialog } from "@/components/ShareCardDialog";
 import { apparitionImage } from "@/data/apparition-images";
 import { WordByWord } from "@/components/WordByWord";
 import { ParallaxHero, ParallaxLayer } from "@/components/ParallaxHero";
+import { GlowingParticles } from "@/components/GlowingParticles";
 
 
 const SITE = "https://apparitions-compass.lovable.app";
