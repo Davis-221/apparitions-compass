@@ -161,8 +161,8 @@ export function ShareCardDialog({ apparition, open, onClose }: Props) {
             disabled={!blob}
             className="flex items-center justify-center gap-2 rounded-full border border-border bg-secondary/50 px-4 py-3 text-sm font-medium text-foreground disabled:opacity-50"
           >
-            <Download className="h-4 w-4" />
-            Save image
+            {saved ? <Check className="h-4 w-4" /> : <Download className="h-4 w-4" />}
+            {saved ? "Saved" : "Download PNG"}
           </button>
           <button
             onClick={share}
