@@ -14,6 +14,7 @@ export function ShareCardDialog({ apparition, open, onClose }: Props) {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [saved, setSaved] = useState(false);
   const url = apparitionUrl(apparition.slug);
   const generated = useRef<string | null>(null);
 
@@ -59,11 +60,19 @@ export function ShareCardDialog({ apparition, open, onClose }: Props) {
 
   const download = () => {
     if (!blob) return;
+    const href = URL.createObjectURL(blob);
     const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
+    a.href = href;
     a.download = `${apparition.slug}-marian-apparition.png`;
+    a.rel = "noopener";
+    document.body.appendChild(a);
     a.click();
-    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    a.remove();
+    // iOS Safari ignores the download attribute — open the image so it can be saved.
+    if (typeof a.download !== "string") window.open(href, "_blank");
+    setSaved(true);
+    setTimeout(() => setSaved(false), 1600);
+    setTimeout(() => URL.revokeObjectURL(href), 4000);
   };
 
   const share = async () => {
@@ -152,8 +161,8 @@ export function ShareCardDialog({ apparition, open, onClose }: Props) {
             disabled={!blob}
             className="flex items-center justify-center gap-2 rounded-full border border-border bg-secondary/50 px-4 py-3 text-sm font-medium text-foreground disabled:opacity-50"
           >
-            <Download className="h-4 w-4" />
-            Save image
+            {saved ? <Check className="h-4 w-4" /> : <Download className="h-4 w-4" />}
+            {saved ? "Saved" : "Download PNG"}
           </button>
           <button
             onClick={share}
