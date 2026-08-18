@@ -14,6 +14,7 @@ export function ShareCardDialog({ apparition, open, onClose }: Props) {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [saved, setSaved] = useState(false);
   const url = apparitionUrl(apparition.slug);
   const generated = useRef<string | null>(null);
 
