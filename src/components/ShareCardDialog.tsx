@@ -59,11 +59,19 @@ export function ShareCardDialog({ apparition, open, onClose }: Props) {
 
   const download = () => {
     if (!blob) return;
+    const href = URL.createObjectURL(blob);
     const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
+    a.href = href;
     a.download = `${apparition.slug}-marian-apparition.png`;
+    a.rel = "noopener";
+    document.body.appendChild(a);
     a.click();
-    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    a.remove();
+    // iOS Safari ignores the download attribute — open the image so it can be saved.
+    if (typeof a.download !== "string") window.open(href, "_blank");
+    setSaved(true);
+    setTimeout(() => setSaved(false), 1600);
+    setTimeout(() => URL.revokeObjectURL(href), 4000);
   };
 
   const share = async () => {
